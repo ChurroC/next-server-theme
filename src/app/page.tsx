@@ -1,10 +1,9 @@
 "use client";
 
-import { Theme } from "@/components/themeProvider";
-import { getSetTheme, getTheme } from "@/util/context/theme";
+import { getSetTheme, getThemeValue } from "@/util/context/theme";
 
 export default function HomePage() {
-    const [theme, setTheme] = [getTheme<Theme>(), getSetTheme<Theme>()];
+    const [theme, setTheme] = [getThemeValue(), getSetTheme()];
 
     return (
         <div className="flex h-screen flex-col items-center justify-center gap-3 dark:text-white">

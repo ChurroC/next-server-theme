@@ -1,5 +1,6 @@
 export {
-    getTheme,
+    getThemeValue,
     getSetTheme,
+    getTheme,
     ThemeProviderWithoutProps
 } from "./theme.context";

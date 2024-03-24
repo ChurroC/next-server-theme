@@ -1,8 +1,7 @@
 import { ThemeProvider } from "@/components/themeProvider";
-import type { Theme } from "@/components/themeProvider";
+import { getTheme } from "@/util/helpers/getServerTheme";
 
 import "@/styles/globals.css";
-import { getCookie } from "@/util/helpers/getCookie";
 
 import { GeistSans } from "geist/font/sans";
 
@@ -18,13 +17,9 @@ export default async function RootLayout({
     children: React.ReactNode;
 }) {
     return (
-        <html lang="en" suppressHydrationWarning>
+        <html lang="en" suppressHydrationWarning className={await getTheme()}>
             <body className={`${GeistSans.className} bg-white dark:bg-black`}>
-                <ThemeProvider
-                    cookie={await getCookie<Theme>("theme", "system")}
-                >
-                    {children}
-                </ThemeProvider>
+                <ThemeProvider>{children}</ThemeProvider>
             </body>
         </html>
     );
