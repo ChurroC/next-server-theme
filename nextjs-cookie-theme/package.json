@@ -1,0 +1,27 @@
+{
+  "name": "nextjs-cookie-theme",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ChurroC/nextjs-cookie-theme.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ChurroC/nextjs-cookie-theme/issues"
+  },
+  "homepage": "https://github.com/ChurroC/nextjs-cookie-theme#readme",
+  "devDependencies": {
+    "@types/react": "^18.2.69",
+    "prettier": "^3.2.5",
+    "typescript": "^5.4.3"
+  },
+  "dependencies": {
+    "react": "^0.0.0-experimental-670811593-20240322"
+  }
+}
