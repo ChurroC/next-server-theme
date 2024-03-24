@@ -1,6 +1,6 @@
 import { cookies } from "next/headers";
 import { config } from "theme.config";
-import { onThemeChange } from "@/util/helpers/getOnThemeChange";
+import { onThemeChange } from "src/util/helpers/getOnThemeChange";
 
 type Theme = typeof config.defaultTheme;
 

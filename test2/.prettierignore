@@ -1,0 +1,11 @@
+.git
+.svn
+.hg
+node_modules
+build
+.next
+.dist
+*.md
+*.config.*
+*.json
+*.cjs

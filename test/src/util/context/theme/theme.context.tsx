@@ -1,12 +1,12 @@
 "use client";
 
-import { isClient } from "@/util/helpers/isClient";
-import { useCookies } from "@/util/hooks/useCookies.hook";
-import { useEventListener } from "@/util/hooks/useEventListener";
-import { useOnChange } from "@/util/hooks/useOnChange.hook";
-import { useReferenceState } from "@/util/hooks/useReferenceState.hook";
+import { isClient } from "src/util/helpers/isClient";
+import { useCookies } from "src/util/hooks/useCookies.hook";
+import { useEventListener } from "src/util/hooks/useEventListener";
+import { useOnChange } from "src/util/hooks/useOnChange.hook";
+import { useReferenceState } from "src/util/hooks/useReferenceState.hook";
 import { createContext, use } from "react";
-import { onThemeChange } from "@/util/helpers/getOnThemeChange";
+import { onThemeChange } from "src/util/helpers/getOnThemeChange";
 
 import { config } from "theme.config";
 type Theme = typeof config.defaultTheme;

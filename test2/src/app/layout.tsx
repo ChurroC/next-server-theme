@@ -1,5 +1,4 @@
-import { ThemeProvider } from "@/components/themeProvider";
-import { getTheme } from "@/util/helpers/getServerTheme";
+import { ThemeProvider, getTheme } from "dist/esm";
 
 import "@/styles/globals.css";
 
