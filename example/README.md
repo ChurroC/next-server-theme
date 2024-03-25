@@ -1,4 +1,4 @@
-cheeck if after budnling if firefox cookeiStore is polyufilled else try to pollyfill it yourself
+cheeck if after budnling if firefox cookeiStore is polyufilled else try to pollyfill it myself
 
 usetabstate could be a component
 

@@ -4,7 +4,6 @@ import { isClient } from "./isClient";
 type Theme = typeof config.defaultTheme;
 
 export function modifyTheme(theme: Theme): Theme {
-    console.log("Theme changed to", theme);
     let renderedTheme = theme;
 
     if (theme === "system") {
