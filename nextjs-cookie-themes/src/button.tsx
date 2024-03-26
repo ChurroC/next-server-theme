@@ -1,11 +1,10 @@
+import { type reactChildren } from './index.d';
+
 export function Button({
     children,
-}: {
-    children: React.ReactNode;
-}) {
+}: reactChildren) {
     return (
-        <button
-        >
+        <button>
             Hi
             {children}
         </button>
