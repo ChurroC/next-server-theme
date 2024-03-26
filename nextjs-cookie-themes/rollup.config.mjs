@@ -4,6 +4,7 @@ import resolve from "@rollup/plugin-node-resolve";
 import commonjs from "@rollup/plugin-commonjs";
 import typescript from "@rollup/plugin-typescript";
 import dts from "rollup-plugin-dts";
+// use terser once everythign works
 
 import packageJson from "./package.json" assert { type: "json" }
 
@@ -22,7 +23,7 @@ export default [{
     peerDepsExternal(),
     resolve(),
     commonjs(),
-    typescript({ tsconfig: "./tsconfig.json", outDir: "dist/cjs", declarationDir: "dist/cjs" }),
+    typescript({ tsconfig: "./tsconfig.json", outDir: "dist/cjs", declarationDir: "dist/cjs/type" }),
     preserveDirectives()
   ]
 },
@@ -40,7 +41,7 @@ export default [{
     peerDepsExternal(),
     resolve(),
     commonjs(),
-    typescript({ tsconfig: "./tsconfig.json", outDir: "dist/esm", declarationDir: "dist/esm" }),
+    typescript({ tsconfig: "./tsconfig.json", outDir: "dist/esm", declarationDir: "dist/esm/type" }),
     preserveDirectives()
   ]
 }, {

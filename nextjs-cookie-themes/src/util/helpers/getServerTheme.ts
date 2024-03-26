@@ -6,13 +6,15 @@ import { modifyTheme } from "@/util/helpers/modifyTheme";
 type Theme = typeof config.defaultTheme;
 
 export function getThemeWithoutModification(): Theme {
-    const theme =
+    const themeUnJSONed =
         (cookies().get("theme")?.value as Theme) ?? config.defaultTheme;
+
+    const theme = JSON.parse(themeUnJSONed) as Theme;
 
     return theme;
 }
 
-export async function getTheme(): Promise<Theme> {
+export async function getServerTheme(): Promise<Theme> {
     const theme = getThemeWithoutModification();
 
     return modifyTheme(theme);

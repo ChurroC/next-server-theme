@@ -1,7 +1,7 @@
 import { ThemeProvider } from "@/components/themeProvider";
-import { getTheme } from "@/util/helpers/getServerTheme";
+import { getServerTheme } from "@/util/helpers/getServerTheme";
 
-import "@/styles/globals.css";
+import "./globals.css";
 
 import { GeistSans } from "geist/font/sans";
 
@@ -17,7 +17,11 @@ export default async function RootLayout({
     children: React.ReactNode;
 }) {
     return (
-        <html lang="en" suppressHydrationWarning className={await getTheme()}>
+        <html
+            lang="en"
+            suppressHydrationWarning
+            className={await getServerTheme()}
+        >
             <body className={`${GeistSans.className} bg-white dark:bg-black`}>
                 <ThemeProvider>{children}</ThemeProvider>
             </body>

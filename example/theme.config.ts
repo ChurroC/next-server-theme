@@ -1,4 +1,4 @@
-import { type ThemeConfig } from "@/type";
+import { type ThemeConfig } from "@/index.d";
 
 export const config: ThemeConfig<"dark" | "system" | "light" | "pink"> = {
     defaultTheme: "dark",

@@ -1,4 +1,3 @@
-import { config } from "@/theme.config";
-console.log(config);
+import { config } from "theme.config";
 
 export { config };

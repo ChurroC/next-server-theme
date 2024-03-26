@@ -1,9 +1,8 @@
 {
   "name": "nextjs-cookie-theme",
-  "version": "1.0.0",
-  "main": "dist/cjs/src/index.js",
-  "module": "dist/esm/src/index.js",
-  "types": "dist/types/index.d.ts",
+  "version": "0.1.0",
+  "module": "src/index.js",
+  "types": "src/index.d.ts",
   "description": "",
   "scripts": {
     "build": "rollup -c"
@@ -22,15 +21,8 @@
   },
   "homepage": "https://github.com/ChurroC/nextjs-cookie-theme#readme",
   "devDependencies": {
-    "@rollup/plugin-commonjs": "^25.0.7",
-    "@rollup/plugin-node-resolve": "^15.2.3",
-    "@rollup/plugin-typescript": "^11.1.6",
     "@types/react": "^18.2.69",
     "prettier": "^3.2.5",
-    "rollup": "^4.13.0",
-    "rollup-plugin-dts": "^6.1.0",
-    "rollup-plugin-peer-deps-external": "^2.2.4",
-    "rollup-plugin-preserve-directives": "^0.4.0",
     "typescript": "^5.4.3"
   },
   "peerDependencies": {

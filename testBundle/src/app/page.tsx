@@ -1,7 +1,23 @@
-import { type reactChildren } from "dist/types";
+// "use client";
 
-const { Button } = require("dist/cjs");
+// import { useGetTheme, useSetTheme } from "dist/esm/src";
+
+// export default function HomePage() {
+//   const [theme, setTheme] = [useGetTheme(), useSetTheme()];
+
+//   return (
+//     <div className="flex h-screen flex-col items-center justify-center gap-3 dark:text-white">
+//       <div>Theme: {theme}</div>
+//       <button onClick={() => setTheme("dark")}>Dark</button>
+//       <button onClick={() => setTheme("light")}>Light</button>
+//       <button onClick={() => setTheme("pink")}>Pink</button>
+//       <button onClick={() => setTheme("system")}>System</button>
+//     </div>
+//   );
+// }
+import { useTheme } from "nextjs-cookie-theme/src";
 
 export default function HomePage() {
-  return <Button>Hi</Button>;
+  const [theme] = useTheme();
+  return <div>Hi</div>;
 }
