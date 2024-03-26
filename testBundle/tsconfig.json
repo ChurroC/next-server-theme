@@ -3,7 +3,7 @@
     /* Base Options: */
     "esModuleInterop": true,
     "skipLibCheck": true,
-    "target": "es5",
+    "target": "es2022",
     "allowJs": true,
     "resolveJsonModule": true,
     "moduleDetection": "force",
@@ -18,22 +18,16 @@
     "lib": ["dom", "dom.iterable", "ES2022"],
     "noEmit": true,
     "module": "ESNext",
-    "moduleResolution": "Node10",
-    "jsx": "react-jsx",
+    "moduleResolution": "Bundler",
+    "jsx": "preserve",
     "plugins": [{ "name": "next" }],
     "incremental": true,
-    "outDir": "dist",
-    "declaration": true,
-    "declarationDir": "dist",
-    "allowSyntheticDefaultImports": true,
-    "forceConsistentCasingInFileNames": true,
 
     /* Path Aliases */
     "baseUrl": ".",
     "paths": {
       "@/*": ["./src/*"]
-    },
-    "types": ["react/experimental"]
+    }
   },
   "include": [
     ".eslintrc.cjs",

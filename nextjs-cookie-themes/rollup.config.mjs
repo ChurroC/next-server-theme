@@ -1,3 +1,4 @@
+import preserveDirectives from "rollup-plugin-preserve-directives";
 import peerDepsExternal from "rollup-plugin-peer-deps-external";
 import resolve from "@rollup/plugin-node-resolve";
 import commonjs from "@rollup/plugin-commonjs";
@@ -11,13 +12,9 @@ export default [{
   input: "src/index.ts",
   output: [
     {
-      file: packageJson.main,
+      dir: "dist/cjs",
       format: "cjs",
-      sourcemap: true
-    },
-    {
-      file: packageJson.module,
-      format: "esm",
+      preserveModules: true,
       sourcemap: true
     }
   ],
@@ -25,7 +22,26 @@ export default [{
     peerDepsExternal(),
     resolve(),
     commonjs(),
-    typescript()
+    typescript({ tsconfig: "./tsconfig.json", outDir: "dist/cjs", declarationDir: "dist/cjs" }),
+    preserveDirectives()
+  ]
+},
+{
+  input: "src/index.ts",
+  output: [
+    {
+      dir: "dist/esm",
+      format: "esm",
+      preserveModules: true,
+      sourcemap: true
+    }
+  ],
+  plugins: [
+    peerDepsExternal(),
+    resolve(),
+    commonjs(),
+    typescript({ tsconfig: "./tsconfig.json", outDir: "dist/esm", declarationDir: "dist/esm" }),
+    preserveDirectives()
   ]
 }, {
   input: 'src/index.d.ts',
