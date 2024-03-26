@@ -1,5 +1,5 @@
 import { ThemeProvider } from "@/components/themeProvider";
-import { getTheme } from "src/util/helpers/getServerTheme";
+import { getTheme } from "@/util/helpers/getServerTheme";
 
 import "@/styles/globals.css";
 

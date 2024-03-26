@@ -1,17 +1,13 @@
 import { ThemeProviderWithoutProps } from "@/util/context/theme";
-import { getTheme } from "src/util/helpers/getServerTheme";
-import { config } from "theme.config";
+import { getThemeWithoutModification } from "@/util/helpers/getServerTheme";
 
 export async function ThemeProvider({
     children
 }: {
     children: React.ReactNode;
 }) {
-    const theme = await getTheme();
-    console.log(theme);
-
     return (
-        <ThemeProviderWithoutProps cookie={theme} {...config}>
+        <ThemeProviderWithoutProps serverTheme={getThemeWithoutModification()}>
             {children}
         </ThemeProviderWithoutProps>
     );

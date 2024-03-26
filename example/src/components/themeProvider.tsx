@@ -1,8 +1,5 @@
 import { ThemeProviderWithoutProps } from "@/util/context/theme";
-import {
-    getTheme,
-    getThemeWithoutModification
-} from "src/util/helpers/getServerTheme";
+import { getThemeWithoutModification } from "@/util/helpers/getServerTheme";
 
 export async function ThemeProvider({
     children
