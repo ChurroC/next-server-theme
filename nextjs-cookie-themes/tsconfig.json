@@ -31,7 +31,7 @@
     /* Path Aliases */
     "baseUrl": ".",
     "paths": {
-      "@/*": ["./src/*"]
+      "@/*": ["srccc/*"]
     },
     "types": ["react/experimental"]
   },

@@ -14,7 +14,7 @@ export function getThemeWithoutModification(): Theme {
     return theme;
 }
 
-export async function getServerTheme(): Promise<Theme> {
+export function getServerTheme(): Theme {
     const theme = getThemeWithoutModification();
 
     return modifyTheme(theme);

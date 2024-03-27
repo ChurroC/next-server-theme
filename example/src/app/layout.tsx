@@ -11,17 +11,13 @@ export const metadata = {
     icons: [{ rel: "icon", url: "/favicon.ico" }]
 };
 
-export default async function RootLayout({
+export default function RootLayout({
     children
 }: {
     children: React.ReactNode;
 }) {
     return (
-        <html
-            lang="en"
-            suppressHydrationWarning
-            className={await getServerTheme()}
-        >
+        <html lang="en" suppressHydrationWarning className={getServerTheme()}>
             <body className={`${GeistSans.className} bg-white dark:bg-black`}>
                 <ThemeProvider>{children}</ThemeProvider>
             </body>

@@ -23,7 +23,7 @@ export default [{
     peerDepsExternal(),
     resolve(),
     commonjs(),
-    typescript({ tsconfig: "./tsconfig.json", outDir: "dist/cjs", declarationDir: "dist/cjs/type" }),
+    typescript({ tsconfig: "./tsconfig.json", outDir: "dist/cjs", declarationDir: "dist/cjs" }),
     preserveDirectives()
   ]
 },
@@ -41,7 +41,7 @@ export default [{
     peerDepsExternal(),
     resolve(),
     commonjs(),
-    typescript({ tsconfig: "./tsconfig.json", outDir: "dist/esm", declarationDir: "dist/esm/type" }),
+    typescript({ tsconfig: "./tsconfig.json", outDir: "dist/esm", declarationDir: "dist/esm" }),
     preserveDirectives()
   ]
 }, {
