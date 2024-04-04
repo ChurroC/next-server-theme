@@ -1,5 +1,4 @@
-import { ThemeProvider } from "@/components/themeProvider";
-import { getServerTheme } from "@/util/helpers/getServerTheme";
+import { ThemeProvider, getServerTheme } from "nextjs-cookie-theme";
 
 import "./globals.css";
 

@@ -31,9 +31,8 @@
     /* Path Aliases */
     "baseUrl": ".",
     "paths": {
-      "@/*": ["srccc/*"]
-    },
-    "types": ["react/experimental"]
+      "@/*": ["./src/*"]
+    }
   },
   "include": [
     ".eslintrc.cjs",

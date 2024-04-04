@@ -52,20 +52,17 @@ export function ThemeProviderWithoutProps({
         <SetThemeContext.Provider value={setTheme}>
             <ThemeContext.Provider value={theme}>
                 {serverTheme === "system" && (
-                    <>
-                        <script
-                            dangerouslySetInnerHTML={{
-                                __html: `(() => {
-                                    if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
-                                        document.documentElement.className = "${config.systemDarkTheme}";
-                                    } else {
-                                        document.documentElement.className = "${config.systemLightTheme}";
-                                    }
-                                })()
-                                `
-                            }}
-                        />
-                    </>
+                    <script
+                        dangerouslySetInnerHTML={{
+                            __html: `(() => {
+                                if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
+                                    document.documentElement.className = "${config.systemDarkTheme}";
+                                } else {
+                                    document.documentElement.className = "${config.systemLightTheme}";
+                                }
+                            })()`
+                        }}
+                    />
                 )}
                 {children}
             </ThemeContext.Provider>

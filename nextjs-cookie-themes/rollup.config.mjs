@@ -44,8 +44,11 @@ export default [{
     typescript({ tsconfig: "./tsconfig.json", outDir: "dist/esm", declarationDir: "dist/esm" }),
     preserveDirectives()
   ]
-}, {
+}];
+/*
+, {
   input: 'src/index.d.ts',
   output: [{ file: packageJson.types, format: 'es' }],
   plugins: [dts()]
-}];
+}
+*/

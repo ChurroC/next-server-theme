@@ -1,6 +1,15 @@
-import { config as customConfig } from "@/theme.config";
+// import { config } from "theme.config";
+
+// export { config };
+
 import { type ThemeConfig } from "@/index.d";
 
-const config = customConfig as ThemeConfig;
-
-export { config };
+export const config: ThemeConfig<"dark" | "system" | "light" | "pink"> = {
+    defaultTheme: "system",
+    systemLightTheme: "pink",
+    systemDarkTheme: "dark",
+    debounce: 0,
+    modifyTheme: theme => {
+        return theme;
+    }
+};

@@ -1,53 +1,32 @@
 "use client";
 
-import { useRef, useState } from "react";
 import { useOnChange } from "./useOnChange.hook";
-import { useEventListener } from "./useEventListener";
-import { isClient } from "../helpers/isClient";
+import { useTabState } from "./useTabState.hook";
 
-export function useCookies<CookieType>(
+declare const cookieStore: {
+    get: (name: string) => Promise<{ value: string }>;
+    set: (name: string, value: string) => void;
+} & EventTarget;
+
+export function useCookies<InitalStateType>(
     key: string,
-    cookieValue: CookieType,
+    initalState: InitalStateType,
     debounceTime: number = 0
-): [CookieType, React.Dispatch<React.SetStateAction<CookieType>>] {
+): [InitalStateType, React.Dispatch<React.SetStateAction<InitalStateType>>] {
     // Use broadcast instead of change in cookie since this is cooler
-    const [value, setValue] = useState<CookieType>(cookieValue);
-
-    // Checks if the origin of the message is the same as the current origin and if it then don't set the cookie aagi
-    const origin = useRef(false);
-
-    useEventListener(
-        "change",
-        ((
-            event: {
-                changed: [
-                    {
-                        name: string;
-                        value: string;
-                    }
-                ];
-            } & Event
-        ) => {
-            if (!origin.current) {
-                // There will always be a change in the array
-                const { name, value } = event.changed.slice(-1)[0]!;
-                if (name === key) {
-                    setValue(JSON.parse(value) as CookieType);
-                }
-            }
-            origin.current = false;
-        }) as EventListener,
-        isClient() ? cookieStore : null
+    const [value, setValue, receiveMessage] = useTabState<InitalStateType>(
+        initalState,
+        key
     );
 
     useOnChange(() => {
-        const delayDebounceFn = setTimeout(async () => {
-            // Cokiestore events are stupid and change runs even if the value is the same
-            if ((await cookieStore.get(key)).value !== value) {
-                console.log("set cookie", Date.now());
-                console.log(JSON.stringify(value));
-                cookieStore.set(key, JSON.stringify(value));
-                origin.current = true;
+        const delayDebounceFn = setTimeout(() => {
+            // If this is no receiveMessage, then it means that the change was made by this tab
+            if (!receiveMessage) {
+                if (typeof cookieStore !== "undefined") {
+                    cookieStore.set(key, JSON.stringify(value));
+                } else {
+                }
             }
         }, debounceTime);
 
