@@ -1,5 +1,4 @@
-import { config } from "@/util/helpers/getConfig";
-import { isClient } from "./isClient";
+import { config } from "@/util/getConfig";
 
 type Theme = typeof config.defaultTheme;
 
@@ -8,7 +7,7 @@ export function modifyTheme(theme: Theme): Theme {
 
     if (theme === "system") {
         if (
-            isClient() &&
+            typeof window !== "undefined" &&
             window.matchMedia("(prefers-color-scheme: dark)").matches
         ) {
             renderedTheme = config.systemDarkTheme;
@@ -17,9 +16,9 @@ export function modifyTheme(theme: Theme): Theme {
         }
     }
 
-    renderedTheme = config?.modifyTheme
-        ? config.modifyTheme(renderedTheme)
-        : renderedTheme;
+    if (config.modifyTheme) {
+        renderedTheme = config.modifyTheme(renderedTheme);
+    }
 
     return renderedTheme;
 }
