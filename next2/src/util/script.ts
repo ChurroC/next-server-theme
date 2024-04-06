@@ -1,4 +1,4 @@
-import { config } from "./getConfig";
+import { config } from "@/util/getConfig";
 type Theme = typeof config.defaultTheme;
 
 export function setSystemDark(systemDarkTheme: Theme) {

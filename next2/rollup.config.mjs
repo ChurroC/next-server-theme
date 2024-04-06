@@ -4,7 +4,6 @@ import resolve from "@rollup/plugin-node-resolve";
 import commonjs from "@rollup/plugin-commonjs";
 import typescript from "@rollup/plugin-typescript";
 import dts from "rollup-plugin-dts";
-import { terser } from 'rollup-plugin-terser';
 // use terser once everythign works
 
 export default [{
@@ -23,13 +22,8 @@ export default [{
     resolve(),
     commonjs(),
     typescript({ tsconfig: "./tsconfig.json", outDir: "dist/cjs/types", declarationDir: "dist/cjs/types" }),
-    preserveDirectives(),
-    terser()
-  ],
-  onwarn: function ( message ) {
-    if ( /"use client"/.test( message ) ) return;
-    console.error( message );
-  }
+    preserveDirectives()
+  ]
 },
 {
   input: "src/index.ts",
@@ -47,24 +41,6 @@ export default [{
     resolve(),
     commonjs(),
     typescript({ tsconfig: "./tsconfig.json", outDir: "dist/esm/types", declarationDir: "dist/esm/types" }),
-    preserveDirectives(),
-    terser()
+    preserveDirectives()
   ],
-  onwarn: function ( message ) {
-    if ( /"use client"/.test( message ) ) return;
-    console.error( message );
-  },
-},
-{
-  input: 'dist/esm/types/index.d.ts',
-  output: [
-    {
-      dir: "dist/types",
-      format: "esm",
-      preserveModules: true,
-      preserveModulesRoot: 'src',
-      sourcemap: true
-    }
-  ],
-  plugins: [dts()],
 }];

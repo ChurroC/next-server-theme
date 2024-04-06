@@ -8,3 +8,13 @@ export const config: ThemeConfig<"dark" | "system" | "light" | "pink"> = {
         return theme;
     }
 };
+
+// export type Theme = typeof config.defaultTheme;
+
+// import { cosmiconfigSync } from "cosmiconfig";
+
+// const explorerSync = cosmiconfigSync("theme");
+
+// const result = explorerSync.search();
+
+// console.log(result);

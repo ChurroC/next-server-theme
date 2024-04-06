@@ -42,6 +42,6 @@
     "**/*.cjs",
     "**/*.js",
     ".next/types/**/*.ts"
-, "../theme.config.ts"  ],
+  ],
   "exclude": ["node_modules"]
 }
