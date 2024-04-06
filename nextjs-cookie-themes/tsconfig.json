@@ -24,9 +24,10 @@
     "incremental": true,
     "outDir": "dist",
     "declaration": true,
-    "declarationDir": "dist",
+    "declarationDir": "dist/types",
     "allowSyntheticDefaultImports": true,
     "forceConsistentCasingInFileNames": true,
+    "importHelpers": false,
 
     /* Path Aliases */
     "baseUrl": ".",

@@ -1,6 +1,6 @@
 "use client";
 
-import { useGetTheme, useSetTheme } from "@/util/context/theme";
+import { useGetTheme, useSetTheme } from "@/components/theme.context";
 
 export default function HomePage() {
     const [theme, setTheme] = [useGetTheme(), useSetTheme()];

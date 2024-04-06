@@ -8,3 +8,4 @@ export const config: ThemeConfig<"dark" | "system" | "light" | "pink"> = {
         return theme;
     }
 };
+

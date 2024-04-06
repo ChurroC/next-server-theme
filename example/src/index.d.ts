@@ -5,6 +5,5 @@ export interface ThemeConfig<
     defaultTheme: Theme;
     systemLightTheme: Theme;
     systemDarkTheme: Theme;
-    debounce?: number;
     modifyTheme?: (theme: Theme) => Theme;
 }

@@ -1,5 +1,5 @@
-import { ThemeProviderWithoutProps } from "@/util/context/theme";
-import { getThemeWithoutModification } from "@/util/helpers/getServerTheme";
+import { ThemeProviderWithoutServerTheme } from "@/components/theme.context";
+import { getUnmodifiedServerTheme } from "@/util/getServerTheme";
 
 export async function ThemeProvider({
     children
@@ -7,8 +7,10 @@ export async function ThemeProvider({
     children: React.ReactNode;
 }) {
     return (
-        <ThemeProviderWithoutProps serverTheme={getThemeWithoutModification()}>
+        <ThemeProviderWithoutServerTheme
+            serverTheme={getUnmodifiedServerTheme()}
+        >
             {children}
-        </ThemeProviderWithoutProps>
+        </ThemeProviderWithoutServerTheme>
     );
 }
