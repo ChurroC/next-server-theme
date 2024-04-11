@@ -2,12 +2,6 @@ import { cosmiconfig } from "cosmiconfig";
 import { type ThemeConfig } from "@/index.d";
 
 export async function getConfig() {
-    let config = {
-        defaultTheme: "system",
-        systemLightTheme: "light",
-        systemDarkTheme: "dark"
-    };
-    
     try {
         const customConfig = (await import("theme.config")).default
         type Theme = typeof customConfig.themes[number]
@@ -26,10 +20,41 @@ export async function noTypeGetConfig() {
     // No typing
     const explorerSync = await cosmiconfig("theme");
     const result = await explorerSync.search();
-    return result.config;
+    const config = result.config;
+    type Theme = typeof config.themes[number]
+    
+    const config = {
+        defaultTheme: "system",
+        systemLightTheme: "light",
+        systemDarkTheme: "dark"
+    };
+    console.log(config)
+    if (!("defaultTheme" in config)) {
+        config.defaultTheme = "system";
+    }
+    if (!("systemLightTheme" in config)) {
+        config.systemLightTheme = "light";
+    }
+    if (!("systemDarkTheme" in config)) {
+        config.systemDarkTheme = "dark";
+    }
+    return config as ThemeConfig
 }
-export async function noTypeGetConfig2(): Promise<ThemeConfig<string>> {
-    return noTypeGetConfig() ?? getConfig()
+export async function noTypeGetConfig2(): Promise<ThemeConfig<"dark" | "system" | "light" | "pink">> {
+    const typedConfig = await getConfig()
+    if (typedConfig) {
+        return typedConfig
+    } else {
+        return new Promise((resolve, reject) => {
+            const config: ThemeConfig = {
+                themes: ["dark", "light", "system", "pink"],
+                defaultTheme: "system",
+                systemLightTheme: "light",
+                systemDarkTheme: "dark"
+            };
+            resolve(config)
+        }
+    }
 }
 
 (async () => {
