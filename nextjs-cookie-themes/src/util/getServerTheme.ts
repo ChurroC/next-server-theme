@@ -3,7 +3,7 @@ import { cookies } from "next/headers";
 import { config } from "@/util/getConfig";
 import { modifyTheme } from "@/util/modifyTheme";
 
-type Theme = typeof config.defaultTheme;
+import type { Theme } from "@/util/getConfig";
 
 export function getUnmodifiedServerTheme(): Theme {
     const cookie = cookies().get("theme")?.value as Theme;

@@ -1,6 +1,6 @@
 import { config } from "@/util/getConfig";
 
-type Theme = typeof config.defaultTheme;
+import type { Theme } from "@/util/getConfig";
 
 export function modifyTheme(theme: Theme): Theme {
     let renderedTheme = theme;

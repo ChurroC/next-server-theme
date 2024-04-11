@@ -10,7 +10,7 @@ import { modifyTheme } from "@/util/modifyTheme";
 import { setSystemDark } from "@/util/script";
 
 import { config } from "@/util/getConfig";
-type Theme = typeof config.defaultTheme;
+import type { Theme } from "@/util/getConfig";
 
 declare const cookieStore: {
     get: (name: string) => Promise<{ value: string }>;
@@ -116,8 +116,8 @@ export function ThemeProviderWithoutServerTheme({
     );
 }
 
-export function useTheme() {
-    return [useContext(ThemeContext), useContext(SetThemeContext)];
+export function useTheme(){
+    return [useContext(ThemeContext), useContext(SetThemeContext)] as const;
 }
 
 export function useGetTheme() {
