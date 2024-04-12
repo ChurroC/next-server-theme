@@ -1,11 +1,14 @@
 import { type ThemeConfig } from "@/index.d";
+import { Theme } from "@/util/getConfig";
 
-const config: ThemeConfig<"dark" | "system" | "light" | "pink"> = {
+const config = {
     themes: ["dark", "light", "system", "pink"],
     defaultTheme: "system",
     systemLightTheme: "pink",
     systemDarkTheme: "dark",
 };
+
+config.themes
 
 export default config;
 

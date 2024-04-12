@@ -8,7 +8,7 @@ export async function ThemeProvider({
 }) {
     return (
         <ThemeProviderWithoutServerTheme
-            serverTheme={getUnmodifiedServerTheme()}
+            serverTheme={getUnmodifiedServerTheme(defaultTheme)}
         >
             {children}
         </ThemeProviderWithoutServerTheme>

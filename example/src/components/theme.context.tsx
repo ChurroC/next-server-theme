@@ -4,17 +4,14 @@ import { createContext, useContext, useEffect, useState } from "react";
 import { modifyTheme } from "@/util/modifyTheme";
 import { setSystemDark } from "@/util/script";
 
-import { config } from "@/util/getConfig";
-type Theme = typeof config.defaultTheme;
-
 declare const cookieStore: {
     get: (name: string) => Promise<{ value: string }>;
     set: (name: string, value: string) => void;
 } & EventTarget;
 
-const ThemeContext = createContext<Theme>(config.defaultTheme);
+const ThemeContext = createContext<string>("");
 const SetThemeContext = createContext<
-    React.Dispatch<React.SetStateAction<Theme>>
+    React.Dispatch<React.SetStateAction<string>>
 >(() => {});
 
 export function useOnChange(
@@ -35,12 +32,16 @@ export function useOnChange(
 
 export function ThemeProviderWithoutServerTheme({
     children,
-    serverTheme
+    serverTheme,
+    systemLightTheme = "light",
+    systemDarkTheme = "dark"
 }: {
     children: React.ReactNode;
-    serverTheme: Theme;
+    serverTheme: string;
+    systemLightTheme: string;
+    systemDarkTheme: string;
 }) {
-    const [theme, setTheme] = useState<Theme>(serverTheme);
+    const [theme, setTheme] = useState<string>(serverTheme);
 
     // When theme changes set class name
     useOnChange(() => {
@@ -64,12 +65,9 @@ export function ThemeProviderWithoutServerTheme({
     useEffect(() => {
         if (theme === "system") {
             function onSystemThemeChange({ matches }: MediaQueryListEventInit) {
-                console.log(theme, matches);
                 if (matches)
-                    document.documentElement.className = config.systemDarkTheme;
-                else
-                    document.documentElement.className =
-                        config.systemLightTheme;
+                    document.documentElement.className = systemDarkTheme;
+                else document.documentElement.className = systemLightTheme;
             }
             const systemDark = window.matchMedia(
                 "(prefers-color-scheme: dark)"
@@ -87,7 +85,7 @@ export function ThemeProviderWithoutServerTheme({
     useEffect(() => {
         function onStorageChange({ key, newValue }: StorageEvent) {
             if (key === "theme") {
-                setTheme(newValue as Theme);
+                setTheme(newValue as string);
             }
         }
         window.addEventListener("storage", onStorageChange);
@@ -101,7 +99,7 @@ export function ThemeProviderWithoutServerTheme({
                 {serverTheme === "system" && (
                     <script
                         dangerouslySetInnerHTML={{
-                            __html: `(${setSystemDark.toString()})("${config.systemDarkTheme}")`
+                            __html: `(${setSystemDark.toString()})("${systemDarkTheme}")`
                         }}
                     />
                 )}

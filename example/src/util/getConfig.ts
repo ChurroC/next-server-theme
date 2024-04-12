@@ -1,14 +1,18 @@
-import { type ThemeConfig } from "@/index.d";
+import { cosmiconfigSync } from "cosmiconfig";
+import type { ThemeConfig } from "@/types";
 
-console.log("confgi");
+export function getConfig() {
+    // No typing
+    const explorerSync = cosmiconfigSync("theme");
+    const test = explorerSync.search();
+    console.log(test);
 
-export const config: ThemeConfig<"dark" | "system" | "light"> = {
-    defaultTheme: "system",
-    systemLightTheme: "light",
-    systemDarkTheme: "dark",
-    modifyTheme: theme => {
-        return theme;
-    }
-};
-
-export type Theme = typeof config.defaultTheme;
+    const config: ThemeConfig = {
+        themes: ["dark", "light", "system"],
+        defaultTheme: "system",
+        systemLightTheme: "light",
+        systemDarkTheme: "dark",
+        ...customConfig
+    };
+    return config;
+}
