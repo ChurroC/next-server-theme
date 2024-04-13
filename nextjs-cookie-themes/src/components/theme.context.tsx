@@ -1,25 +1,16 @@
 "use client";
 
-import {
-    createContext,
-    useContext,
-    useEffect,
-    useState
-} from "react";
-import { modifyTheme } from "@/util/modifyTheme";
+import { createContext, useContext, useEffect, useState } from "react";
 import { setSystemDark } from "@/util/script";
-
-import { config } from "@/util/getConfig";
-import type { Theme } from "@/util/getConfig";
 
 declare const cookieStore: {
     get: (name: string) => Promise<{ value: string }>;
     set: (name: string, value: string) => void;
 } & EventTarget;
 
-const ThemeContext = createContext<Theme>(config.defaultTheme);
+const ThemeContext = createContext<string>("");
 const SetThemeContext = createContext<
-    React.Dispatch<React.SetStateAction<Theme>>
+    React.Dispatch<React.SetStateAction<string>>
 >(() => {});
 
 export function useOnChange(
@@ -40,16 +31,71 @@ export function useOnChange(
 
 export function ThemeProviderWithoutServerTheme({
     children,
-    serverTheme
+    serverTheme,
+    systemLightTheme,
+    systemDarkTheme,
+    attributes
 }: {
     children: React.ReactNode;
-    serverTheme: Theme;
+    serverTheme: string;
+    systemLightTheme: string;
+    systemDarkTheme: string;
+    attributes: string | string[];
 }) {
-    const [theme, setTheme] = useState<Theme>(serverTheme);
+    const [theme, setTheme] = useState<string>(serverTheme);
 
     // When theme changes set class name
-    useOnChange(() => {
-        document.documentElement.className = modifyTheme(theme);
+    useEffect(() => {
+        if (theme === "system") {
+            const onSystemThemeChange = ({
+                matches
+            }: MediaQueryListEventInit) => {
+                if (matches)
+                    [attributes].flat().forEach(attribute => {
+                        document.documentElement.setAttribute(
+                            attribute,
+                            systemDarkTheme
+                        );
+                    });
+                else
+                    [attributes].flat().forEach(attribute => {
+                        document.documentElement.setAttribute(
+                            attribute,
+                            systemLightTheme
+                        );
+                    });
+            };
+            const systemDark = window.matchMedia(
+                "(prefers-color-scheme: dark)"
+            );
+            systemDark.addEventListener("change", onSystemThemeChange);
+
+            if (
+                typeof window !== "undefined" &&
+                window.matchMedia("(prefers-color-scheme: dark)").matches
+            ) {
+                [attributes].flat().forEach(attribute => {
+                    document.documentElement.setAttribute(
+                        attribute,
+                        systemDarkTheme
+                    );
+                });
+            } else {
+                [attributes].flat().forEach(attribute => {
+                    document.documentElement.setAttribute(
+                        attribute,
+                        systemLightTheme
+                    );
+                });
+            }
+
+            return () =>
+                systemDark.removeEventListener("change", onSystemThemeChange);
+        } else {
+            [attributes].flat().forEach(attribute => {
+                document.documentElement.setAttribute(attribute, theme);
+            });
+        }
     }, [theme]);
 
     // When theme changes set cookie
@@ -65,34 +111,12 @@ export function ThemeProviderWithoutServerTheme({
         localStorage.setItem("theme", theme);
     }, [theme]);
 
-    // This is for when the system theme changes
-    useEffect(() => {
-        if (theme === "system") {
-            const onSystemThemeChange = ({ matches }: MediaQueryListEventInit) => {
-                console.log(theme, matches);
-                if (matches)
-                    document.documentElement.className = config.systemDarkTheme;
-                else
-                    document.documentElement.className =
-                        config.systemLightTheme;
-            }
-            const systemDark = window.matchMedia(
-                "(prefers-color-scheme: dark)"
-            );
-
-            systemDark.addEventListener("change", onSystemThemeChange);
-
-            return () =>
-                systemDark.removeEventListener("change", onSystemThemeChange);
-        }
-    }, [theme]);
-
     // This is when another tabs theme changes
     // Was going to use broadcast api but this is easier since it runs on other tabs and doesnt run if localstorage is set to the value
     useEffect(() => {
         function onStorageChange({ key, newValue }: StorageEvent) {
             if (key === "theme") {
-                setTheme(newValue as Theme);
+                setTheme(newValue!);
             }
         }
         window.addEventListener("storage", onStorageChange);
@@ -106,7 +130,7 @@ export function ThemeProviderWithoutServerTheme({
                 {serverTheme === "system" && (
                     <script
                         dangerouslySetInnerHTML={{
-                            __html: `(${setSystemDark.toString()})("${config.systemDarkTheme}")`
+                            __html: `(${setSystemDark.toString()})("${attributes}", "${systemLightTheme}", "${systemDarkTheme}")`
                         }}
                     />
                 )}
@@ -116,8 +140,8 @@ export function ThemeProviderWithoutServerTheme({
     );
 }
 
-export function useTheme(){
-    return [useContext(ThemeContext), useContext(SetThemeContext)] as const;
+export function useTheme() {
+    return [useContext(ThemeContext), useContext(SetThemeContext)];
 }
 
 export function useGetTheme() {

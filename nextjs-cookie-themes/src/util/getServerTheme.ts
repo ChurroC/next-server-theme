@@ -1,18 +1,15 @@
 import { cookies } from "next/headers";
 
-import { config } from "@/util/getConfig";
-import { modifyTheme } from "@/util/modifyTheme";
+// This is basically a static variable
+// But we warned while hot reloading this will stay the same
+let defaultThemeStatic: string;
 
-import type { Theme } from "@/util/getConfig";
+export function getServerTheme(defaultTheme?: string): string {
+    if (defaultTheme) {
+        defaultThemeStatic = defaultTheme;
+    }
+    const cookie = cookies().get("theme")?.value;
 
-export function getUnmodifiedServerTheme(): Theme {
-    const cookie = cookies().get("theme")?.value as Theme;
-
-    return cookie ?? config.defaultTheme;
-}
-
-export function getServerTheme(): Theme {
-    const theme = getUnmodifiedServerTheme();
-
-    return modifyTheme(theme);
+    // even if the theme is system before being displayed the right theme will be set
+    return cookie ?? defaultThemeStatic ?? "system";
 }
