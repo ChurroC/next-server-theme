@@ -1,14 +1,25 @@
 import { ThemeProviderWithoutServerTheme } from "@/components/theme.context";
-import { getUnmodifiedServerTheme } from "@/util/getServerTheme";
+import { getServerTheme } from "@/util/getServerTheme";
 
 export async function ThemeProvider({
-    children
+    children,
+    defaultTheme = "system",
+    systemLightTheme = "light",
+    systemDarkTheme = "dark",
+    attributes = "class"
 }: {
     children: React.ReactNode;
+    defaultTheme?: string;
+    systemLightTheme?: string;
+    systemDarkTheme?: string;
+    attributes?: string | string[];
 }) {
     return (
         <ThemeProviderWithoutServerTheme
-            serverTheme={getUnmodifiedServerTheme(defaultTheme)}
+            serverTheme={getServerTheme(defaultTheme)}
+            systemLightTheme={systemLightTheme}
+            systemDarkTheme={systemDarkTheme}
+            attributes={attributes}
         >
             {children}
         </ThemeProviderWithoutServerTheme>
