@@ -1,1 +1,1 @@
-[this subtext](./next-server-theme/README.md)
+[README](./next-server-theme/README.md)
