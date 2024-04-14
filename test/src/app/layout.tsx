@@ -1,5 +1,4 @@
-import { getServerTheme, ThemeProvider } from "nextjs-cookie-theme";
-import type { Theme } from "nextjs-cookie-theme";
+import { getServerTheme, ThemeProvider } from "next-server-theme";
 
 import "./globals.css";
 
@@ -21,9 +20,7 @@ export default function RootLayout({
             <body
                 className={`${GeistSans.className} bg-white dark:bg-black pink:bg-pink-100`}
             >
-                <ThemeProvider defaultTheme="s" wows={{ test: "s" }}>
-                    {children}
-                </ThemeProvider>
+                <ThemeProvider defaultTheme="s">{children}</ThemeProvider>
             </body>
         </html>
     );

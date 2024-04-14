@@ -1,6 +1,6 @@
 "use client";
 
-import { useGetTheme, useSetTheme, useTheme } from "nextjs-cookie-theme";
+import { useGetTheme, useSetTheme, useTheme } from "next-server-theme";
 
 export default function HomePage() {
     const [theme, setTheme] = [useGetTheme(), useSetTheme()];

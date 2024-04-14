@@ -1,0 +1,13 @@
+{
+  "trailingComma": "none",
+  "tabWidth": 4,
+  "arrowParens": "avoid",
+  "overrides": [
+    {
+      "files": ["*.config.*", "*.json"],
+      "options": {
+        "tabWidth": 2
+      }
+    }
+  ]
+}
