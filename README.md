@@ -1,1 +1,1 @@
-[README](./next-server-theme/README.md)
+./next-server-theme/README.md
