@@ -16,6 +16,7 @@ export async function ThemeProvider({
     attributes?: string | string[];
 }) {
     return (
+        // To have cookie from getServerTheme we need this to be a server component
         <ThemeProviderWithoutServerTheme
             serverTheme={getServerTheme(defaultTheme)}
             systemLightTheme={systemLightTheme}

@@ -1,5 +1,4 @@
-import { getServerTheme, ThemeProvider } from "nextjs-cookie-theme";
-import type { Theme } from "nextjs-cookie-theme";
+import { getServerTheme, ThemeProvider } from "next-server-theme";
 
 import "./globals.css";
 
@@ -17,11 +16,9 @@ export default function RootLayout({
     children: React.ReactNode;
 }) {
     return (
-        <html lang="en" suppressHydrationWarning className={getServerTheme()}>
-            <body
-                className={`${GeistSans.className} bg-white dark:bg-black pink:bg-pink-100`}
-            >
-                <ThemeProvider defaultTheme="s" wows={{ test: "s" }}>
+        <html lang="en" suppressHydrationWarning data-theme={getServerTheme()}>
+            <body className={GeistSans.className}>
+                <ThemeProvider attributes="data-theme">
                     {children}
                 </ThemeProvider>
             </body>

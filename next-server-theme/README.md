@@ -14,3 +14,5 @@ espeically to mofiy types in file
 add remove and reset types
 
 maybe try to support non app dir
+
+need to actually install lirbary and not custom way when finsihed

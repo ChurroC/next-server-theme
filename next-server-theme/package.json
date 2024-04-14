@@ -1,5 +1,5 @@
 {
-  "name": "nextjs-cookie-theme",
+  "name": "next-server-theme",
   "version": "1.4.1",
   "author": "churroc",
   "description": "This is a theme library that allows you to know the user's theme preference on the server and allow you to server pages with no hydration errors.",
@@ -9,9 +9,7 @@
   "type": "module",
   "license": "MIT",
   "scripts": {
-    "link": "npm link",
     "build": "rollup -c",
-    "postbuild": "npm link",
     "publishPKG": "npm publish"
   },
   "devDependencies": {
