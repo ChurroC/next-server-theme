@@ -94,8 +94,7 @@ export default [
       resolve(),
       terser(),
       commonjs(),
-      filesize(),
-      visualizer()
+      filesize()
     ]
   }
 ];

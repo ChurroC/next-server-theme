@@ -1,9 +1,9 @@
 #! /usr/bin/env node
 import { program } from "commander";
-import { version } from "../package.json";
+import { version, name } from "../package.json";
 import fs from "fs/promises";
 
-const fileName = "./node_modules/next-server-theme/dist/index.d.ts";
+const fileName = `./node_modules/${name}/dist/index.d.ts`;
 
 program
     .name("next-server-theme")
