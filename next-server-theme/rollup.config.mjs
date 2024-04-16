@@ -7,6 +7,7 @@ import dts from "rollup-plugin-dts";
 import { terser } from "rollup-plugin-terser";
 import { visualizer } from "rollup-plugin-visualizer";
 import filesize from "rollup-plugin-filesize";
+import json from "@rollup/plugin-json";
 // use terser once everythign works
 
 export default [
@@ -73,8 +74,28 @@ export default [
     }
   },
   {
-    input: "./dist/esm/types/index.d.ts",
+    input: "dist/esm/types/index.d.ts",
     output: [{ file: "dist/index.d.ts", format: "es" }],
     plugins: [dts()]
+  },
+  {
+    input: "bin/index.ts",
+    output: [{ file: "dist/bin/index.js", format: "es" }],
+    plugins: [
+      peerDepsExternal(),
+      typescript({
+        tsconfig: "./tsconfig.json",
+        outDir: "dist/bin",
+        declarationDir: "dist/bin",
+        rootDir: "bin",
+        outputToFilesystem: true
+      }),
+      json(),
+      resolve(),
+      terser(),
+      commonjs(),
+      filesize(),
+      visualizer()
+    ]
   }
 ];

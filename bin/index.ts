@@ -3,7 +3,7 @@ import { program } from "commander";
 import { version } from "../package.json";
 import fs from "fs/promises";
 
-const fileName = "./node_modules/next-server-theme/dist/index.d.ts";
+const fileName = "node_modules/next-server-theme/dist/index.d.ts";
 
 program
     .name("next-server-theme")
