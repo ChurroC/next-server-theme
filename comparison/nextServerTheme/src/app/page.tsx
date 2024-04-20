@@ -1,21 +1,9 @@
 "use client";
 
-import { useGetTheme, useSetTheme } from "next-server-theme";
-import { useTheme } from "next-themes";
-import { useEffect, useState } from "react";
+import { useTheme } from "next-server-theme";
 
 export default function HomePage() {
-    //const [theme, setTheme] = [useGetTheme(), useSetTheme()];
-    // const [theme, setTheme] = useTheme();
-    const [isMounted, setIsMounted] = useState(false);
-
-    useEffect(() => {
-        setIsMounted(true);
-    });
-
-    const { theme, setTheme } = useTheme();
-
-    if (!isMounted) return null;
+    const [theme, setTheme] = useTheme();
 
     return (
         <div className="flex h-screen flex-col items-center justify-center gap-3 dark:text-white">

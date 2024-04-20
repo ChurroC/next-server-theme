@@ -1,10 +1,9 @@
 import { getServerTheme, ThemeProvider } from "next-server-theme";
 
-import { ThemeProvider as Theme } from "next-themes";
-
 import "./globals.css";
 
 import { GeistSans } from "geist/font/sans";
+import { WebVitals } from "./web-vitals";
 
 export const metadata = {
     title: "Create T3 App",
@@ -18,15 +17,13 @@ export default function RootLayout({
     children: React.ReactNode;
 }) {
     return (
-        <html lang="en">
+        <html lang="en" suppressHydrationWarning className={getServerTheme()}>
             <body
                 className={`${GeistSans.className} bg-white dark:bg-black pink:bg-pink-100`}
             >
-                <Theme attribute="class" themes={["pink", "dark", "light"]}>
-                    {children}
-                </Theme>
+                <WebVitals />
+                <ThemeProvider>{children}</ThemeProvider>
             </body>
         </html>
     );
 }
-// suppressHydrationWarning className={getServerTheme()}

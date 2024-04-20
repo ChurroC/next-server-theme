@@ -1,5 +1,5 @@
 {
-  "name": "churro-test",
+  "name": "next-server-theme",
   "version": "3.0.0",
   "author": "churroc",
   "description": "This is a theme library that allows you to know the user's theme preference on the server and allow you to server pages with no hydration errors.",
@@ -9,7 +9,7 @@
   "module": "dist/esm/index.js",
   "types": "dist/index.d.ts",
   "bin": {
-    "churro-test": "dist/bin/index.js"
+    "next-server-theme": "dist/bin/index.js"
   },
   "scripts": {
     "build": "rollup -c",

@@ -31,8 +31,7 @@
     "prettier": "^3.2.5",
     "prettier-plugin-tailwindcss": "^0.5.11",
     "tailwindcss": "^3.4.1",
-    "typescript": "^5.4.2",
-    "churro-test": "^1.4.1"
+    "typescript": "^5.4.2"
   },
   "ct3aMetadata": {
     "initVersion": "7.30.0"

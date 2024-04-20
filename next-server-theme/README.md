@@ -18,3 +18,7 @@ maybe try to support non app dir
 need to actually install lirbary and not custom way when finsihed
 
 maybe cache line at where theme is in cli
+
+reasons why
+"typsafe"
+theme on server for state and no no rehydration worry
