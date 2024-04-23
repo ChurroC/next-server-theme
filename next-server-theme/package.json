@@ -1,6 +1,6 @@
 {
   "name": "next-server-theme",
-  "version": "3.0.0",
+  "version": "1.0.0",
   "author": "churroc",
   "description": "This is a theme library that allows you to know the user's theme preference on the server and allow you to server pages with no hydration errors.",
   "type": "module",
@@ -12,7 +12,7 @@
     "next-server-theme": "dist/bin/index.js"
   },
   "scripts": {
-    "build": "rollup -c",
+    "build": "rm -rf dist && rollup -c",
     "publishPKG": "npm publish"
   },
   "devDependencies": {

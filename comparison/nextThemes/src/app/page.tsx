@@ -9,7 +9,7 @@ export default function HomePage() {
 
     useEffect(() => {
         setIsMounted(true);
-    });
+    }, []);
 
     const [open, setOpen] = useState(false);
 

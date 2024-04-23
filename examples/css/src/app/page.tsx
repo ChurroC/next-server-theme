@@ -1,12 +1,11 @@
 "use client";
 
-import { useGetTheme, useSetTheme } from "next-server-theme";
+import { useTheme } from "next-server-theme";
 
 import styles from "./styles.module.css";
 
 export default function HomePage() {
-    const [theme, setTheme] = [useGetTheme(), useSetTheme()];
-    // const [theme, setTheme] = useTheme();
+    const [theme, setTheme] = useTheme();
 
     return (
         <div className={styles.themeSelector}>

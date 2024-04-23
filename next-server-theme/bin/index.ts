@@ -40,4 +40,9 @@ program
         console.log("Theme type changed");
     });
 
+program
+    .command("reset")
+    .description("rest theme to string type")
+    .action(() => console.log("reset theme type"));
+
 program.parse();

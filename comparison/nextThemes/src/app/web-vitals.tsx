@@ -7,7 +7,7 @@ export function WebVitals() {
         console.log(metric);
         const body = JSON.stringify(metric);
 
-        fetch("/api/analytics", { body, method: "POST", keepalive: true });
+        void fetch("/api/analytics", { body, method: "POST", keepalive: true });
     });
     return null;
 }
