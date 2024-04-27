@@ -18,7 +18,7 @@ export default function RootLayout({
     children: React.ReactNode;
 }) {
     return (
-        <html lang="en">
+        <html lang="en" suppressHydrationWarning className={getServerTheme()}>
             <body
                 className={`${GeistSans.className} bg-white dark:bg-black pink:bg-pink-100`}
             >
@@ -29,4 +29,3 @@ export default function RootLayout({
         </html>
     );
 }
-// suppressHydrationWarning className={getServerTheme()}

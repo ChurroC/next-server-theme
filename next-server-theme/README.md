@@ -23,7 +23,7 @@ Adding dark mode support takes 2 lines of code:
 
 ```jsx
 // app/layout.jsx
-import { ThemeProvider } from "next-themes";
+import { ThemeProvider, getServerTheme } from "next-server-themes";
 
 export default function Layout({ children }) {
     return (
@@ -101,7 +101,7 @@ In out examples we have 3 ways to do this method
 
 ```jsx
 // app/layout.jsx
-import { ThemeProvider } from "next-themes";
+import { ThemeProvider, getServerTheme } from "next-server-themes";
 
 export default function Layout({ children }) {
     return (
@@ -153,7 +153,7 @@ export default {
 
 ```jsx
 // app/layout.jsx
-import { ThemeProvider } from "next-themes";
+import { ThemeProvider, getServerTheme } from "next-server-themes";
 
 export default function Layout({ children }) {
     return (
