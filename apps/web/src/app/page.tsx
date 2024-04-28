@@ -1,6 +1,6 @@
 "use client";
 
-import { useTheme } from "./src";
+import { useTheme } from "next-server-theme";
 
 export default function HomePage() {
     const [theme, setTheme] = useTheme();

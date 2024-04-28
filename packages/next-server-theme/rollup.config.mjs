@@ -10,7 +10,7 @@ import json from "@rollup/plugin-json";
 
 export default [
   {
-    input: "src/index.ts",
+    input: ["src/client.ts", "src/server.ts"],
     output: [
       {
         dir: "dist/cjs",
@@ -39,7 +39,7 @@ export default [
     }
   },
   {
-    input: "src/index.ts",
+    input: ["src/client.ts", "src/server.ts"],
     output: [
       {
         dir: "dist/esm",
@@ -68,8 +68,13 @@ export default [
     }
   },
   {
-    input: "dist/esm/types/index.d.ts",
-    output: [{ file: "dist/types/index.d.ts", format: "es" }],
+    input: "dist/esm/types/client.d.ts",
+    output: [{ file: "dist/types/client.d.ts", format: "es" }],
+    plugins: [dts()]
+  },
+  {
+    input: "dist/esm/types/server.d.ts",
+    output: [{ file: "dist/types/server.d.ts", format: "es" }],
     plugins: [dts()]
   },
   {

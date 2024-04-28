@@ -5,13 +5,17 @@
   "description": "This is a theme library that allows you to know the user's theme preference on the server and allow you to server pages with no hydration errors.",
   "license": "MIT",
   "exports": {
-    "import": "./dist/esm/index.js",
-    "require": "./dist/cjs/index.js",
-    "types": "./dist/types/index.d.ts"
+    ".": {
+      "import": "./dist/esm/client.js",
+      "require": "./dist/cjs/client.js",
+      "types": "./dist/types/client.d.ts"
+    },
+    "./server": {
+      "import": "./dist/esm/server.js",
+      "require": "./dist/cjs/server.js",
+      "types": "./dist/types/server.d.ts"
+    }
   },
-  "main": "dist/cjs/index.js",
-  "module": "dist/esm/index.js",
-  "types": "dist/types/index.d.ts",
   "bin": {
     "next-server-theme": "dist/bin/index.js"
   },
