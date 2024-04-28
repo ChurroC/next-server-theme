@@ -33,10 +33,10 @@
     "@rollup/plugin-json": "^6.1.0",
     "@rollup/plugin-node-resolve": "^15.2.3",
     "@rollup/plugin-typescript": "^11.1.6",
-    "@types/react": "^18.2.69",
+    "@types/react": "^18.3.1",
     "@repo/eslint-config": "workspace: *",
     "@repo/typescript-config": "workspace: *",
-    "typescript": "^5.4.3"
+    "typescript": "^5.4.5"
   },
   "peerDependencies": {
     "react": "^16.8 || ^17 || ^18",
