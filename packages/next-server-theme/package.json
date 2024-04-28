@@ -28,7 +28,7 @@
     "rollup-plugin-dts": "^6.1.0",
     "rollup-plugin-peer-deps-external": "^2.2.4",
     "rollup-plugin-preserve-directives": "^0.4.0",
-    "rollup-plugin-terser": "^7.0.2",
+    "@rollup/plugin-terser": "^0.4.4",
     "@rollup/plugin-commonjs": "^25.0.7",
     "@rollup/plugin-json": "^6.1.0",
     "@rollup/plugin-node-resolve": "^15.2.3",
@@ -39,8 +39,8 @@
     "typescript": "^5.4.3"
   },
   "peerDependencies": {
-    "react": "^18.2.0",
-    "next": "^14.1.1"
+    "react": "^16.8 || ^17 || ^18",
+    "next": "^13 || ^14"
   },
   "homepage": "https://github.com/ChurroC/next-server-theme#readme",
   "repository": {

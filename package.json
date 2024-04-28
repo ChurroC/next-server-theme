@@ -6,13 +6,15 @@
     "build": "turbo build",
     "dev": "turbo dev",
     "lint": "turbo lint",
-    "format": "prettier --write \"**/*.{ts,tsx,md}\""
+    "format": "prettier --write \"**/*.{ts,tsx,md}\"",
+    "postinstall": "manypkg check"
   },
-  "devDependencies": {
-    "@repo/eslint-config": "0.0.0",
-    "@repo/typescript-config": "0.0.0",
+  "dependencies": {
+    "@repo/eslint-config": "workspace: *",
+    "@repo/typescript-config": "workspace: *",
     "prettier": "^3.2.5",
     "prettier-plugin-tailwindcss": "^0.5.14",
+    "@manypkg/cli": "^0.21.4",
     "turbo": "latest"
   },
   "engines": {
