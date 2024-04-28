@@ -131,7 +131,7 @@ export function ThemeProviderWithoutServerTheme({
                 {serverTheme === "system" && (
                     <script
                         dangerouslySetInnerHTML={{
-                            __html: `(${setSystemDark.toString()})("${attributes}", "${systemLightTheme}", "${systemDarkTheme}")`
+                            __html: `(${setSystemDark.toString()})("[${attributes}]", "${systemLightTheme}", "${systemDarkTheme}")`
                         }}
                     />
                 )}

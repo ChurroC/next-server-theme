@@ -1,32 +1,8 @@
 {
+  "extends": "@repo/typescript-config/react-library.json",
   "compilerOptions": {
-    /* Base Options: */
-    "esModuleInterop": true,
-    "skipLibCheck": true,
-    "target": "es5",
-    "allowJs": true,
-    "resolveJsonModule": true,
-    "moduleDetection": "force",
-    "isolatedModules": true,
-
-    /* Strictness */
-    "strict": true,
-    "noUncheckedIndexedAccess": true,
-    "checkJs": true,
-
-    /* Bundled projects */
-    "lib": ["dom", "dom.iterable", "ES2022"],
-    "noEmit": true,
-    "module": "ESNext",
-    "moduleResolution": "Node10",
-    "jsx": "react-jsx",
-    "plugins": [{ "name": "next" }],
-    "incremental": true,
     "outDir": "dist",
-    "declaration": true,
     "declarationDir": "dist/types",
-    "allowSyntheticDefaultImports": true,
-    "forceConsistentCasingInFileNames": true,
     "importHelpers": false,
 
     /* Path Aliases */
@@ -35,15 +11,6 @@
       "@/*": ["./src/*"]
     }
   },
-  "include": [
-    ".eslintrc.cjs",
-    "next-env.d.ts",
-    "**/*.ts",
-    "**/*.tsx",
-    "**/*.cjs",
-    "**/*.js",
-    ".next/types/**/*.ts",
-    "../theme.config.ts"
-  ],
-  "exclude": ["node_modules"]
+  "include": ["src"],
+  "exclude": ["node_modules", "dist"]
 }

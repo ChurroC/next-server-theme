@@ -23,7 +23,7 @@ program
     .command("change")
     .description("Modify theme type")
     .argument("<strings...>", "modified theme types")
-    .action(async newThemeType => {
+    .action(async (newThemeType: string[]) => {
         console.log(newThemeType);
         const data = await fs.readFile(fileName, { encoding: "utf8" });
         const themeType = data.split("type Theme = ")[1]?.split(";")[0];
@@ -34,7 +34,7 @@ program
 
         const formattedType = data.replace(
             `type Theme = ${themeType};`,
-            `type Theme = ${newThemeType.map((type: string) => `"${type.trim()}"`).join(" | ")};`
+            `type Theme = ${newThemeType.map(type => `"${type.trim()}"`).join(" | ")};`
         );
         await fs.writeFile(fileName, formattedType, "utf8");
         console.log("Theme type changed");

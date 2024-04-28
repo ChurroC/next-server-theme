@@ -2,7 +2,7 @@ import { ThemeProviderWithoutServerTheme } from "@/components/theme.context";
 import { getServerTheme } from "@/util/getServerTheme";
 import type { Theme } from "../types";
 
-export async function ThemeProvider({
+export function ThemeProvider({
     children,
     defaultTheme = "system",
     systemLightTheme = "light",

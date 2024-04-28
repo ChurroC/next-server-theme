@@ -10,7 +10,7 @@ import json from "@rollup/plugin-json";
 
 export default [
   {
-    input: ["src/client.ts", "src/server.ts"],
+    input: "src/client.ts",
     output: [
       {
         dir: "dist/cjs",
