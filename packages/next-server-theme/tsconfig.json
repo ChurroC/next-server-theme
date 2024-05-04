@@ -8,7 +8,7 @@
     /* Path Aliases */
     "baseUrl": ".",
     "paths": {
-      "@/*": ["./src/*"]
+      "@/*": ["./src/react/*"]
     }
   },
   "include": ["src"],

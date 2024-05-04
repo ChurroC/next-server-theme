@@ -27,7 +27,6 @@ coverage
 .next/
 out/
 build
-dist
 
 
 # Debug

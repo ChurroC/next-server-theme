@@ -17,7 +17,7 @@
     }
   },
   "bin": {
-    "next-server-theme": "dist/bin/index.js"
+    "next-server-theme": "dist/cli/index.js"
   },
   "files": [
     "dist"

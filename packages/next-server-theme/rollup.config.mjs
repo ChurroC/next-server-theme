@@ -4,33 +4,31 @@ import resolve from "@rollup/plugin-node-resolve";
 import commonjs from "@rollup/plugin-commonjs";
 import typescript from "@rollup/plugin-typescript";
 import dts from "rollup-plugin-dts";
-import terser from '@rollup/plugin-terser';
+import terser from "@rollup/plugin-terser";
 import json from "@rollup/plugin-json";
 
 export default [
   {
-    input: "src/client.ts",
-    output: [
-      {
-        dir: "dist/cjs",
-        format: "cjs",
-        preserveModules: true,
-        preserveModulesRoot: "src",
-        sourcemap: true
-      }
-    ],
+    input: ["src/react/client.ts", "src/react/server.ts"],
+    output: {
+      dir: "dist/cjs",
+      format: "cjs",
+      preserveModules: true,
+      preserveModulesRoot: "src/react",
+      sourcemap: true
+    },
     plugins: [
       peerDepsExternal(),
       typescript({
         tsconfig: "./tsconfig.json",
-        outDir: "dist/cjs/types",
-        declarationDir: "dist/cjs/types",
-        rootDir: "src"
+        outDir: "dist/cjs",
+        declarationDir: "dist/cjs",
+        rootDir: "src/react",
+        outputToFilesystem: true
       }),
       resolve(),
       preserveDirectives(),
-      terser(),
-      commonjs()
+      terser()
     ],
     onwarn: function (message) {
       if (/"use client"/.test(message)) return;
@@ -38,28 +36,26 @@ export default [
     }
   },
   {
-    input: ["src/client.ts", "src/server.ts"],
-    output: [
-      {
-        dir: "dist/esm",
-        format: "esm",
-        preserveModules: true,
-        preserveModulesRoot: "src",
-        sourcemap: true
-      }
-    ],
+    input: ["src/react/client.ts", "src/react/server.ts"],
+    output: {
+      dir: "dist/esm",
+      format: "esm",
+      preserveModules: true,
+      preserveModulesRoot: "src/react",
+      sourcemap: true
+    },
     plugins: [
       peerDepsExternal(),
       typescript({
         tsconfig: "./tsconfig.json",
-        outDir: "dist/esm/types",
-        declarationDir: "dist/esm/types",
-        rootDir: "src"
+        outDir: "dist/esm",
+        declarationDir: "dist/esm",
+        rootDir: "src/react",
+        outputToFilesystem: true
       }),
       resolve(),
       preserveDirectives(),
-      terser(),
-      commonjs()
+      terser()
     ],
     onwarn: function (message) {
       if (/"use client"/.test(message)) return;
@@ -67,31 +63,30 @@ export default [
     }
   },
   {
-    input: "dist/esm/types/client.d.ts",
+    input: "dist/esm/client.d.ts",
     output: [{ file: "dist/types/client.d.ts", format: "es" }],
     plugins: [dts()]
   },
   {
-    input: "dist/esm/types/server.d.ts",
+    input: "dist/esm/server.d.ts",
     output: [{ file: "dist/types/server.d.ts", format: "es" }],
     plugins: [dts()]
   },
   {
-    input: "src/bin/index.ts",
-    output: [{ file: "dist/bin/index.js", format: "es" }],
+    input: "src/cli/index.ts",
+    output: [{ file: "dist/cli/index.js", format: "es" }],
     plugins: [
       peerDepsExternal(),
       typescript({
         tsconfig: "./tsconfig.json",
-        outDir: "dist/bin",
-        declarationDir: "dist/bin",
-        rootDir: "src/bin",
+        outDir: "dist/cli",
+        declarationDir: "dist/cli",
+        rootDir: "src/cli",
         outputToFilesystem: true
       }),
       json(),
       resolve(),
-      terser(),
-      commonjs()
+      terser()
     ]
   }
 ];
