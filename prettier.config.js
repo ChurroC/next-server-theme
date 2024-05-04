@@ -6,11 +6,11 @@ const config = {
   overrides: [
     {
       files: [
-        "*.config.*",
-        "*.json",
         "**/*config*/*.js",
-        ".eslintrc.*",
-        "**/*env*/*.js"
+        "*.json",
+        "*.eslintrc.*",
+        "*.config.*",
+        "*env*.js"
       ],
       options: {
         tabWidth: 2
