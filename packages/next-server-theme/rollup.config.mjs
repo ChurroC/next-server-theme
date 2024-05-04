@@ -21,12 +21,11 @@ export default [
       peerDepsExternal(),
       typescript({
         tsconfig: "./tsconfig.json",
-        outDir: "dist/cjs",
-        declarationDir: "dist/cjs",
+        outDir: "dist/cjs/types",
+        declarationDir: "dist/cjs/types",
         rootDir: "src/react",
         outputToFilesystem: true
       }),
-      resolve(),
       preserveDirectives(),
       terser()
     ],
@@ -48,12 +47,11 @@ export default [
       peerDepsExternal(),
       typescript({
         tsconfig: "./tsconfig.json",
-        outDir: "dist/esm",
-        declarationDir: "dist/esm",
+        outDir: "dist/esm/types",
+        declarationDir: "dist/esm/types",
         rootDir: "src/react",
         outputToFilesystem: true
       }),
-      resolve(),
       preserveDirectives(),
       terser()
     ],
@@ -63,12 +61,12 @@ export default [
     }
   },
   {
-    input: "dist/esm/client.d.ts",
+    input: "dist/esm/types/client.d.ts",
     output: [{ file: "dist/types/client.d.ts", format: "es" }],
     plugins: [dts()]
   },
   {
-    input: "dist/esm/server.d.ts",
+    input: "dist/esm/types/server.d.ts",
     output: [{ file: "dist/types/server.d.ts", format: "es" }],
     plugins: [dts()]
   },
@@ -76,7 +74,6 @@ export default [
     input: "src/cli/index.ts",
     output: [{ file: "dist/cli/index.js", format: "es" }],
     plugins: [
-      peerDepsExternal(),
       typescript({
         tsconfig: "./tsconfig.json",
         outDir: "dist/cli",
@@ -86,7 +83,8 @@ export default [
       }),
       json(),
       resolve(),
-      terser()
+      terser(),
+      commonjs()
     ]
   }
 ];

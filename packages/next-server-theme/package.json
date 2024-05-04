@@ -17,14 +17,14 @@
     }
   },
   "bin": {
-    "next-server-theme": "dist/cli/index.js"
+    "next-server-theme": "cli/index.js"
   },
-  "files": [
-    "dist"
-  ],
   "scripts": {
-    "build": "rm -rf dist && rollup -c",
-    "lint": "eslint ."
+    "prebuild": "rm -rf dist",
+    "build": "rollup -c",
+    "postbuild": "rm -rf ./dist/esm/types ./dist/cjs/types ./dist/cli/index.d.ts",
+    "lint": "eslint .",
+    "dev": "bun run build -- --watch"
   },
   "dependencies": {
     "commander": "^12.0.0"

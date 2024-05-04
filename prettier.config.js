@@ -5,7 +5,13 @@ const config = {
   arrowParens: "avoid",
   overrides: [
     {
-      files: ["*.config.*", "*.json", "**/*config*/*.js", ".eslintrc.*"],
+      files: [
+        "*.config.*",
+        "*.json",
+        "**/*config*/*.js",
+        ".eslintrc.*",
+        "**/*env*/*.js"
+      ],
       options: {
         tabWidth: 2
       }

@@ -1,9 +1,9 @@
-import { getServerTheme, ThemeProvider } from "next-server-theme";
+import { getServerTheme, ThemeProvider } from "next-server-theme/server";
 
 import { GeistSans } from "geist/font/sans";
 
 import "./globals.css";
-import "./styles.css";
+import "./styles.module.css";
 
 export const metadata = {
     title: "Create T3 App",

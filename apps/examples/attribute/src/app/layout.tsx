@@ -1,4 +1,4 @@
-import { getServerTheme, ThemeProvider } from "next-server-theme";
+import { getServerTheme, ThemeProvider } from "next-server-theme/server";
 
 import { GeistSans } from "geist/font/sans";
 
