@@ -10,7 +10,7 @@
     "findMismatch": "syncpack list-mismatches",
     "fixMismatch": "syncpack fix-mismatches",
     "postinstall": "bun run findMismatch",
-    "push": "bun run format && git add . && echo $m && git commit -m $m && echo $m  && git push"
+    "push": "bun run format && git add . && echo $m && git commit -m '$m' && echo $m  && git push"
   },
   "scriptPushComment": "Currently for push you have to do m='message' bun run push until https://github.com/oven-sh/bun/issues/73 gets resolved",
   "devDependencies": {
