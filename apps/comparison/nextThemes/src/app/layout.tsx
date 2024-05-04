@@ -19,7 +19,7 @@ export default function RootLayout({
     return (
         <html lang="en" suppressHydrationWarning>
             <body
-                className={`${GeistSans.className} bg-white dark:bg-black pink:bg-pink-100`}
+                className={`${GeistSans.className} pink:bg-pink-100 bg-white dark:bg-black`}
             >
                 <WebVitals />
                 <ThemeProvider

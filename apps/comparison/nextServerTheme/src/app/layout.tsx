@@ -1,5 +1,4 @@
-import { ThemeProvider } from "next-server-theme/src/components/themeProvider";
-import { getServerTheme } from "next-server-theme/src/util/getServerTheme";
+import { ThemeProvider, getServerTheme } from "next-server-theme/server";
 
 import "./globals.css";
 
@@ -20,7 +19,7 @@ export default function RootLayout({
     return (
         <html lang="en" suppressHydrationWarning className={getServerTheme()}>
             <body
-                className={`${GeistSans.className} bg-white dark:bg-black pink:bg-pink-100`}
+                className={`${GeistSans.className} pink:bg-pink-100 bg-white dark:bg-black`}
             >
                 <WebVitals />
                 <ThemeProvider>{children}</ThemeProvider>
