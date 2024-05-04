@@ -1,5 +1,5 @@
 {
-  "name": "next-server-theme",
+  "name": "next-server-theme-repo",
   "type": "module",
   "private": true,
   "scripts": {
@@ -7,15 +7,17 @@
     "dev": "turbo dev",
     "lint": "turbo lint",
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
-    "postinstall": "manypkg check"
+    "findMismatch": "syncpack list-mismatches",
+    "fixMismatch": "syncpack fix-mismatches",
+    "postinstall": "bun run findMismatch"
   },
-  "dependencies": {
-    "@manypkg/cli": "^0.21.4",
-    "@repo/eslint-config": "workspace: *",
-    "@repo/typescript-config": "workspace: *",
+  "devDependencies": {
     "prettier": "^3.2.5",
     "prettier-plugin-tailwindcss": "^0.5.14",
-    "turbo": "latest"
+    "turbo": "latest",
+    "syncpack": "^12.3.2",
+    "@repo/eslint-config": "workspace: *",
+    "@repo/typescript-config": "workspace: *"
   },
   "engines": {
     "node": ">=18"
