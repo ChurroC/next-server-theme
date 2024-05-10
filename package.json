@@ -3,20 +3,18 @@
   "type": "module",
   "private": true,
   "scripts": {
+    "start": "turbo start",
     "build": "turbo build",
     "dev": "turbo dev",
     "lint": "turbo lint",
-    "format": "prettier --write \"**/*.{ts,tsx,md}\"",
+    "format": "prettier --write .",
     "findMismatch": "syncpack list-mismatches",
     "fixMismatch": "syncpack fix-mismatches",
-    "postinstall": "bun run findMismatch",
-    "push": "bun run format && git add . && git commit -m $m && git push"
+    "postinstall": "bun run findMismatch"
   },
-  "scriptPushComment": "Currently for push you have to do m='message' bun run push until https://github.com/oven-sh/bun/issues/73 gets resolved",
   "devDependencies": {
     "@repo/eslint-config": "workspace: *",
     "@repo/typescript-config": "workspace: *",
-    "cross-var": "^1.1.0",
     "prettier": "^3.2.5",
     "prettier-plugin-tailwindcss": "^0.5.14",
     "syncpack": "^12.3.2",
