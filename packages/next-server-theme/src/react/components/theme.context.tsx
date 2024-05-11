@@ -1,7 +1,7 @@
 "use client";
 
 import { createContext, useContext, useEffect, useState } from "react";
-import { setSystemDark } from "@/util/script";
+import { setSystemDark } from "../util/script";
 import type { Theme } from "../types";
 
 declare const cookieStore: {

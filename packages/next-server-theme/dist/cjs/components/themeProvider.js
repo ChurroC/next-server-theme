@@ -1,2 +1,0 @@
-"use strict";var e=require("react/jsx-runtime"),r=require("./theme.context.js"),t=require("../util/getServerTheme.js");exports.ThemeProvider=function({children:s,defaultTheme:h="system",systemLightTheme:m="light",systemDarkTheme:i="dark",attributes:u="class"}){return e.jsx(r.ThemeProviderWithoutServerTheme,{serverTheme:t.getServerTheme(h),systemLightTheme:m,systemDarkTheme:i,attributes:u,children:s})};
-//# sourceMappingURL=themeProvider.js.map

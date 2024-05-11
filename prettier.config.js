@@ -9,7 +9,7 @@ const config = {
         "**/*config*/*.js",
         "*.json",
         "*.eslintrc.*",
-        "*.config.*",
+        "*.*.*",
         "*env*.js"
       ],
       options: {

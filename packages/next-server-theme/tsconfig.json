@@ -3,13 +3,7 @@
   "compilerOptions": {
     "outDir": "dist",
     "declarationDir": "dist/types",
-    "importHelpers": false,
-
-    /* Path Aliases */
-    "baseUrl": ".",
-    "paths": {
-      "@/*": ["./src/react/*"]
-    }
+    "importHelpers": false
   },
   "include": ["src"],
   "exclude": ["node_modules", "dist"]

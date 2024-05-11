@@ -5,16 +5,3 @@ module.exports = {
   extends: ["@repo/eslint-config/library.js"],
   parser: "@typescript-eslint/parser"
 };
-
-import exampleConfigs from "@repo/eslint-config/eslint.repo.config";
-
-export default [
-  ...exampleConfigs,
-
-  // your modifications
-  {
-    rules: {
-      "no-unused-vars": "warn"
-    }
-  }
-];

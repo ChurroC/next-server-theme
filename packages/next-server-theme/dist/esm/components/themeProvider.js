@@ -1,2 +1,0 @@
-import{jsx as e}from"react/jsx-runtime";import{ThemeProviderWithoutServerTheme as t}from"./theme.context.js";import{getServerTheme as r}from"../util/getServerTheme.js";function m({children:m,defaultTheme:s="system",systemLightTheme:h="light",systemDarkTheme:i="dark",attributes:o="class"}){return e(t,{serverTheme:r(s),systemLightTheme:h,systemDarkTheme:i,attributes:o,children:m})}export{m as ThemeProvider};
-//# sourceMappingURL=themeProvider.js.map

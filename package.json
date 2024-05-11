@@ -10,15 +10,16 @@
     "format": "prettier --write .",
     "findMismatches": "syncpack list-mismatches",
     "fixMismatches": "syncpack fix-mismatches",
-    "postinstall": "bun run findMismatches"
+    "postinstall": "bun run findMismatches",
+    "test": "echo $foo"
   },
   "devDependencies": {
-    "turbo": "latest",
-    "syncpack": "^12.3.2",
+    "@repo/eslint-config": "workspace: *",
+    "@repo/typescript-config": "workspace: *",
     "prettier": "^3.2.5",
     "prettier-plugin-tailwindcss": "^0.5.14",
-    "@repo/eslint-config": "workspace: *",
-    "@repo/typescript-config": "workspace: *"
+    "syncpack": "^12.3.2",
+    "turbo": "latest"
   },
   "engines": {
     "node": ">=18"

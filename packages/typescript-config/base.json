@@ -5,7 +5,7 @@
     /* Base Options: */
     "esModuleInterop": true,
     "skipLibCheck": true,
-    "target": "ES2022",
+    "target": "es2022",
     "allowJs": true,
     "resolveJsonModule": true,
     "moduleDetection": "force",
@@ -17,12 +17,13 @@
     "checkJs": true,
 
     /* Bundled projects */
-    "lib": ["dom", "dom.iterable", "ES2022"],
+    "lib": ["dom", "dom.iterable", "es2022"],
     "noEmit": true,
-    "moduleResolution": "Node10",
+    "moduleResolution": "Node",
     "incremental": true,
 
     "declaration": true,
     "declarationMap": true
-  }
+  },
+  "exclude": ["node_modules", "dist"]
 }
