@@ -1,6 +1,7 @@
 {
   "name": "@repo/eslint-config",
   "version": "0.0.0",
+  "type": "module",
   "private": true,
   "files": [
     "library.js",
@@ -8,12 +9,12 @@
     "react-internal.js"
   ],
   "devDependencies": {
-    "@typescript-eslint/eslint-plugin": "^7.1.0",
-    "@typescript-eslint/parser": "^7.1.0",
+    "@typescript-eslint/eslint-plugin": "^7.8.0",
+    "@typescript-eslint/parser": "^7.8.0",
     "@vercel/style-guide": "6.0.0",
     "eslint-config-prettier": "^9.1.0",
     "eslint-config-turbo": "^1.12.4",
     "eslint-plugin-only-warn": "^1.1.0",
-    "typescript": "^5.4.5"
+    "eslint-define-config": "^2.1.0"
   }
 }

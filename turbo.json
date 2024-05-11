@@ -11,9 +11,13 @@
       "persistent": true
     },
     "build": {
+      "inputs": ["*", "!tests"],
       "dependsOn": ["^build"],
       "outputs": [".next/**", "!.next/cache/**", "dist"],
       "env": ["NODE_ENV", "SKIP_ENV_VALIDATION"]
+    },
+    "test": {
+      "dependsOn": ["build"]
     },
     "lint": {},
     "dev": {

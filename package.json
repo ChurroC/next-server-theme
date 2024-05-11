@@ -8,17 +8,17 @@
     "dev": "turbo dev",
     "lint": "turbo lint",
     "format": "prettier --write .",
-    "findMismatch": "syncpack list-mismatches",
-    "fixMismatch": "syncpack fix-mismatches",
-    "postinstall": "bun run findMismatch"
+    "findMismatches": "syncpack list-mismatches",
+    "fixMismatches": "syncpack fix-mismatches",
+    "postinstall": "bun run findMismatches"
   },
   "devDependencies": {
-    "@repo/eslint-config": "workspace: *",
-    "@repo/typescript-config": "workspace: *",
+    "turbo": "latest",
+    "syncpack": "^12.3.2",
     "prettier": "^3.2.5",
     "prettier-plugin-tailwindcss": "^0.5.14",
-    "syncpack": "^12.3.2",
-    "turbo": "latest"
+    "@repo/eslint-config": "workspace: *",
+    "@repo/typescript-config": "workspace: *"
   },
   "engines": {
     "node": ">=18"

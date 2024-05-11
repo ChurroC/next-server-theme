@@ -1,20 +1,5 @@
 {
-  "extends": "@repo/typescript-config/nextjs.json",
-  "compilerOptions": {
-    "plugins": [
-      {
-        "name": "next"
-      }
-    ]
-  },
-  "include": [
-    "eslint.config.js",
-    "next-env.d.ts",
-    "**/*.ts",
-    "**/*.tsx",
-    "**/*.cjs",
-    "**/*.js",
-    ".next/types/**/*.ts"
-  ],
+  "extends": "@repo/typescript-config/react-library.json",
+  "include": ["tests", "**/*.ts"],
   "exclude": ["node_modules"]
 }

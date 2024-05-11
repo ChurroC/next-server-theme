@@ -3,11 +3,18 @@
   "display": "Next.js",
   "extends": "./base.json",
   "compilerOptions": {
-    "plugins": [{ "name": "next" }],
     "module": "ESNext",
     "moduleResolution": "Bundler",
     "allowJs": true,
     "jsx": "preserve",
     "noEmit": true
-  }
+  },
+  "include": [
+    "${configDir}/next-env.d.ts",
+    "${configDir}/.next/types/**/*.ts",
+    "${configDir}/**/*.ts",
+    "${configDir}/**/*.tsx",
+    "**/*.ts"
+  ],
+  "exclude": ["${configDir}/node_modules"]
 }
