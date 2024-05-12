@@ -3,21 +3,15 @@ import tseslint from "typescript-eslint";
 import eslintConfigPrettier from "eslint-config-prettier";
 import globals from "globals";
 
-import { FlatCompat } from "@eslint/eslintrc";
-const compat = new FlatCompat({
-  baseDirectory: __dirname
-});
+import { resolve } from "node:path";
+
+import compat from "./compat.js";
 
 export default tseslint.config(
   eslint.configs.recommended,
   ...tseslint.configs.recommended,
   eslintConfigPrettier,
-  ...compat.extends(
-    "eslint-config-my-config",
-    "plugin:@typescript-eslint/recommended-type-checked",
-    "plugin:@typescript-eslint/stylistic-type-checked",
-    "plugin:eslint-plugin-only-warn"
-  ),
+  ...compat.plugins("eslint-plugin-only-warn"),
   {
     rules: {},
     languageOptions: {
@@ -26,6 +20,20 @@ export default tseslint.config(
         React: true,
         JSX: true
       }
-    }
+    },
+    ignores: [
+      // Ignore dotfiles
+      ".*.js",
+      "node_modules/",
+      "dist/"
+    ],
+    settings: {
+      "import/resolver": {
+        typescript: {
+          project: resolve(process.cwd(), "tsconfig.json")
+        }
+      }
+    },
+    files: ["*.js?(x)", "*.ts?(x)"]
   }
 );

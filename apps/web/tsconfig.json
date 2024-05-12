@@ -12,7 +12,7 @@
     "./.next/types/**/*.ts",
     "./**/*.ts",
     "./**/*.tsx",
-    "**/*.ts",
+    "./**/*.ts",
     ".next/types/**/*.ts"
   ],
   "exclude": [
