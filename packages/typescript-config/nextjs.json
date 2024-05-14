@@ -10,16 +10,16 @@
     "noEmit": true,
 
     /* Path Aliases */
+    "baseUrl": "${configDir}",
     "paths": {
       "@/*": ["${configDir}/src/*"]
     }
   },
   "include": [
-    "${configDir}/next-env.d.ts",
     "${configDir}/.next/types/**/*.ts",
-    "${configDir}/**/*.ts",
+    "${configDir}/next-env.d.ts",
     "${configDir}/**/*.tsx",
-    "**/*.ts"
+    "${configDir}/**/*.ts"
   ],
   "exclude": ["${configDir}/node_modules"]
 }

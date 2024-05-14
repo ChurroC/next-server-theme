@@ -1,31 +1,40 @@
 import eslint from "@eslint/js"; // eslint.configs.recommended is basically "eslint:recommended"
-import tseslint from "typescript-eslint";
 import eslintConfigPrettier from "eslint-config-prettier";
 import globals from "globals";
-
+import tsPlugin from "@typescript-eslint/eslint-plugin";
+import tsParser from "@typescript-eslint/parser";
 import { resolve } from "node:path";
+import flatCompat from "./compat.js";
 
-import compat from "./compat.js";
-
-export default tseslint.config(
+/** @type {import("eslint").Linter.FlatConfig[]} */
+export default [
   eslint.configs.recommended,
-  ...tseslint.configs.recommended,
   eslintConfigPrettier,
-  ...compat.plugins("eslint-plugin-only-warn"),
+  ...flatCompat.plugins("eslint-plugin-only-warn"),
   {
-    rules: {},
     languageOptions: {
+      parser: tsParser,
+      parserOptions: {
+        project: resolve(process.cwd(), "tsconfig.json")
+      },
       globals: {
         ...globals.node,
         React: true,
         JSX: true
       }
     },
+    plugins: {
+      "@typescript-eslint": tsPlugin.configs // <<<<<
+    },
     ignores: [
       // Ignore dotfiles
       ".*.js",
-      "node_modules/",
-      "dist/"
+      "**/dist/*",
+      ".git",
+      "node_modules",
+      "build",
+      "dist",
+      ".next"
     ],
     settings: {
       "import/resolver": {
@@ -36,4 +45,4 @@ export default tseslint.config(
     },
     files: ["*.js?(x)", "*.ts?(x)"]
   }
-);
+];

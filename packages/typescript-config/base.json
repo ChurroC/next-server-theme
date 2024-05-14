@@ -19,7 +19,8 @@
     /* Bundled projects */
     "lib": ["dom", "dom.iterable", "es2022"],
     "noEmit": true,
-    "moduleResolution": "Node",
+    "moduleResolution": "Node16",
+    "module": "Node16",
     "incremental": true,
 
     "declaration": true,
