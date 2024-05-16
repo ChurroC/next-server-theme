@@ -27,13 +27,7 @@ export default [
     rules: {
       "@typescript-eslint/array-type": "off",
       "@typescript-eslint/consistent-type-definitions": "off",
-      "@typescript-eslint/no-empty-function": "off",
-      "react/no-unescaped-entities": "off"
+      "@typescript-eslint/no-empty-function": "off"
     }
   }
 ];
-
-fixupConfigRules(
-  /** @type {import("@eslint/compat").FixupConfigArray} */
-  (flatCompat.extends("config"))
-);

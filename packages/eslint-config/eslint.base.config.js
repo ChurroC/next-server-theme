@@ -25,14 +25,16 @@ export default [
         React: true,
         JSX: true
       }
-    },
-    files: ["**/*.js?(x)", "**/*.ts?(x)"]
+    }
   },
   {
     ignores: [
       // Ignore dotfiles
-      ".*.js",
-      "*.config.js",
+      ".*.?(c)js",
+      "*.config*.?(c)js",
+      ".*.ts",
+      "*.config*.ts",
+      "*.d.ts",
       "dist",
       ".git",
       "node_modules",

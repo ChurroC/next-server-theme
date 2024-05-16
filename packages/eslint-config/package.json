@@ -3,11 +3,6 @@
   "version": "0.0.0",
   "type": "module",
   "private": true,
-  "files": [
-    "library.js",
-    "next.js",
-    "react-internal.js"
-  ],
   "devDependencies": {
     "@eslint/js": "^9.2.0",
     "@eslint/compat": "^1.0.1",

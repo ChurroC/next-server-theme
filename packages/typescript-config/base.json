@@ -10,6 +10,7 @@
     "resolveJsonModule": true,
     "moduleDetection": "force",
     "isolatedModules": true,
+    "jsx": "preserve",
 
     /* Strictness */
     "strict": true,
@@ -19,12 +20,16 @@
     /* Bundled projects */
     "lib": ["dom", "dom.iterable", "es2022"],
     "noEmit": true,
-    "moduleResolution": "Node16",
-    "module": "Node16",
+    "moduleResolution": "Bundler",
+    "module": "ESNext",
     "incremental": true,
 
     "declaration": true,
-    "declarationMap": true
+    "declarationMap": true,
+
+    "resolve": {
+      "extensions": ["", ".js", ".jsx", ".tsx"]
+    }
   },
   "exclude": ["node_modules", "dist"]
 }

@@ -24,7 +24,7 @@
     "prebuild": "rm -rf dist",
     "build": "rollup -c",
     "postbuild": "rm -rf ./dist/esm/types ./dist/cjs/types ./dist/cli/index.d.ts",
-    "lint": "eslint .",
+    "lint": "eslint",
     "dev": " $npm_execpath run build -- --watch"
   },
   "dependencies": {

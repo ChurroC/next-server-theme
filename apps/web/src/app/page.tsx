@@ -1,12 +1,10 @@
 "use client";
 
 import { useTheme } from "next-server-theme";
+import test from "./layout";
 
 export default function HomePage() {
     const [theme, setTheme] = useTheme();
-    interface T {
-        x: number;
-    }
 
     return (
         <div className="flex h-screen flex-col items-center justify-center gap-3 dark:text-white">
@@ -17,12 +15,4 @@ export default function HomePage() {
             <button onClick={() => setTheme("system")}>System</button>
         </div>
     );
-}
-
-export function useCookies<InitalStateType>(
-    key: string,
-    initalState: InitalStateType,
-    debounceTime: number = 0
-) {
-    return [debounceTime, () => {}];
 }

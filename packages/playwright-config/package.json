@@ -1,13 +1,10 @@
 {
-  "name": "tests",
+  "name": "@repo/playwright-config",
   "version": "0.0.0",
   "private": true,
   "type": "module",
   "devDependencies": {
     "@playwright/test": "^1.44.0",
-    "eslint": "9.2.0",
-    "typescript": "^5.5.0-dev.20240511",
-    "@repo/eslint-config": "workspace: *",
     "@repo/typescript-config": "workspace: *"
   }
 }

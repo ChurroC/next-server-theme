@@ -1,14 +1,7 @@
 import { defineConfig, devices } from "@playwright/test";
+//import nextConfig from "@repo/playwright-config/playwright.next.config";
 
-/**
- * Read environment variables from file.
- * https://github.com/motdotla/dotenv
- */
-// require('dotenv').config();
-
-/**
- * See https://playwright.dev/docs/test-configuration.
- */
+console.log("hnk");
 export default defineConfig({
   testDir: "./tests",
   /* Run tests in files in parallel */
@@ -47,11 +40,4 @@ export default defineConfig({
       use: { ...devices["Desktop Safari"] }
     }
   ]
-
-  /* Run your local dev server before starting the tests */
-  // webServer: {
-  //   command: 'npm run start',
-  //   url: 'http://127.0.0.1:3000',
-  //   reuseExistingServer: !process.env.CI,
-  // },
 });
