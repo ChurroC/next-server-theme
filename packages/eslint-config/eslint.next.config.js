@@ -32,3 +32,8 @@ export default [
     }
   }
 ];
+
+fixupConfigRules(
+  /** @type {import("@eslint/compat").FixupConfigArray} */
+  (flatCompat.extends("config"))
+);

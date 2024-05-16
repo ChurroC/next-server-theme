@@ -10,8 +10,7 @@
     "format": "prettier --write .",
     "findMismatches": "syncpack list-mismatches",
     "fixMismatches": "syncpack fix-mismatches",
-    "postinstall": "bun run findMismatches",
-    "test": "echo $foo"
+    "postinstall": " $npm_execpath run findMismatches"
   },
   "devDependencies": {
     "@repo/eslint-config": "workspace: *",

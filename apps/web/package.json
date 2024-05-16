@@ -7,7 +7,8 @@
     "build": "next build",
     "dev": "next dev",
     "lint": "next lint",
-    "start": "next start"
+    "start": "next start",
+    "test": "basePath=${npm_package_name} $npm_execpath run dev"
   },
   "dependencies": {
     "@t3-oss/env-nextjs": "0.10.1",
