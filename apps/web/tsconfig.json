@@ -8,12 +8,10 @@
     ]
   },
   "include": [
-    "./.next/types/**/*.ts",
     "./next-env.d.ts",
     "./**/*.tsx",
     "./**/*.ts",
-    ".next/types/**/*.ts",
-    "./playwright.config.ts"
+    ".next/types/**/*.ts"
   ],
   "exclude": ["node_modules"]
 }

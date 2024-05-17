@@ -8,8 +8,8 @@
     "dev": "next dev",
     "lint": "eslint",
     "start": "next start",
-    "test": "basePath=${npm_package_name} $npm_execpath run start && $npm_execpath run playwright test",
-    "wow": "playwright test"
+    "test": "playwright test",
+    "wow": "basePath=${npm_package_name} $npm_execpath run start && $npm_execpath run playwright test"
   },
   "dependencies": {
     "@t3-oss/env-nextjs": "0.10.1",

@@ -4,8 +4,6 @@
  */
 
 /** @type {import("next").NextConfig} */
-const config = {
-  basePath: process.env.basePath ? `/${process.env.basePath}` : ""
-};
+const config = {};
 
 export default config;

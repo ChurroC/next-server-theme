@@ -11,6 +11,7 @@
     "moduleDetection": "force",
     "isolatedModules": true,
     "jsx": "preserve",
+    "allowImportingTsExtensions": true,
 
     /* Strictness */
     "strict": true,
@@ -25,11 +26,7 @@
     "incremental": true,
 
     "declaration": true,
-    "declarationMap": true,
-
-    "resolve": {
-      "extensions": ["", ".js", ".jsx", ".tsx"]
-    }
+    "declarationMap": true
   },
   "exclude": ["node_modules", "dist"]
 }
