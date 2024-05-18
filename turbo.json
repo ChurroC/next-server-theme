@@ -1,6 +1,5 @@
 {
   "$schema": "https://turbo.build/schema.json",
-  "globalDependencies": ["**/.env.*local"],
   "pipeline": {
     "deploy": {
       "dependsOn": ["lint", "build", "test"],
@@ -11,13 +10,13 @@
       "persistent": true
     },
     "build": {
-      "inputs": ["*", "!tests"],
+      "inputs": ["$TURBO_DEFAULT$", "!README.md"],
       "dependsOn": ["^build"],
-      "outputs": [".next/**", "!.next/cache/**", "dist"],
-      "env": ["NODE_ENV", "SKIP_ENV_VALIDATION"]
+      "outputs": [".next/**", "!.next/cache/**", "dist/**"]
     },
     "test": {
-      "dependsOn": ["build"]
+      "dependsOn": ["build"],
+      "outputs": ["playwright/**"]
     },
     "lint": {},
     "dev": {

@@ -7,7 +7,8 @@
     "build": "next build",
     "dev": "next dev",
     "lint": "eslint",
-    "start": "next start"
+    "start": "next start",
+    "test": "playwright test"
   },
   "dependencies": {
     "@t3-oss/env-nextjs": "0.10.1",
@@ -28,7 +29,9 @@
     "tailwindcss": "^3.4.1",
     "typescript": "^5.5.0-dev.20240511",
     "@repo/eslint-config": "workspace: *",
-    "@repo/typescript-config": "workspace: *"
+    "@repo/typescript-config": "workspace: *",
+    "@repo/playwright-config": "workspace: *",
+    "playwright": "^1.44.0"
   },
   "ct3aMetadata": {
     "initVersion": "7.30.0"

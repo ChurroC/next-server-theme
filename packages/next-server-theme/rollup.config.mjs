@@ -74,6 +74,7 @@ export default [
     input: "src/cli/index.ts",
     output: [{ file: "dist/cli/index.js", format: "es" }],
     plugins: [
+      peerDepsExternal(),
       typescript({
         tsconfig: "./tsconfig.json",
         outDir: "dist/cli",

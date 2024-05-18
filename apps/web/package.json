@@ -5,11 +5,10 @@
   "type": "module",
   "scripts": {
     "build": "next build",
-    "dev": "next dev",
+    "dev": "next dev --turbo",
     "lint": "eslint",
     "start": "next start",
-    "test": "playwright test",
-    "wow": "basePath=${npm_package_name} $npm_execpath run start && $npm_execpath run playwright test"
+    "test": "playwright test"
   },
   "dependencies": {
     "@t3-oss/env-nextjs": "0.10.1",

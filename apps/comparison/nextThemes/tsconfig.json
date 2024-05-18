@@ -8,12 +8,9 @@
     ]
   },
   "include": [
-    "eslint.config.js",
-    "next-env.d.ts",
-    "**/*.ts",
-    "**/*.tsx",
-    "**/*.cjs",
-    "**/*.js",
+    "./next-env.d.ts",
+    "./**/*.tsx",
+    "./**/*.ts",
     ".next/types/**/*.ts"
   ],
   "exclude": ["node_modules"]

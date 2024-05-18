@@ -3,6 +3,7 @@
   "display": "Next.js",
   "extends": "./base.json",
   "compilerOptions": {
+    "allowImportingTsExtensions": true,
 
     /* Path Aliases */
     "baseUrl": "${configDir}",
