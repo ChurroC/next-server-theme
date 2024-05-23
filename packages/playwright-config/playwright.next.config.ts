@@ -1,22 +1,18 @@
 import { defineConfig } from "@playwright/test";
 import baseConfig from "./playwright.base.config";
-import net from "net";
+import getPort from "./util/getPort";
 
-const server = net.createServer();
-// 0 assigns to a random available port
-server.listen(0);
-const address = server.address();
-// For this whole process and all tests reuse the first port that is available
-process.env.port =
-  process.env.port ?? (address as net.AddressInfo).port.toString();
-server.close();
+// Was going to do just --port 0 but can't send that to playwright and next so this is the next best way
+if (typeof process.env.port === "undefined") {
+  process.env.port = getPort();
+}
 
 export default defineConfig({
   ...baseConfig,
   testDir: "./src/tests",
   retries: 2,
   webServer: {
-    command: `bun run start -p ${process.env.port}`,
+    command: `$npm_execpath run start -p ${process.env.port}`,
     url: `http://localhost:${process.env.port}`,
     reuseExistingServer: !process.env.CI,
     stdout: "ignore",
