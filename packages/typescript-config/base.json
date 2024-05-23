@@ -10,7 +10,7 @@
     "resolveJsonModule": true,
     "moduleDetection": "force",
     "isolatedModules": true,
-    "jsx": "preserve",
+    "jsx": "react-jsx",
 
     /* Strictness */
     "strict": true,

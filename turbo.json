@@ -10,6 +10,7 @@
       "persistent": true
     },
     "build": {
+      "inputs": ["$TURBO_DEFAULT$"],
       "dependsOn": ["^build"],
       "outputs": [".next/**", "!.next/cache/**", "dist/**"]
     },

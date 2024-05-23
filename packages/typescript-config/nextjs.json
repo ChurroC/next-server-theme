@@ -4,6 +4,7 @@
   "extends": "./base.json",
   "compilerOptions": {
     "allowImportingTsExtensions": true,
+    "jsx": "preserve",
 
     /* Path Aliases */
     "baseUrl": "${configDir}",
