@@ -20,6 +20,10 @@
       "dependsOn": ["build"],
       "outputs": ["playwright/**"]
     },
+    "showTests": {
+      "dependsOn": ["test"],
+      "persistent": true
+    },
     "lint": {},
     "dev": {
       "cache": false,

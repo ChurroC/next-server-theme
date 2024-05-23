@@ -3,6 +3,9 @@
   "version": "0.0.0",
   "type": "module",
   "private": true,
+  "scripts": {
+    "lint": "eslint"
+  },
   "devDependencies": {
     "@playwright/test": "^1.44.0",
     "find-free-ports": "^3.1.1"

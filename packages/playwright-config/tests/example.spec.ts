@@ -1,5 +1,6 @@
-import { test, expect } from "@playwright/test";
+import { test, expect, type Page } from "@playwright/test";
 
+// This will always run when file is imported
 test("has title", async ({ page }) => {
   await page.goto("https://playwright.dev/");
 
@@ -7,7 +8,18 @@ test("has title", async ({ page }) => {
   await expect(page).toHaveTitle(/Playwright/);
 });
 
-test("get started link", async ({ page }) => {
+// This will be a function called checkHeading
+// This allows it to be reused in other tests and not cause it to be run when file is imported
+/*
+You can use it like so:
+test("whatever name", checkHeading);
+or
+test("whatever name", async ({ page }) => {
+  await checkHeading({ page });
+  // add additional test steps here
+});
+*/
+export const checkHeading = async ({ page }: { page: Page }) => {
   await page.goto("https://playwright.dev/");
 
   // Click the get started link.
@@ -17,4 +29,4 @@ test("get started link", async ({ page }) => {
   await expect(
     page.getByRole("heading", { name: "Installation" })
   ).toBeVisible();
-});
+};
