@@ -10,11 +10,13 @@
       "persistent": true
     },
     "build": {
-      "inputs": ["$TURBO_DEFAULT$"],
+      "inputs": ["$TURBO_DEFAULT$", "!src/tests/**", "!playwright/**"],
       "dependsOn": ["^build"],
       "outputs": [".next/**", "!.next/cache/**", "dist/**"]
     },
     "test": {
+      "inputs": ["$TURBO_DEFAULT$", "!playwright/**"],
+      "env": ["CI", "port"],
       "dependsOn": ["build"],
       "outputs": ["playwright/**"]
     },
