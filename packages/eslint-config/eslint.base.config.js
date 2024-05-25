@@ -39,7 +39,8 @@ export default [
       ".git",
       "node_modules",
       "build",
-      ".next"
+      ".next",
+      "*rollup*"
     ]
   }
 ];

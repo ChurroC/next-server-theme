@@ -1,0 +1,87 @@
+[
+  {
+    "name": "FCP",
+    "value": 4146.199999999255,
+    "rating": "poor",
+    "delta": 4146.199999999255,
+    "entries": [
+      {
+        "name": "first-contentful-paint",
+        "entryType": "paint",
+        "startTime": 4146.199999999255,
+        "duration": 0
+      }
+    ],
+    "id": "v3-1716611586069-5897534147021",
+    "navigationType": "reload"
+  },
+  {
+    "name": "FID",
+    "value": 1.199999999254942,
+    "rating": "good",
+    "delta": 1.199999999254942,
+    "entries": [
+      {
+        "name": "pointerdown",
+        "entryType": "first-input",
+        "startTime": 9268.900000002235,
+        "duration": 16,
+        "processingStart": 9270.10000000149,
+        "processingEnd": 9270.300000000745,
+        "cancelable": true
+      }
+    ],
+    "id": "v3-1716611586068-1157068090771",
+    "navigationType": "reload"
+  },
+  {
+    "name": "TTFB",
+    "value": 4021,
+    "rating": "poor",
+    "delta": 4021,
+    "entries": [
+      {
+        "name": "http://localhost:3000/",
+        "entryType": "navigation",
+        "startTime": 0,
+        "duration": 4432.800000000745,
+        "initiatorType": "navigation",
+        "deliveryType": "",
+        "nextHopProtocol": "http/1.1",
+        "renderBlockingStatus": "non-blocking",
+        "workerStart": 0,
+        "redirectStart": 0,
+        "redirectEnd": 0,
+        "fetchStart": 0.8000000007450581,
+        "domainLookupStart": 303.69999999925494,
+        "domainLookupEnd": 303.80000000074506,
+        "connectStart": 303.80000000074506,
+        "secureConnectionStart": 0,
+        "connectEnd": 2358.699999999255,
+        "requestStart": 2359.10000000149,
+        "responseStart": 4021,
+        "firstInterimResponseStart": 0,
+        "responseEnd": 4025.900000002235,
+        "transferSize": 2998,
+        "encodedBodySize": 2698,
+        "decodedBodySize": 6377,
+        "responseStatus": 200,
+        "serverTiming": [],
+        "unloadEventStart": 0,
+        "unloadEventEnd": 0,
+        "domInteractive": 4128,
+        "domContentLoadedEventStart": 4128,
+        "domContentLoadedEventEnd": 4128.900000002235,
+        "domComplete": 4432.699999999255,
+        "loadEventStart": 4432.699999999255,
+        "loadEventEnd": 4432.800000000745,
+        "type": "reload",
+        "redirectCount": 0,
+        "activationStart": 0,
+        "criticalCHRestart": 0
+      }
+    ],
+    "id": "v3-1716611586072-5881678849307",
+    "navigationType": "reload"
+  }
+]

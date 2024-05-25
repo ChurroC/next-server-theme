@@ -1,3 +1,4 @@
-import baseConfig from "@repo/eslint-config/eslint.base.config.js";
+import base from "@repo/eslint-config/eslint.base.config.js";
 
-export default [...baseConfig];
+/** @type {import("eslint").Linter.FlatConfig[]} */
+export default [...base];
