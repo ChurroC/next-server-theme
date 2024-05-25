@@ -1,50 +1,128 @@
 [
   {
-    "name": "FCP",
-    "value": 4146.199999999255,
-    "rating": "poor",
-    "delta": 4146.199999999255,
+    "name": "LCP",
+    "value": 118.39999999990687,
+    "rating": "good",
+    "delta": 118.39999999990687,
     "entries": [
       {
-        "name": "first-contentful-paint",
-        "entryType": "paint",
-        "startTime": 4146.199999999255,
-        "duration": 0
+        "name": "",
+        "entryType": "largest-contentful-paint",
+        "startTime": 118.39999999990687,
+        "duration": 0,
+        "size": 1767,
+        "renderTime": 118.39999999990687,
+        "loadTime": 0,
+        "firstAnimatedFrameTime": 0,
+        "id": "",
+        "url": ""
       }
     ],
-    "id": "v3-1716611586069-5897534147021",
+    "id": "v3-1716667121910-5072826191961",
     "navigationType": "reload"
   },
+  { "name": "time", "value": 1716667123307 },
   {
     "name": "FID",
-    "value": 1.199999999254942,
+    "value": 0.39999999990686774,
     "rating": "good",
-    "delta": 1.199999999254942,
+    "delta": 0.39999999990686774,
     "entries": [
       {
         "name": "pointerdown",
         "entryType": "first-input",
-        "startTime": 9268.900000002235,
-        "duration": 16,
-        "processingStart": 9270.10000000149,
-        "processingEnd": 9270.300000000745,
+        "startTime": 361.20000000018626,
+        "duration": 0,
+        "processingStart": 361.60000000009313,
+        "processingEnd": 361.70000000018626,
         "cancelable": true
       }
     ],
-    "id": "v3-1716611586068-1157068090771",
+    "id": "v3-1716667123173-5577626101338",
+    "navigationType": "reload"
+  },
+  {
+    "name": "CLS",
+    "value": 0,
+    "rating": "good",
+    "delta": 0,
+    "entries": [],
+    "id": "v3-1716667121910-7877219897118",
+    "navigationType": "reload"
+  },
+  {
+    "name": "INP",
+    "value": 64,
+    "rating": "good",
+    "delta": 64,
+    "entries": [
+      {
+        "name": "pointerdown",
+        "entryType": "event",
+        "startTime": 289.0999999998603,
+        "duration": 64,
+        "processingStart": 320.39999999990687,
+        "processingEnd": 352.19999999995343,
+        "cancelable": true
+      },
+      {
+        "name": "pointerdown",
+        "entryType": "first-input",
+        "startTime": 289.0999999998603,
+        "duration": 64,
+        "processingStart": 320.39999999990687,
+        "processingEnd": 352.19999999995343,
+        "cancelable": true
+      },
+      {
+        "name": "pointerdown",
+        "entryType": "event",
+        "startTime": 289.0999999998603,
+        "duration": 64,
+        "processingStart": 320.39999999990687,
+        "processingEnd": 352.19999999995343,
+        "cancelable": true
+      },
+      {
+        "name": "pointerdown",
+        "entryType": "first-input",
+        "startTime": 289.0999999998603,
+        "duration": 64,
+        "processingStart": 320.39999999990687,
+        "processingEnd": 352.19999999995343,
+        "cancelable": true
+      }
+    ],
+    "id": "v3-1716667121910-1617501332644",
+    "navigationType": "reload"
+  },
+  {
+    "name": "FCP",
+    "value": 83.60000000009313,
+    "rating": "good",
+    "delta": 83.60000000009313,
+    "entries": [
+      {
+        "name": "first-contentful-paint",
+        "entryType": "paint",
+        "startTime": 83.60000000009313,
+        "duration": 0
+      }
+    ],
+    "id": "v3-1716667123171-4284726142748",
     "navigationType": "reload"
   },
   {
     "name": "TTFB",
-    "value": 4021,
-    "rating": "poor",
-    "delta": 4021,
+    "value": 16.100000000093132,
+    "rating": "good",
+    "delta": 16.100000000093132,
     "entries": [
       {
         "name": "http://localhost:3000/",
         "entryType": "navigation",
         "startTime": 0,
-        "duration": 4432.800000000745,
+        "duration": 333.30000000004657,
         "initiatorType": "navigation",
         "deliveryType": "",
         "nextHopProtocol": "http/1.1",
@@ -52,36 +130,36 @@
         "workerStart": 0,
         "redirectStart": 0,
         "redirectEnd": 0,
-        "fetchStart": 0.8000000007450581,
-        "domainLookupStart": 303.69999999925494,
-        "domainLookupEnd": 303.80000000074506,
-        "connectStart": 303.80000000074506,
+        "fetchStart": 0.6000000000931323,
+        "domainLookupStart": 0.6000000000931323,
+        "domainLookupEnd": 0.6000000000931323,
+        "connectStart": 0.6000000000931323,
         "secureConnectionStart": 0,
-        "connectEnd": 2358.699999999255,
-        "requestStart": 2359.10000000149,
-        "responseStart": 4021,
+        "connectEnd": 0.6000000000931323,
+        "requestStart": 2.4000000001396984,
+        "responseStart": 16.100000000093132,
         "firstInterimResponseStart": 0,
-        "responseEnd": 4025.900000002235,
-        "transferSize": 2998,
-        "encodedBodySize": 2698,
-        "decodedBodySize": 6377,
+        "responseEnd": 17.9000000001397,
+        "transferSize": 3003,
+        "encodedBodySize": 2703,
+        "decodedBodySize": 6381,
         "responseStatus": 200,
         "serverTiming": [],
-        "unloadEventStart": 0,
-        "unloadEventEnd": 0,
-        "domInteractive": 4128,
-        "domContentLoadedEventStart": 4128,
-        "domContentLoadedEventEnd": 4128.900000002235,
-        "domComplete": 4432.699999999255,
-        "loadEventStart": 4432.699999999255,
-        "loadEventEnd": 4432.800000000745,
+        "unloadEventStart": 20.700000000186265,
+        "unloadEventEnd": 20.700000000186265,
+        "domInteractive": 62.800000000046566,
+        "domContentLoadedEventStart": 62.800000000046566,
+        "domContentLoadedEventEnd": 63.200000000186265,
+        "domComplete": 333.20000000018626,
+        "loadEventStart": 333.20000000018626,
+        "loadEventEnd": 333.30000000004657,
         "type": "reload",
         "redirectCount": 0,
         "activationStart": 0,
         "criticalCHRestart": 0
       }
     ],
-    "id": "v3-1716611586072-5881678849307",
+    "id": "v3-1716667123173-3693287731212",
     "navigationType": "reload"
   }
 ]
