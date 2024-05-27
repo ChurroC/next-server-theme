@@ -7,7 +7,9 @@
     "build": "next build",
     "dev": "next dev",
     "lint": "eslint",
-    "start": "next start"
+    "start": "next start",
+    "test": "playwright test",
+    "showTests": "playwright show-report playwright/report --port 0"
   },
   "dependencies": {
     "@t3-oss/env-nextjs": "0.10.1",
