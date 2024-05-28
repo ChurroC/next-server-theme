@@ -88,3 +88,5 @@ the results speak for themsleevs especialy in lartge contenful paint. it is almo
 
 check if I do need /server on import
 also set up github actiosn for uploading to npm and testing espeicaly for analytics
+
+also run bun format in github action thoug me need to pull or fetch to get it sorted or just have a precommit hook

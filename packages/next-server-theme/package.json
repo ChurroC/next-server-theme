@@ -73,6 +73,9 @@
     "hydration",
     "ssr",
     "server-side-rendering",
-    "next-server-theme"
+    "next-server-theme",
+    "next-theme",
+    "nextjs-theme",
+    "nextjs-server-theme"
   ]
 }
