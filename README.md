@@ -85,3 +85,6 @@ Would be cool if I could get @repo/playwright-config removed as a dependancy fro
 in order to run analytics in dev mode just for deving I guess run analytics=true bun run dev
 
 the results speak for themsleevs especialy in lartge contenful paint. it is almost 5x slower than Next server themes but this is for a very basic website with 4 buttons. Imagine as you scale the page how much toughter it will be to run.
+
+check if I do need /server on import
+also set up github actiosn for uploading to npm and testing espeicaly for analytics

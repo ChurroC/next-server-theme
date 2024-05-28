@@ -1,143 +1,125 @@
 {
-  "LCP": {
-    "value": 68.4000000001397,
+  "FCP": {
+    "value": 143,
     "rating": "good",
-    "delta": 68.4000000001397,
+    "delta": 143,
+    "entries": [
+      {
+        "name": "first-contentful-paint",
+        "entryType": "paint",
+        "startTime": 143,
+        "duration": 0
+      }
+    ],
+    "id": "v3-1716936209122-8955822656236",
+    "navigationType": "navigate"
+  },
+  "time": { "value": 1716936209128 },
+  "TTFB": {
+    "value": 27,
+    "rating": "good",
+    "delta": 27,
+    "entries": [
+      {
+        "name": "http://localhost:36045/",
+        "entryType": "navigation",
+        "startTime": 0,
+        "duration": 198,
+        "initiatorType": "navigation",
+        "nextHopProtocol": "http/1.1",
+        "workerStart": 0,
+        "redirectStart": 0,
+        "redirectEnd": 0,
+        "fetchStart": 1,
+        "domainLookupStart": 1,
+        "domainLookupEnd": 1,
+        "connectStart": 1,
+        "connectEnd": 1,
+        "secureConnectionStart": 0,
+        "requestStart": 1,
+        "responseStart": 27,
+        "responseEnd": 56,
+        "transferSize": 2982,
+        "encodedBodySize": 2682,
+        "decodedBodySize": 5527,
+        "serverTiming": [],
+        "unloadEventStart": 0,
+        "unloadEventEnd": 0,
+        "domInteractive": 86,
+        "domContentLoadedEventStart": 86,
+        "domContentLoadedEventEnd": 86,
+        "domComplete": 198,
+        "loadEventStart": 198,
+        "loadEventEnd": 198,
+        "type": "navigate",
+        "redirectCount": 0
+      }
+    ],
+    "id": "v3-1716936208481-6260951355275",
+    "navigationType": "navigate"
+  },
+  "LCP": {
+    "value": 525,
+    "rating": "good",
+    "delta": 525,
     "entries": [
       {
         "name": "",
         "entryType": "largest-contentful-paint",
-        "startTime": 68.4000000001397,
+        "startTime": 525,
         "duration": 0,
-        "size": 1767,
-        "renderTime": 68.4000000001397,
+        "renderTime": 525,
         "loadTime": 0,
-        "firstAnimatedFrameTime": 0,
+        "size": 1198,
         "id": "",
         "url": ""
       }
     ],
-    "id": "v3-1716923477429-5529011537341",
-    "navigationType": "reload"
+    "id": "v3-1716936208264-2236572501345",
+    "navigationType": "navigate"
   },
   "FID": {
-    "value": 0.6999999999534339,
+    "value": 2,
     "rating": "good",
-    "delta": 0.6999999999534339,
+    "delta": 2,
     "entries": [
       {
-        "name": "pointerdown",
+        "name": "mousedown",
         "entryType": "first-input",
-        "startTime": 184.5,
-        "duration": 0,
-        "processingStart": 185.19999999995343,
-        "processingEnd": 185.19999999995343,
+        "startTime": 851,
+        "duration": 5,
+        "processingStart": 853,
+        "processingEnd": 855,
         "cancelable": true
       }
     ],
-    "id": "v3-1716923477427-8411379679412",
-    "navigationType": "reload"
+    "id": "v3-1716936208263-8464666901294",
+    "navigationType": "navigate"
   },
   "CLS": {
     "value": 0,
     "rating": "good",
     "delta": 0,
     "entries": [],
-    "id": "v3-1716923477429-5773008483903",
-    "navigationType": "reload"
+    "id": "v3-1716936206222-1293075508045",
+    "navigationType": "navigate"
   },
   "INP": {
-    "value": 0,
+    "value": 24,
     "rating": "good",
-    "delta": 0,
+    "delta": 24,
     "entries": [
       {
         "name": "pointerdown",
         "entryType": "first-input",
-        "startTime": 184.5,
-        "duration": 0,
-        "processingStart": 185.19999999995343,
-        "processingEnd": 185.19999999995343,
-        "cancelable": true
-      },
-      {
-        "name": "pointerdown",
-        "entryType": "first-input",
-        "startTime": 184.5,
-        "duration": 0,
-        "processingStart": 185.19999999995343,
-        "processingEnd": 185.19999999995343,
+        "startTime": 221.40000000037253,
+        "duration": 24,
+        "processingStart": 226,
+        "processingEnd": 227.40000000037253,
         "cancelable": true
       }
     ],
-    "id": "v3-1716923477429-2936347870062",
-    "navigationType": "reload"
-  },
-  "FCP": {
-    "value": 68.4000000001397,
-    "rating": "good",
-    "delta": 68.4000000001397,
-    "entries": [
-      {
-        "name": "first-contentful-paint",
-        "entryType": "paint",
-        "startTime": 68.4000000001397,
-        "duration": 0
-      }
-    ],
-    "id": "v3-1716923477429-5003868337383",
-    "navigationType": "reload"
-  },
-  "TTFB": {
-    "value": 17,
-    "rating": "good",
-    "delta": 17,
-    "entries": [
-      {
-        "name": "http://localhost:3000/",
-        "entryType": "navigation",
-        "startTime": 0,
-        "duration": 309.4000000001397,
-        "initiatorType": "navigation",
-        "deliveryType": "",
-        "nextHopProtocol": "http/1.1",
-        "renderBlockingStatus": "non-blocking",
-        "workerStart": 0,
-        "redirectStart": 0,
-        "redirectEnd": 0,
-        "fetchStart": 0.5,
-        "domainLookupStart": 0.5,
-        "domainLookupEnd": 0.5,
-        "connectStart": 0.5,
-        "secureConnectionStart": 0,
-        "connectEnd": 0.5,
-        "requestStart": 2.300000000046566,
-        "responseStart": 17,
-        "firstInterimResponseStart": 0,
-        "responseEnd": 18.5,
-        "transferSize": 3002,
-        "encodedBodySize": 2702,
-        "decodedBodySize": 6377,
-        "responseStatus": 200,
-        "serverTiming": [],
-        "unloadEventStart": 21.100000000093132,
-        "unloadEventEnd": 21.100000000093132,
-        "domInteractive": 63.10000000009313,
-        "domContentLoadedEventStart": 63.10000000009313,
-        "domContentLoadedEventEnd": 63.60000000009313,
-        "domComplete": 309.19999999995343,
-        "loadEventStart": 309.19999999995343,
-        "loadEventEnd": 309.4000000001397,
-        "type": "reload",
-        "redirectCount": 0,
-        "activationStart": 0,
-        "criticalCHRestart": 0
-      }
-    ],
-    "id": "v3-1716923477429-1330561136863",
-    "navigationType": "reload"
-  },
-  "time": {
-    "value": 1716924160200
+    "id": "v3-1716936206222-3439181960507",
+    "navigationType": "navigate"
   }
 }

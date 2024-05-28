@@ -1,5 +1,5 @@
 import { defineConfig } from "@playwright/test";
-import next from "@repo/playwright-config/playwright.next.config.js";
+import next from "@repo/playwright-config/playwright.next.config.ts";
 import getPort from "@repo/playwright-config/util/getPort";
 
 if (typeof process.env.port === "undefined") {
