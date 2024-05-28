@@ -11,7 +11,8 @@
     "./next-env.d.ts",
     "./**/*.tsx",
     "./**/*.ts",
-    ".next/types/**/*.ts"
+    ".next/types/**/*.ts",
+    "analytics/test.js"
   ],
   "exclude": ["node_modules"]
 }
