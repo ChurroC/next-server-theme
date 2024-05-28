@@ -32,7 +32,8 @@
     "@repo/eslint-config": "workspace: *",
     "@repo/typescript-config": "workspace: *",
     "@repo/playwright-config": "workspace: *",
-    "playwright": "^1.44.0"
+    "playwright": "^1.44.0",
+    "async-mutex": "^0.5.0"
   },
   "ct3aMetadata": {
     "initVersion": "7.30.0"
