@@ -1,5 +1,8 @@
 import fs from "fs/promises";
-import { Mutex } from 'async-mutex'
+import { Mutex } from "async-mutex";
+
+// use mutex to only allow one write and read operation at a time
+const mutex = new Mutex();
 
 // check if in production
 export async function POST(request: Request) {
@@ -7,47 +10,29 @@ export async function POST(request: Request) {
         try {
             console.log("Analytics request received.");
             const body = await request.json();
-            let parsedData;
-            let newData;
-            let time;
-            
-            const release = await mutex.acquire() // acquires access to the critical path
+
+            const release = await mutex.acquire(); // acquires access to the critical path
+
+            let data;
             try {
-                try {
-                    const data = await fs.readFile(
-                        "analytics/analytics.json",
-                        "utf8"
-                    );
-                    parsedData = JSON.parse(data);
-                } catch (e) {
-                    parsedData = [];
-                }
-                
-                let found = false;
-                newData = parsedData.map((item: any) => {
-                    if (item.name === body.name) {
-                        found = true;
-                        return body;
-                    } else if (item.name === "time") {
-                        foundTime = true;
-                        return { name: "time", value: Date.now() };
-                    }
-                    return item;
-                });
-                if (!foundTime) {
-                    newData.push({ name: "time", value: Date.now() });
-                }
-                
+                data = JSON.parse(
+                    await fs.readFile("analytics/analytics.json", "utf8")
+                );
+            } catch (e) {
+                data = {};
+            }
+
+            const { name, ...receivedData } = body;
+            data[name] = receivedData;
+
             await fs.mkdir("analytics", { recursive: true });
             await fs.writeFile(
                 "analytics/analytics.json",
-                JSON.stringify(newData),
+                JSON.stringify(data),
                 "utf8"
             );
-            } finally {
-            release() // completes the work on the critical path
-            }
 
+            release(); // completes the work on the critical path
         } catch (e) {
             console.error(e);
         }

@@ -81,3 +81,5 @@ Learn more about the power of Turborepo:
 -   [CLI Usage](https://turbo.build/repo/docs/reference/command-line-reference)
 
 Would be cool if I could get @repo/playwright-config removed as a dependancy from build.
+
+in order to run analytics in dev mode just for deving I guess run analytics=true bun run dev
