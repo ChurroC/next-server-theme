@@ -30,7 +30,6 @@ coverage
 out/
 build/
 dist/
-src/
 
 
 # Debug
