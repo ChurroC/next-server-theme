@@ -7,12 +7,14 @@ export function ThemeProvider({
     defaultTheme = "system",
     systemLightTheme = "light",
     systemDarkTheme = "dark",
+    element = "html",
     attributes = "class"
 }: {
     children: React.ReactNode;
     defaultTheme?: Theme;
     systemLightTheme?: Theme;
     systemDarkTheme?: Theme;
+    element?: string;
     attributes?: string | string[];
 }) {
     return (
@@ -21,6 +23,7 @@ export function ThemeProvider({
             serverTheme={getServerTheme(defaultTheme)}
             systemLightTheme={systemLightTheme}
             systemDarkTheme={systemDarkTheme}
+            element={element}
             attributes={attributes}
         >
             {children}

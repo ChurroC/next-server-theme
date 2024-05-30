@@ -1,10 +1,12 @@
 # next-server-themes
 
-Simple way to add themeing to your nextjs app directory project. It's as simple as adding 2 lines which allows you to use the best theming package made specifically for next.
+Simple way to add themeing to your nextjs app directory project. It's as simple as adding 2 lines which allows you to use the best theming package made specifically for next. Similar to other packages like next-themes but we you won't have to worry about the rehydration issues as you can see the users choice on the server. No need to check if we mount before reading the theme. This also allows us to prerender all the pages on the server and have a smaller client bundle which is faster.
 
-This package was made for only one reason and purpose to give nextjs app dir (pages dir in the near future) user the best theming possible. Though it may seem like out package is very specific by doing this, it allows us high compatibility and a seamless theming configuration with next. This is what allows us to know the user's theme choice on the server and have no rehydration problems.
+This package was specifically to allow nextjs app dir (pages dir in the near future) user's to have the best theming possible. This allow us high compatibility and a seamless theming configuration with next. Especially since we rely on next's cookie features to allow us to know the user's theme choice on the server and have no rehydration problems.
 
-The other functionality out package solves is typesafety. This will make it much easier to know which themes are being used and help you not make any mistakes. This is the only package that allow your themes to be typesafe.
+We have also tested all the pages to make sure the newest release always works. We also have compared our package against competitiros. Namely next-themes for which you can run your own tests to check but we beat theme in every web vital.
+
+Our package also insures typesafety. It might be a bit complicated using a cli but other libraries espeically prisma have done similar implimentation. It also only opt-in and you can see more details below.
 
 ## Add To Project
 
@@ -38,7 +40,7 @@ export default function Layout({ children }) {
 
 The code above might seem abstract but it isn't anything to crazy.
 
-The suppressHydrationWarning is there for when the theme is set to system which causes us to load preload a script to resolve the background theme to whatever the user's preference is. But other that case the state in server is the same as the clients selected theme.
+The suppressHydrationWarning is there for when the theme is set to system which causes us to preload a script to resolve the background theme to whatever the user's preference is. This preload script is only used when the theme is set to "system" and works similar to next-themes.
 
 The className={getServerTheme()} will grab the users theme preference from the last time on the site and add it to the class of the html body.
 
