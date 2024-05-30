@@ -29,7 +29,7 @@ export default async function HomePage() {
             await fs.readFile(
                 path.resolve(
                     process.cwd(),
-                    "../nextServerThemeComparison/analytics/analytics.json"
+                    "../nextServerThemeComparison/analyticsData/analytics.json"
                 ),
                 "utf-8"
             )
@@ -44,7 +44,7 @@ export default async function HomePage() {
             await fs.readFile(
                 path.resolve(
                     process.cwd(),
-                    "../nextThemesComparison/analytics/analytics.json"
+                    "../nextThemesComparison/analyticsData/analytics.json"
                 ),
                 "utf-8"
             )

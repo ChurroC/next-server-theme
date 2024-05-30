@@ -16,7 +16,7 @@ export async function POST(request: Request) {
             let data;
             try {
                 data = JSON.parse(
-                    await fs.readFile("analytics/analytics.json", "utf8")
+                    await fs.readFile("analyticsData/analytics.json", "utf8")
                 );
             } catch (e) {
                 data = {};
@@ -27,9 +27,9 @@ export async function POST(request: Request) {
 
             data.time = { value: Date.now() };
 
-            await fs.mkdir("analytics", { recursive: true });
+            await fs.mkdir("analyticsData", { recursive: true });
             await fs.writeFile(
-                "analytics/analytics.json",
+                "analyticsData/analytics.json",
                 JSON.stringify(data),
                 "utf8"
             );
