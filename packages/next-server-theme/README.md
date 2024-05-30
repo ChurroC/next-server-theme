@@ -14,7 +14,7 @@ Just wanted to talk about big reason this would be useful and why I built. I wro
 
 I had a button that would change the theme that had an icon of the current theme. But every time I loaded up the page it would have the system icon displayed first then switch to the proper theme due to hydration. I don't mean to call next-themes out since they were a source of inspiration and the tool that I first used but even on their example site [Next Themes Site](https://next-themes-example.vercel.app) you can see this issue apparent. If you switch themes from system and reload the page it causes a flash in the textbox. If it's apparent for me on my wifi with just a textbox imagine it on a larger image or any data. This is why having the theme on the server can allow us to just apply these changes before the user sees it to have a seemless experience.
 
-This library allow has a substantial speed difference especially in first contentful paint and other web vitals. You can see how I tested it all in [Comparison README.md](../apps/comparison/README.md). It will not stop all flickers for anything dependant on the theme but also increase page loads by a substantial amount that is easily retestable on you device.
+This library allow has a substantial speed difference especially in first contentful paint and other web vitals. You can see how I tested it all in [Comparison README.md](/../../apps/comparison/README.md). It will not stop all flickers for anything dependant on the theme but also increase page loads by a substantial amount that is easily retestable on you device.
 
 ## Add To Project
 
@@ -50,7 +50,7 @@ The code above might seem abstract but it isn't anything to crazy.
 
 The suppressHydrationWarning is there for when the theme is set to system which causes us to preload a script to resolve the background theme to whatever the user's preference is. This preload script is only used when the theme is set to "system" and works similar to next-themes.
 
-The className={getServerTheme()} will grab the users theme preference from the last time on the site and add it to the class of the html body. Both which element you bind it to and whether it changes the class or a different attribute can be changed.
+The `className={getServerTheme()}` will grab the users theme preference from the last time on the site and add it to the class of the html body. Both which element you bind it to and whether it changes the class or a different attribute can be changed.
 
 Then the ThemeProvider is a context that allows children to use the current state value.
 
@@ -107,7 +107,7 @@ In both of these example you don't need to worry about rehydration since the the
 
 In our examples we have 3 ways to do this method
 
-[Tailwind](../apps/examples/tailwind):
+[Tailwind](/../../apps/examples/tailwind):
 
 ```jsx
 //app/layout.jsx
@@ -143,7 +143,7 @@ export default {
 } satisfies Config;
 ```
 
-[CSS](../apps/examples/css/):
+[CSS](/../../apps/examples/css/):
 
 ```css
 .light {
@@ -160,7 +160,7 @@ export default {
 }
 ```
 
-[Attribute](../apps/examples/attribute/) (We change classes to data-theme for getServerTheme):
+[Attribute](/../../apps/examples/attribute/) (We change classes to data-theme for getServerTheme):
 
 ```jsx
 //app/layout.jsx
