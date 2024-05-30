@@ -12,7 +12,7 @@ program
 
 program
     .command("types")
-    .description("Displayes current theme type")
+    .description("Displays current theme type")
     .action(async () => {
         const data = await fs.readFile(fileName, { encoding: "utf8" });
         const themeType = data.split("type Theme = ")[1]?.split(";")[0];
@@ -20,17 +20,13 @@ program
     });
 
 program
-    .command("change")
+    .command("set")
     .description("Modify theme type")
     .argument("<strings...>", "modified theme types")
     .action(async (newThemeType: string[]) => {
         console.log(newThemeType);
         const data = await fs.readFile(fileName, { encoding: "utf8" });
         const themeType = data.split("type Theme = ")[1]?.split(";")[0];
-        if (themeType === "type Theme = undefined;") {
-            console.log("No theme type found");
-            return;
-        }
 
         const formattedType = data.replace(
             `type Theme = ${themeType};`,
@@ -43,4 +39,14 @@ program
 program
     .command("reset")
     .description("rest theme to string type")
-    .action(() => console.log("reset theme type"));
+    .action(async () => {
+        const data = await fs.readFile(fileName, { encoding: "utf8" });
+        const themeType = data.split("type Theme = ")[1]?.split(";")[0];
+
+        const formattedType = data.replace(
+            `type Theme = ${themeType};`,
+            `type Theme = string;`
+        );
+        await fs.writeFile(fileName, formattedType, "utf8");
+        console.log("reset theme type");
+    });
