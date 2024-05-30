@@ -1,7 +1,35 @@
-First thing we do is add the class name to html with getServerTheme()
-This is to get the client theme on the server and plug it into classname
+Things to make sure:
 
-Next we wrap ThemeProvider around children
+```jsx
+//app/layout.jsx
+import { ThemeProvider, getServerTheme } from "next-server-themes";
 
-Lastly I would reccomend as you bring more themes you could add tailwind variants
-In our example we add the pink theme variant
+export default function Layout({ children }) {
+    return (
+        <html suppressHydrationWarning className={getServerTheme()}>
+            <body className="pink:bg-pink-100 bg-white dark:bg-black">
+                <ThemeProvider>{children}</ThemeProvider>
+            </body>
+        </html>
+    );
+}
+```
+
+```js
+//tailwind.config.ts
+import plugin from "tailwindcss/plugin";
+import { type Config } from "tailwindcss";
+
+export default {
+    content: ["./src/**/*.tsx"],
+    darkMode: "selector",
+    plugins: [
+        plugin(function ({ addVariant }) {
+            // here is your CSS selector - could be anything
+            // in this case it allows you to add modifier like
+            // pink:classes_here
+            addVariant("pink", ".pink &");
+        })
+    ]
+} satisfies Config;
+```
