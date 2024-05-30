@@ -1,10 +1,10 @@
 [data-theme="light"] {
-    color: white;
-    background-color: black;
-}
-[data-theme="dark"] {
     color: black;
     background-color: white;
+}
+[data-theme="dark"] {
+    color: white;
+    background-color: black;
 }
 [data-theme="pink"] {
     color: black;

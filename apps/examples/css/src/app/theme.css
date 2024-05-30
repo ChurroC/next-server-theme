@@ -1,10 +1,10 @@
 .light {
-    color: white;
-    background-color: black;
-}
-.dark {
     color: black;
     background-color: white;
+}
+.dark {
+    color: white;
+    background-color: black;
 }
 .pink {
     color: black;
