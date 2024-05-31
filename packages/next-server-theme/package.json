@@ -1,6 +1,6 @@
 {
-  "name": "next-server-theme",
-  "version": "1.0.0",
+  "name": "churro-test",
+  "version": "3.0.8",
   "type": "module",
   "author": "churroc",
   "description": "This is a theme library that allows you to know the user's theme preference on the server and allow you to server pages with no hydration errors.",
@@ -18,23 +18,22 @@
     }
   },
   "bin": {
-    "next-server-theme": "cli/index.js"
+    "next-server-theme": "./dist/cli/index.js"
   },
   "scripts": {
     "prebuild": "rm -rf dist",
     "build": "rollup -c",
     "postbuild": "rm -rf ./dist/esm/types ./dist/cjs/types ./dist/cli/index.d.ts",
+    "publishPKG": "$npm_execpath run build && sh publish.sh",
     "lint": "eslint",
-    "dev": " $npm_execpath run build -- --watch"
-  },
-  "dependencies": {
-    "commander": "^12.0.0"
+    "dev": "$npm_execpath run build -- --watch"
   },
   "peerDependencies": {
     "react": "^16.8 || ^17 || ^18",
     "next": "^13 || ^14"
   },
   "devDependencies": {
+    "commander": "^12.0.0",
     "rollup": "^4.13.0",
     "rollup-plugin-dts": "^6.1.0",
     "rollup-plugin-peer-deps-external": "^2.2.4",
