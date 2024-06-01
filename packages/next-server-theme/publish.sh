@@ -1,4 +1,5 @@
 #! /bin/bash
+$npm_execpath run build
 rm -rf ./dist/tsconfig.tsbuildinfo
 mkdir tempDist
 cp ./package.json ./tempDist/package.json

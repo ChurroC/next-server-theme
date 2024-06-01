@@ -13,7 +13,6 @@
     "getAnalytics": "turbo run test --filter next-server-theme-comparison --filter next-themes-comparison"
   },
   "dependencies": {
-    "@t3-oss/env-nextjs": "0.10.1",
     "geist": "^1.2.2",
     "next": "^14.2.3",
     "next-server-theme": "workspace: *",
