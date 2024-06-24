@@ -29,7 +29,7 @@ export default async function HomePage() {
             await fs.readFile(
                 path.resolve(
                     process.cwd(),
-                    "../nextServerThemeComparison/analyticsData/analytics.json"
+                    "../nextServerThemeComparison/analyticsData/analytics-avg.json"
                 ),
                 "utf-8"
             )
@@ -37,6 +37,7 @@ export default async function HomePage() {
     } catch (e) {
         console.error(e);
     }
+    console.log(nextServerThemeAnalytics);
 
     let nextThemesAnalytics: Analytics | null = null;
     try {
@@ -44,7 +45,7 @@ export default async function HomePage() {
             await fs.readFile(
                 path.resolve(
                     process.cwd(),
-                    "../nextThemesComparison/analyticsData/analytics.json"
+                    "../nextThemesComparison/analyticsData/analytics-avg.json"
                 ),
                 "utf-8"
             )
@@ -119,15 +120,15 @@ export default async function HomePage() {
     );
 }
 
-const analyticsInfo: Record<keyof Analytics, string> = {
-    TTFB: "Time to First Byte",
-    FCP: "First Contentful Paint",
-    LCP: "Largest Contentful Paint",
-    FID: "First Input Delay",
-    CLS: "Cumulative Layout Shift",
-    INP: "Input Performance",
-    time: "Last Updated"
-};
+enum analyticsInfo {
+    TTFB = "Time to First Byte",
+    FCP = "First Contentful Paint",
+    LCP = "Largest Contentful Paint",
+    FID = "First Input Delay",
+    CLS = "Cumulative Layout Shift",
+    INP = "Input Performance",
+    time = "Last Updated"
+}
 
 function Item({
     object1,
