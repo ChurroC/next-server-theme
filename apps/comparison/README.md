@@ -5,3 +5,5 @@ I tried to make sure analytics only work in production since those are the only 
 Main results are that Next Themes is almost 5x slower than Next server themes but this is for a very basic website with 4 buttons. As you scale the page and it will make a pretty big difff.
 
 Need to make sure I get data from every browser. Maybe have api detect browser through info sent on request an have a differen analytics file. Then in themeCompare have a left and right arrow to switch data
+
+use --force to do multiple tests

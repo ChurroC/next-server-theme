@@ -1,12 +1,11 @@
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-nocheck
 import preserveDirectives from "rollup-plugin-preserve-directives";
 import peerDepsExternal from "rollup-plugin-peer-deps-external";
 import resolve from "@rollup/plugin-node-resolve";
 import typescript from "@rollup/plugin-typescript";
-import dts from "rollup-plugin-dts";
+import commonjs from "@rollup/plugin-commonjs";
 import terser from "@rollup/plugin-terser";
 import json from "@rollup/plugin-json";
+import dts from "rollup-plugin-dts";
 
 export default [
     {
@@ -83,9 +82,10 @@ export default [
                 rootDir: "src/cli",
                 outputToFilesystem: true
             }),
-            json(),
+            commonjs(),
             resolve(),
-            terser(),
+            json(),
+            terser()
         ]
     }
 ];

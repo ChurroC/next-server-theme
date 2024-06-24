@@ -9,6 +9,8 @@
     "lint": "eslint",
     "start": "next start",
     "test": "playwright test",
+    "multipleTests": "rm -r analyticsData && for i in {1..10} ; do $npm_execpath run test ; done && $npm_execpath run ./src/util/averageData.ts",
+    "wha": "$npm_execpath run ./src/util/averageData.ts",
     "showTests": "playwright show-report playwright/report --port 0"
   },
   "dependencies": {

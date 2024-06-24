@@ -1,8 +1,14 @@
 import fs from "fs/promises";
+import fsSync from "fs";
 import { Mutex } from "async-mutex";
 
 // use mutex to only allow one write and read operation at a time
 const mutex = new Mutex();
+
+let i = 1;
+while (fsSync.existsSync(`analyticsData/analytics-${i}.json`)) {
+    i++;
+}
 
 // check if in production
 export async function POST(request: Request) {
@@ -16,7 +22,10 @@ export async function POST(request: Request) {
             let data;
             try {
                 data = JSON.parse(
-                    await fs.readFile("analyticsData/analytics.json", "utf8")
+                    await fs.readFile(
+                        `analyticsData/analytics-${i}.json`,
+                        "utf8"
+                    )
                 );
             } catch (e) {
                 data = {};
@@ -29,7 +38,7 @@ export async function POST(request: Request) {
 
             await fs.mkdir("analyticsData", { recursive: true });
             await fs.writeFile(
-                "analyticsData/analytics.json",
+                `analyticsData/analytics-${i}.json`,
                 JSON.stringify(data),
                 "utf8"
             );

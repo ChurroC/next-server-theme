@@ -8,6 +8,7 @@
     "dev": "turbo dev",
     "lint": "turbo lint",
     "test": "turbo test",
+    "multipleTests": "turbo multipleTests",
     "showTests": "turbo showTests",
     "format": "prettier --write .",
     "findMismatches": "syncpack list-mismatches",
