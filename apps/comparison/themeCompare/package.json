@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "build": "next build",
-    "dev": "next dev --turbo",
+    "dev": "next dev",
     "lint": "eslint",
     "start": "next start",
     "test": "playwright test",
@@ -13,6 +13,7 @@
     "getAnalytics": "turbo run test --filter next-server-theme-comparison --filter next-themes-comparison"
   },
   "dependencies": {
+    "@heroicons/react": "^2.1.4",
     "geist": "^1.2.2",
     "next": "^14.2.3",
     "next-server-theme": "workspace: *",

@@ -2,7 +2,7 @@ import fs from "fs/promises";
 
 (async () => {
     try {
-        const analytics: Record<string, number> = {};
+        const analytics: Record<string, { value: number }> = {};
 
         const files = await fs.readdir("./analyticsData");
         if (files.length === 0) {
@@ -15,13 +15,16 @@ import fs from "fs/promises";
             );
 
             Object.entries(data).forEach(([key, value]) => {
-                analytics[key] =
-                    (analytics[key] ?? 0) + (value as { value: number })?.value;
+                analytics[key] = {
+                    value:
+                        (analytics[key]?.value ?? 0) +
+                        (value as { value: number })?.value
+                };
             });
         }
 
         Object.keys(analytics).forEach(key => {
-            analytics[key]! /= files.length;
+            analytics[key]!.value /= files.length;
         });
 
         await fs.writeFile(
