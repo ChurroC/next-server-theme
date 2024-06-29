@@ -1,8 +1,8 @@
-import { ThemeProvider, getServerTheme } from "next-server-theme/server";
-
 import { GeistSans } from "geist/font/sans";
 
 import "./globals.css";
+
+import QueryProvider from "./QueryProvider";
 
 export const metadata = {
     title: "Create T3 App",
@@ -20,7 +20,7 @@ export default function RootLayout({
             <body
                 className={`${GeistSans.className} pink:bg-pink-100 flex h-screen w-screen items-center justify-center bg-white dark:bg-black`}
             >
-                {children}
+                <QueryProvider>{children}</QueryProvider>
             </body>
         </html>
     );

@@ -1,19 +1,23 @@
 import fs from "fs/promises";
-import path from "path";
 import { SwitchDisplays } from "./SwitchDisplays";
-import { DataDisplay } from "./DataDisplay";
 
 export default async function HomePage() {
-    const files = await fs.readdir(
-        path.resolve(
-            process.cwd(),
-            "../nextServerThemeComparison/analyticsData"
-        )
-    );
+    const { nextServerThemeAnalytics, nextThemesAnalytics } = (await (
+        await fetch("http://localhost:3000/api/analyticsData/0")
+    ).json()) as {
+        nextServerThemeAnalytics: Analytics;
+        nextThemesAnalytics: Analytics;
+    };
 
+    const filesCount = Math.max(
+        (await fs.readdir("../nextServerThemeComparison/analyticsData")).length,
+        (await fs.readdir("../nextThemesComparison/analyticsData")).length
+    );
     return (
-        <SwitchDisplays files={files}>
-            <DataDisplay fileName={files[0] ?? ""} />
-        </SwitchDisplays>
+        <SwitchDisplays
+            fileCount={filesCount}
+            nextServerThemeAnalyticsData={nextServerThemeAnalytics}
+            nextThemesAnalyticsData={nextThemesAnalytics}
+        ></SwitchDisplays>
     );
 }

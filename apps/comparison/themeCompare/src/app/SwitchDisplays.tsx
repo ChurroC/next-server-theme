@@ -1,31 +1,44 @@
 "use client";
 
-import { Suspense, useState } from "react";
+import { useState } from "react";
 import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/24/solid";
 import { DataDisplay } from "./DataDisplay";
 
 export function SwitchDisplays({
-    files,
-    children
+    fileCount,
+    nextServerThemeAnalyticsData,
+    nextThemesAnalyticsData
 }: {
-    files: string[];
-    children: React.ReactNode;
+    fileCount: number;
+    nextServerThemeAnalyticsData: Analytics;
+    nextThemesAnalyticsData: Analytics;
 }) {
-    const [fileNameIndex, setFileNameIndex] = useState(0);
+    const [dataTestNumber, setDataTestNumber] = useState(0);
+    console.log(dataTestNumber);
 
     return (
         <>
             <ChevronLeftIcon
                 className="mt-[calc(100vh/6)] size-6 self-start"
                 onClick={() =>
-                    setFileNameIndex((fileNameIndex - 1) % files.length)
+                    setDataTestNumber(
+                        (((dataTestNumber - 1) % fileCount) + fileCount) %
+                            fileCount
+                    )
                 }
             />
-            {children}
+            <DataDisplay
+                nextServerThemeAnalyticsData={nextServerThemeAnalyticsData}
+                nextThemesAnalyticsData={nextThemesAnalyticsData}
+                dataTestNumber={dataTestNumber}
+            />
             <ChevronRightIcon
                 className="mt-[calc(100vh/6)] size-6 self-start"
                 onClick={() =>
-                    setFileNameIndex((fileNameIndex + 1) % files.length)
+                    setDataTestNumber(
+                        (((dataTestNumber + 1) % fileCount) + fileCount) %
+                            fileCount
+                    )
                 }
             />
         </>

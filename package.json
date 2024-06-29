@@ -31,5 +31,8 @@
     "apps/web",
     "apps/examples/*",
     "apps/comparison/*"
-  ]
+  ],
+  "dependencies": {
+    "@tanstack/react-query": "^5.48.0"
+  }
 }

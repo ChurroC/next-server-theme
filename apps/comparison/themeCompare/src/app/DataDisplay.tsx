@@ -1,38 +1,34 @@
-import fs from "fs/promises";
-import path from "path";
+"use client";
 import { Item } from "./Item";
+import { useQuery } from "@tanstack/react-query";
 
-export async function DataDisplay({ fileName }: { fileName: string }) {
-    let nextServerThemeAnalytics: Analytics | null = null;
-    try {
-        nextServerThemeAnalytics = JSON.parse(
-            await fs.readFile(
-                path.resolve(
-                    process.cwd(),
-                    `../nextServerThemeComparison/analyticsData/${fileName}`
-                ),
-                "utf-8"
-            )
-        ) as Analytics;
-    } catch (e) {
-        console.error(e);
-    }
-    console.log(nextServerThemeAnalytics);
-
-    let nextThemesAnalytics: Analytics | null = null;
-    try {
-        nextThemesAnalytics = JSON.parse(
-            await fs.readFile(
-                path.resolve(
-                    process.cwd(),
-                    `../nextThemesComparison/analyticsData/${fileName}`
-                ),
-                "utf-8"
-            )
-        ) as Analytics;
-    } catch (e) {
-        console.error(e);
-    }
+export function DataDisplay({
+    nextServerThemeAnalyticsData,
+    nextThemesAnalyticsData,
+    dataTestNumber
+}: {
+    nextServerThemeAnalyticsData: Analytics;
+    nextThemesAnalyticsData: Analytics;
+    dataTestNumber: number;
+}) {
+    const {
+        data: { nextServerThemeAnalytics, nextThemesAnalytics }
+    } = useQuery<{
+        nextServerThemeAnalytics: Analytics;
+        nextThemesAnalytics: Analytics;
+    }>({
+        queryKey: ["analyticData", dataTestNumber],
+        queryFn: async () => {
+            const data = await fetch(
+                `http://localhost:3000/api/analyticsData/${dataTestNumber}`
+            );
+            return await data.json();
+        },
+        initialData: {
+            nextServerThemeAnalytics: nextServerThemeAnalyticsData,
+            nextThemesAnalytics: nextThemesAnalyticsData
+        }
+    });
 
     return (
         <div className="flex h-2/3 w-2/3 max-w-3xl items-center justify-around">
@@ -65,6 +61,9 @@ export async function DataDisplay({ fileName }: { fileName: string }) {
                           ).toLocaleString()
                         : "No Data"}
                 </p>
+            </div>
+            <div className="self-start">
+                Test {dataTestNumber === 0 ? "Avg" : dataTestNumber}
             </div>
             <div className="flex size-full flex-1 flex-col items-center justify-between">
                 <p>Next Themes</p>
