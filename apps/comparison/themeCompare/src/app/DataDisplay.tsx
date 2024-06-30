@@ -62,7 +62,7 @@ export function DataDisplay({
                         : "No Data"}
                 </p>
             </div>
-            <div className="self-start">
+            <div className="w-24 self-start text-center">
                 Test {dataTestNumber === 0 ? "Avg" : dataTestNumber}
             </div>
             <div className="flex size-full flex-1 flex-col items-center justify-between">
