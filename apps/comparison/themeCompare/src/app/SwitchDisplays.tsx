@@ -14,7 +14,6 @@ export function SwitchDisplays({
     nextThemesAnalyticsData: Analytics;
 }) {
     const [dataTestNumber, setDataTestNumber] = useState(0);
-    console.log(dataTestNumber);
 
     return (
         <>

@@ -141,13 +141,16 @@ export function ThemeProviderWithoutServerTheme({
     );
 }
 
-export function useTheme() {
+export function useTheme(): readonly [
+    Theme,
+    React.Dispatch<React.SetStateAction<Theme>>
+] {
     return [useContext(ThemeContext), useContext(SetThemeContext)] as const;
 }
 
-export function useGetTheme() {
+export function useGetTheme(): Theme {
     return useContext(ThemeContext);
 }
-export function useSetTheme() {
+export function useSetTheme(): React.Dispatch<React.SetStateAction<Theme>> {
     return useContext(SetThemeContext);
 }

@@ -1,5 +1,5 @@
 {
-  "name": "next-themes-compare",
+  "name": "next-server-theme-monorepo",
   "type": "module",
   "private": true,
   "scripts": {
@@ -10,6 +10,7 @@
     "test": "turbo test",
     "multipleTests": "turbo multipleTests",
     "showTests": "turbo showTests",
+    "publishPKG": "turbo publishPKG",
     "format": "prettier --write .",
     "findMismatches": "syncpack list-mismatches",
     "fixMismatches": "syncpack fix-mismatches",
