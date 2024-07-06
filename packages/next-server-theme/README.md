@@ -67,7 +67,7 @@ export default function HomePage() {
     const [theme, setTheme] = useTheme();
 
     return (
-        <div className="flex h-screen flex-col items-center justify-center gap-3 dark:text-white">
+        <div className="flex h-screen flex-col items-center justify-center gap-3">
             <div>Theme: {theme}</div>
             <button onClick={() => setTheme("dark")}>Dark</button>
             <button onClick={() => setTheme("light")}>Light</button>
@@ -90,7 +90,7 @@ export default function HomePage() {
     const setTheme = useSetTheme();
 
     return (
-        <div className="flex h-screen flex-col items-center justify-center gap-3 dark:text-white">
+        <div className="flex h-screen flex-col items-center justify-center gap-3">
             <div>Theme: {theme}</div>
             <button onClick={() => setTheme("dark")}>Dark</button>
             <button onClick={() => setTheme("light")}>Light</button>
@@ -102,6 +102,8 @@ export default function HomePage() {
 ```
 
 In both of these example you don't need to worry about rehydration since the theme is on the server and this will run fine during SSR.
+
+**When you setTheme the background color won't change but the attribute class on the HTML tag will. Then you can react to it using styles in the next section for further customizability**
 
 ### Styling
 
@@ -116,7 +118,7 @@ import { ThemeProvider, getServerTheme } from "next-server-themes";
 export default function Layout({ children }) {
     return (
         <html suppressHydrationWarning className={getServerTheme()}>
-            <body className="pink:bg-pink-100 bg-white dark:bg-black">
+            <body className="bg-white dark:bg-black pink:bg-pink-100 dark:text-white">
                 <ThemeProvider>{children}</ThemeProvider>
             </body>
         </html>
@@ -156,7 +158,7 @@ export default {
 }
 .pink {
     color: black;
-    background-color: rgb(252 231 243);
+    background-color: pink;
 }
 ```
 
@@ -190,7 +192,7 @@ export default function Layout({ children }) {
 }
 [data-theme="pink"] {
     color: black;
-    background-color: rgb(252 231 243);
+    background-color: pink;
 }
 ```
 
