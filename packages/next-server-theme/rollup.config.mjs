@@ -76,8 +76,8 @@ export default [
         plugins: [
             typescript({
                 tsconfig: "./tsconfig.json",
-                outDir: "dist/cli",
-                declarationDir: "dist/cli",
+                outDir: "dist/cli/types",
+                declarationDir: "dist/cli/types",
                 rootDir: "src/cli",
                 outputToFilesystem: true
             }),

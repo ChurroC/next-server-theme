@@ -7,9 +7,7 @@ import fs from "fs/promises";
 const fileNameClient = `./node_modules/${name}/types/client.d.ts`;
 const fileNameServer = `./node_modules/${name}/types/server.d.ts`;
 
-console.log(chalk);
-Object.keys(chalk).forEach(prop => console.log(prop));
-console.log("red" in chalk);
+process.env.FORCE_COLOR = "3";
 
 program
     .name("next-server-theme")
@@ -33,8 +31,6 @@ program
                         type in chalk &&
                         typeof chalk[type as keyof typeof chalk] === "function"
                     ) {
-                        console.log(chalk.red("red"));
-                        console.log(chalk.red);
                         // This is kinda sketch but we do know if this is a property of chalk and it is a callable function
                         console.log(
                             (
@@ -47,7 +43,7 @@ program
                         console.log(type);
                     }
                 });
-        } catch (e) {
+        } catch {
             console.log(
                 "Theme type not found. Make sure cli is run in the root of the project next to node_modules folder."
             );
@@ -83,7 +79,7 @@ program
             await fs.writeFile(fileNameServer, formattedTypeServer, "utf8");
 
             console.log(`Theme type changed to ${newThemeType.join(" | ")}`);
-        } catch (e) {
+        } catch {
             console.log(
                 "Theme type not found. Make sure cli is run in the root of the project next to node_modules folder."
             );
@@ -118,7 +114,7 @@ program
             await fs.writeFile(fileNameServer, formattedTypeServer, "utf8");
 
             console.log("reset theme type");
-        } catch (e) {
+        } catch {
             console.log(
                 "Theme type not found. Make sure cli is run in the root of the project next to node_modules folder."
             );

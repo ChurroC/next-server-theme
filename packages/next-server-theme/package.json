@@ -1,6 +1,6 @@
 {
   "name": "churro-test",
-  "version": "3.0.16",
+  "version": "3.0.17",
   "type": "module",
   "author": "churroc",
   "description": "This is a theme library that allows you to know the user's theme preference on the server and allow you to server pages with no hydration errors.",
@@ -23,7 +23,7 @@
   "scripts": {
     "prebuild": "rm -rf dist",
     "build": "rollup -c",
-    "postbuild": "rm -rf ./dist/esm/types ./dist/cjs/types ./dist/cli/index.d.ts",
+    "postbuild": "rm -rf ./dist/esm/types ./dist/cjs/types ./dist/cli/types ./dist/tsconfig.tsbuildinfo",
     "publishPKG": "sh publish.sh",
     "lint": "eslint",
     "dev": "$npm_execpath run build -- --watch"
