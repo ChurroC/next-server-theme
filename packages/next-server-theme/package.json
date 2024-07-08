@@ -21,12 +21,14 @@
     "next-server-theme": "./dist/cli/index.js"
   },
   "scripts": {
+    "lint": "eslint",
+    "dev": "$npm_execpath run build -- --watch",
+    "changeset": "changeset",
+    "publishPKG": "sh publish.sh",
+    "version:packages": "changeset version",
     "prebuild": "rm -rf dist",
     "build": "rollup -c",
-    "postbuild": "rm -rf ./dist/esm/types ./dist/cjs/types ./dist/cli/types ./dist/tsconfig.tsbuildinfo",
-    "publishPKG": "sh publish.sh",
-    "lint": "eslint",
-    "dev": "$npm_execpath run build -- --watch"
+    "postbuild": "rm -rf ./dist/esm/types ./dist/cjs/types ./dist/cli/types ./dist/tsconfig.tsbuildinfo"
   },
   "peerDependencies": {
     "react": "^16.8 || ^17 || ^18",

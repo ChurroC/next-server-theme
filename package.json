@@ -22,7 +22,8 @@
     "prettier": "^3.2.5",
     "prettier-plugin-tailwindcss": "^0.5.14",
     "syncpack": "^12.3.2",
-    "turbo": "1.13.1"
+    "turbo": "1.13.1",
+    "@changesets/cli": "^2.27.7"
   },
   "engines": {
     "node": ">=18"
