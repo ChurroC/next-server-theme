@@ -24,7 +24,11 @@ import fs from "fs/promises";
         }
 
         Object.keys(analytics).forEach(key => {
-            analytics[key]!.value /= files.length;
+            if (analytics[key]?.value) {
+                analytics[key].value /= files.length;
+            } else {
+                analytics[key] = { value: 0 };
+            }
         });
 
         await fs.writeFile(

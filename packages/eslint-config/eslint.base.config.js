@@ -18,7 +18,7 @@ export default [
   {
     languageOptions: {
       parserOptions: {
-        project: resolve(__dirname, "tsconfig.json")
+        project: resolve(process.cwd(), "tsconfig.json")
       },
       globals: {
         ...globals.node,
