@@ -2,6 +2,8 @@
 
 Simple way to add themeing to your nextjs app directory project. It's as simple as adding 2 lines which allows you to use the best theming package made specifically for next. Similar to other packages like next-themes but we you won't have to worry about the rehydration issues as you can see the users choice on the server. No need to check if we mount before reading the theme. This also allows us to prerender all the pages on the server and have a smaller client bundle which is faster.
 
+**The reason this package is unique is that it allows you to use nextjs to its limit to prerender data using SSR of theming compared to Next-Themes that needs to wait till rehydration. In my use case I had a large scale svg in the background that changed depending on the theme. When I used Next-Themes I ended up having the svg's flicker since I essentially had to wait for rehydration. But with this package the svg could be prerendered correctly on the server with SSR creating a seamless experience for the user.**
+
 This package was specifically to allow nextjs app dir (pages dir in the near future) user's to have the best theming possible. This allow us high compatibility and a seamless theming configuration with next. Especially since we rely on next's cookie features to allow us to know the user's theme choice on the server and have no rehydration problems. You also need to make sure have rendering using SSR and not anything since we need to parse cookies for every user.
 
 We have also tested all the pages to make sure the newest release always works. We also have compared our package against competitiros. Namely next-themes for which you can run your own tests to check but we beat theme in every web vital.
@@ -118,7 +120,7 @@ import { ThemeProvider, getServerTheme } from "next-server-themes";
 export default function Layout({ children }) {
     return (
         <html suppressHydrationWarning className={getServerTheme()}>
-            <body className="bg-white dark:bg-black pink:bg-pink-100 dark:text-white">
+            <body className="pink:bg-pink-100 bg-white dark:bg-black dark:text-white">
                 <ThemeProvider>{children}</ThemeProvider>
             </body>
         </html>
