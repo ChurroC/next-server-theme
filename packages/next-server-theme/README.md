@@ -232,7 +232,7 @@ Since it is very tough to provide a good experience with types with context we e
 
 -   `next-server-theme`: CLI info
 -   `next-server-theme types`: Displays current theme type
--   `next-server-theme set`: You can modify the theme type with a ts type
+-   `next-server-theme set`: You can modify the theme type with a ts type. Ex: next-server-theme set dark light system. This causes theme to be typesafe and equal to a union of dark | light | system
 -   `next-server-theme reset`: Switches theme type to the default which is all strings
 
 The default is string and once you modify it when you try to get or set themes they will be typed.
