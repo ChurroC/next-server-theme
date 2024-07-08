@@ -1,13 +1,14 @@
 #! /usr/bin/env node
 import { program } from "commander";
 import { version, name } from "../../package.json";
-import chalk from "chalk";
+import { Chalk } from "chalk";
 import fs from "fs/promises";
 
+// When running this script, types will be in the root of the project
 const fileNameClient = `./node_modules/${name}/types/client.d.ts`;
 const fileNameServer = `./node_modules/${name}/types/server.d.ts`;
 
-process.env.FORCE_COLOR = "3";
+const chalk = new Chalk({ level: 3 });
 
 program
     .name("next-server-theme")
