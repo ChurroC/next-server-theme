@@ -1,6 +1,6 @@
 {
   "name": "churro-test",
-  "version": "3.0.14",
+  "version": "3.0.16",
   "type": "module",
   "author": "churroc",
   "description": "This is a theme library that allows you to know the user's theme preference on the server and allow you to server pages with no hydration errors.",
@@ -33,6 +33,7 @@
     "next": "^13 || ^14"
   },
   "dependencies": {
+    "chalk": "^5.3.0",
     "commander": "^12.1.0"
   },
   "devDependencies": {
