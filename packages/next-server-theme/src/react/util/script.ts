@@ -1,6 +1,6 @@
 import type { Theme } from "../types";
 
-export function setSystemDark(
+export function setBackgroundTheme(
     systemLightTheme: Theme,
     systemDarkTheme: Theme,
     element: string = "html",

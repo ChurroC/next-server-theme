@@ -1,5 +1,5 @@
-import { ThemeProviderWithoutServerTheme } from "../components/theme.context";
-import { getServerTheme } from "../util/getServerTheme";
+import { ThemeProviderWithoutServerTheme } from "../client/theme.context";
+import { getServerTheme } from "./getServerTheme";
 import type { Theme } from "../types";
 
 export function ThemeProvider({
