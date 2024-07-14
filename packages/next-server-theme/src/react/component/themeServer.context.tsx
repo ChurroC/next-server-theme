@@ -16,7 +16,7 @@ const SetThemeContext = createContext<
     React.Dispatch<React.SetStateAction<Theme>>
 >(() => {});
 
-export function ThemeProviderWithoutServerTheme({
+export function ServerThemeProvider({
     children,
     defaultTheme = "system",
     systemLightTheme = "light",
@@ -24,10 +24,23 @@ export function ThemeProviderWithoutServerTheme({
     element = "html",
     attributes = "class"
 }: ThemeProviderProps) {
+    /*
+
+    const [theme, setTheme] = useState<Theme>(() => {
+    if (static) {
+    document.cookie
+                .match("(^|;)\\s*" + "theme" + "\\s*=\\s*([^;]+)")
+                ?.pop() || defaultTheme
+    } else {
+     defaultTheme
+     }
+    });
+    */
     const [theme, setTheme] = useState<Theme>(defaultTheme);
 
     // When theme changes set class name
-    useOnChange(() => {
+    // Use effect to initalize the event listener
+    useEffect(() => {
         if (theme === "system") {
             const onSystemThemeChange = ({
                 matches
@@ -60,6 +73,7 @@ export function ThemeProviderWithoutServerTheme({
 
     // When theme changes set cookie
     // cookieStore is async
+    // Onchange since we don't need to broadcast to other tabs or set cookie if it hasn't changed
     useOnChange(() => {
         if (typeof cookieStore !== "undefined") {
             cookieStore.set("theme", theme);

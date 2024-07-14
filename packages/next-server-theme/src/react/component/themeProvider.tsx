@@ -1,5 +1,6 @@
-import { ThemeProviderWithoutServerTheme } from "./themeServer.context";
+import { ServerThemeProvider } from "./themeServer.context";
 import { getServerTheme } from "../util/getServerTheme";
+import { StaticThemeProvider } from "./themeStatic.context";
 import type { Theme } from "../types";
 
 export function ThemeProvider({
@@ -9,7 +10,7 @@ export function ThemeProvider({
     systemDarkTheme = "dark",
     element = "html",
     attributes = "class",
-    staticRender = false
+    staticRender = true
 }: {
     children: React.ReactNode;
     defaultTheme?: Theme;
@@ -22,7 +23,7 @@ export function ThemeProvider({
     if (!staticRender) {
         return (
             // To have cookie from getServerTheme we need this to be a server component
-            <ThemeProviderWithoutServerTheme
+            <ServerThemeProvider
                 defaultTheme={getServerTheme(defaultTheme)}
                 systemLightTheme={systemLightTheme}
                 systemDarkTheme={systemDarkTheme}
@@ -30,8 +31,19 @@ export function ThemeProvider({
                 attributes={attributes}
             >
                 {children}
-            </ThemeProviderWithoutServerTheme>
+            </ServerThemeProvider>
         );
     } else {
+        return (
+            <StaticThemeProvider
+                defaultTheme={defaultTheme}
+                systemLightTheme={systemLightTheme}
+                systemDarkTheme={systemDarkTheme}
+                element={element}
+                attributes={attributes}
+            >
+                {children}
+            </StaticThemeProvider>
+        );
     }
 }

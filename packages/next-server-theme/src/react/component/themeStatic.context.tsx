@@ -15,20 +15,27 @@ const SetThemeContext = createContext<
     React.Dispatch<React.SetStateAction<Theme>>
 >(() => {});
 
-export function ThemeProviderWithoutServerTheme({
+export function StaticThemeProvider({
     children,
+    defaultTheme = "system",
     systemLightTheme = "light",
     systemDarkTheme = "dark",
     element = "html",
     attributes = "class"
 }: ThemeProviderProps) {
     // Can't use CookieStore since it's async
-    const [theme, setTheme] = useState<Theme>(
-        () =>
-            document.cookie
-                .match("(^|;)\\s*" + "theme" + "\\s*=\\s*([^;]+)")
-                ?.pop() || "system"
-    );
+    const [theme, setTheme] = useState<Theme>(() => {
+        if (typeof document !== "undefined") {
+            return (
+                document.cookie
+                    .match("(^|;)\\s*" + "theme" + "\\s*=\\s*([^;]+)")
+                    ?.pop() || defaultTheme
+            );
+        } else {
+            return defaultTheme;
+        }
+    });
+    console.log(theme);
 
     // When theme changes set class name
     useEffect(() => {
@@ -92,7 +99,7 @@ export function ThemeProviderWithoutServerTheme({
             <ThemeContext.Provider value={theme}>
                 <script
                     dangerouslySetInnerHTML={{
-                        __html: `(${setBackgroundTheme.toString()})(window.matchMedia("(prefers-color-scheme: dark)").matches, "${systemLightTheme}", "${systemDarkTheme}", "${element}", "${attributes}")`
+                        __html: `(${setBackgroundTheme.toString()})((document.cookie.match("(^|;)\\\\s*" + "theme" + "\\\\s*=\\\\s*([^;]+)")?.pop() || "${defaultTheme}") === "system" ? window.matchMedia("(prefers-color-scheme: dark)").matches ? "${systemDarkTheme}" : "${systemLightTheme}" : document.cookie.match("(^|;)\\\\s*" + "theme" + "\\\\s*=\\\\s*([^;]+)")?.pop() || "${defaultTheme}" , "${element}", "${attributes}")`
                     }}
                 />
                 {children}

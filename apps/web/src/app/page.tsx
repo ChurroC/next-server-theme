@@ -1,9 +1,11 @@
 "use client";
 
-import { useTheme } from "next-server-theme/dev";
+// import { useTheme } from "next-server-theme/dev/client.ts";
+import { useTheme } from "next-server-theme/dev/component/themeStatic.context.tsx";
 
 export default function HomePage() {
     const [theme, setTheme] = useTheme();
+    console.log(theme, "client");
 
     return (
         <div className="flex h-screen flex-col items-center justify-center gap-3 dark:text-white">
