@@ -6,9 +6,11 @@ Simple way to add themeing to your nextjs app directory project. It's as simple 
 
 This package was specifically to allow nextjs app dir (pages dir in the near future) user's to have the best theming possible. This allow us high compatibility and a seamless theming configuration with next. Especially since we rely on next's cookie features to allow us to know the user's theme choice on the server and have no rehydration problems. You also need to make sure have rendering using SSR and not anything since we need to parse cookies for every user.
 
-We have also tested all the pages to make sure the newest release always works. We also have compared our package against competitiros. Namely next-themes for which you can run your own tests to check but we beat theme in every web vital.
+We have also tested all the pages to make sure the newest release always works. We also have compared our package against competitors. Namely next-themes for which you can run your own tests to check but we beat theme in every web vital.
 
 Our package also insures typesafety. It might be a bit complicated using a cli but other libraries espeically prisma have done similar implimentation. It also only opt-in and you can see more details below.
+
+One reason users might be hesitant to use us is because they have to opt into dynamic rendering and can't use SSG or staticically render all their pages. But we do have a prop option of staticRender that works similar to next-themes and allows you to have those pages renderable through SSG.
 
 # Why
 
@@ -65,7 +67,7 @@ To get the current theme you would do:
 
 import { useTheme } from "next-server-theme";
 
-export default function HomePage() {
+export default function Page() {
     const [theme, setTheme] = useTheme();
 
     return (
@@ -87,7 +89,7 @@ If you want to cut down on render on components that only use setTheme you could
 
 import { useGetTheme, useSetTheme } from "next-server-theme";
 
-export default function HomePage() {
+export default function Page() {
     const theme = useGetTheme();
     const setTheme = useSetTheme();
 
@@ -168,7 +170,7 @@ export default {
 
 ```jsx
 //app/layout.jsx
-import { ThemeProvider, getServerTheme } from "next-server-themes";
+import { ThemeProvider, getServerTheme } from "next-server-themes/server";
 
 export default function Layout({ children }) {
     return (
@@ -225,6 +227,57 @@ In the example we move getServerTheme to give the className in the server to the
 Then we added the css selector of "body" to the element attribute to ThemeProvider so we know what element to change css for in case of changes to theme.
 We can combine the last section of custom attributes to allow us to apply the theme to any eleent with any attribute.
 Make sure you modfiy the css to account for the new element you picked.
+
+### Static Rendering
+
+This works similar to next-themes and it let next not read cookies on the server like the rest of the package.
+It might seem backwards to what this package does but this option allows you to statically render your pages using SSG or other rendering methods instead of dynamic rendering.
+This could put less stress on your server and makes it easier for users who don't need the page rendered on the server.
+
+```jsx
+//app/layout.jsx
+import { ThemeProvider, getServerTheme } from "next-server-themes/server";
+
+export default function Layout({ children }) {
+    return (
+        <html>
+            <body suppressHydrationWarning>
+                <ThemeProvider staticRender>{children}</ThemeProvider>
+            </body>
+        </html>
+    );
+}
+```
+
+Only issue is that is must be hydrated like so:
+
+```jsx
+"use client";
+
+import { useTheme } from "next-server-theme/client";
+import { useEffect, useState } from "react";
+
+export default function Page() {
+    const [isMounted, setIsMounted] = useState(false);
+    const [theme, setTheme] = useTheme();
+
+    useEffect(() => {
+        setIsMounted(true);
+    }, []);
+
+    if (!isMounted) return null;
+
+    return (
+        <div className="flex h-screen flex-col items-center justify-center gap-3">
+            <div>Theme: {theme}</div>
+            <button onClick={() => setTheme("dark")}>Dark</button>
+            <button onClick={() => setTheme("light")}>Light</button>
+            <button onClick={() => setTheme("pink")}>Pink</button>
+            <button onClick={() => setTheme("system")}>System</button>
+        </div>
+    );
+}
+```
 
 ## Typesafety
 

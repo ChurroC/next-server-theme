@@ -1,5 +1,11 @@
 # next-server-theme
 
+## 1.1.1
+
+### Patch Changes
+
+-   Had to unpublish 1.0.0 since I published without build
+
 ## 1.1.0
 
 ### Minor Changes
