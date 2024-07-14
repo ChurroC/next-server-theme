@@ -1,10 +1,10 @@
 {
   "extends": ["//"],
   "tasks": {
-    "build": {
-      "inputs": ["$TURBO_DEFAULT$", "!src/tests/**", "!playwright/**"],
-      "dependsOn": ["build"],
-      "outputs": [".next/**", "!.next/cache/**", "dist/**"]
+    "dev": {
+      "dependsOn": [],
+      "cache": false,
+      "persistent": true
     }
   }
 }
