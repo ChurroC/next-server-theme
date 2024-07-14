@@ -1,5 +1,11 @@
 # next-server-theme
 
+## 1.1.2
+
+### Patch Changes
+
+-   Added docs for static rendering
+
 ## 1.1.1
 
 ### Patch Changes

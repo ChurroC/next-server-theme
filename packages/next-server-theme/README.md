@@ -299,3 +299,4 @@ All your theme configuration is passed to ThemeProvider.
 -   `systemDarkTheme = "dark"`: If you use the system theme then dark mode will be set as this variable
 -   `element = "html"`: CSS selector to choose which element to update attribute with theme. Remember to move getServerTheme to this location
 -   `attributes = "class"`: CSS attribute to which theme is set to. It does replace all the data so make sure you don't use attribute for anything else. Remeber to move getServerTheme to this location.
+-   `staticRender = false`: If staticRender is true it lets you opt out of dyanmic rendering.
