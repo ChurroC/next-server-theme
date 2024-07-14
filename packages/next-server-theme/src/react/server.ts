@@ -1,3 +1,3 @@
-export { ThemeProvider } from "./server/themeProvider";
-export { getServerTheme } from "./server/getServerTheme";
+export { ThemeProvider } from "./component/themeProvider";
+export { getServerTheme } from "./util/getServerTheme";
 export type { Theme } from "./types";

@@ -1,6 +1,6 @@
 {
   "name": "next-server-theme",
-  "version": "1.0.2",
+  "version": "1.0.5",
   "type": "module",
   "author": "churroc",
   "description": "This is a theme library that allows you to know the user's theme preference on the server and allow you to server pages with no hydration errors.",
@@ -23,9 +23,7 @@
   "scripts": {
     "lint": "eslint",
     "dev": "$npm_execpath run build -- --watch",
-    "changeset": "changeset",
     "publishPKG": "sh publish.sh",
-    "version:packages": "changeset version",
     "prebuild": "rm -rf dist",
     "build": "rollup -c",
     "postbuild": "rm -rf ./dist/esm/types ./dist/cjs/types ./dist/cli/types ./dist/tsconfig.tsbuildinfo"

@@ -1,7 +1,8 @@
 "use client";
 
 import { createContext, useContext, useEffect, useState } from "react";
-import { setSystemDark } from "../util/script";
+import { useOnChange } from "../util/useOnChange";
+import { setSystemTheme } from "../util/setSystemTheme";
 import type { Theme } from "../types";
 
 declare const cookieStore: {
@@ -13,22 +14,6 @@ const ThemeContext = createContext<Theme>("");
 const SetThemeContext = createContext<
     React.Dispatch<React.SetStateAction<Theme>>
 >(() => {});
-
-export function useOnChange(
-    callback: React.EffectCallback,
-    dependancies: React.DependencyList
-) {
-    const [hasMounted, setHasMounted] = useState(false);
-
-    // Page loads and sets hasMounted to true then next time dependacies change it will run the callback
-    useEffect(() => {
-        if (hasMounted) {
-            return callback();
-        } else {
-            setHasMounted(true);
-        }
-    }, dependancies);
-}
 
 export function ThemeProviderWithoutServerTheme({
     children,
@@ -48,47 +33,28 @@ export function ThemeProviderWithoutServerTheme({
     const [theme, setTheme] = useState<Theme>(serverTheme);
 
     // When theme changes set class name
-    useEffect(() => {
+    useOnChange(() => {
         if (theme === "system") {
             const onSystemThemeChange = ({
                 matches
             }: MediaQueryListEventInit) => {
-                if (matches)
-                    [attributes].flat().forEach(attribute => {
-                        document.documentElement.setAttribute(
-                            attribute,
-                            systemDarkTheme
-                        );
-                    });
-                else
-                    [attributes].flat().forEach(attribute => {
-                        document.documentElement.setAttribute(
-                            attribute,
-                            systemLightTheme
-                        );
-                    });
+                setSystemTheme(
+                    matches ?? false,
+                    systemLightTheme,
+                    systemDarkTheme,
+                    element,
+                    attributes
+                );
             };
             const systemDark = window.matchMedia(
                 "(prefers-color-scheme: dark)"
             );
+
+            // This checks for when the system theme changes and only run on the change
             systemDark.addEventListener("change", onSystemThemeChange);
 
-            if (
-                typeof window !== "undefined" &&
-                window.matchMedia("(prefers-color-scheme: dark)").matches
-            ) {
-                [attributes].flat().forEach(attribute => {
-                    document
-                        .querySelector(element)
-                        ?.setAttribute(attribute, systemDarkTheme);
-                });
-            } else {
-                [attributes].flat().forEach(attribute => {
-                    document
-                        .querySelector(element)
-                        ?.setAttribute(attribute, systemLightTheme);
-                });
-            }
+            // This checks the current system theme and sets to it
+            onSystemThemeChange(systemDark);
 
             return () =>
                 systemDark.removeEventListener("change", onSystemThemeChange);
@@ -131,7 +97,7 @@ export function ThemeProviderWithoutServerTheme({
                 {serverTheme === "system" && (
                     <script
                         dangerouslySetInnerHTML={{
-                            __html: `(${setSystemDark.toString()})("${systemLightTheme}", "${systemDarkTheme}", ${element}, ${attributes})`
+                            __html: `(${setSystemTheme.toString()})(window.matchMedia("(prefers-color-scheme: dark)").matches, "${systemLightTheme}", "${systemDarkTheme}", "${element}", "${attributes}")`
                         }}
                     />
                 )}

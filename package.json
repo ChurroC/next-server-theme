@@ -14,7 +14,8 @@
     "format": "prettier --write .",
     "findMismatches": "syncpack list-mismatches",
     "fixMismatches": "syncpack fix-mismatches",
-    "postinstall": "$npm_execpath run findMismatches"
+    "postinstall": "$npm_execpath run findMismatches",
+    "changeset": "changeset"
   },
   "devDependencies": {
     "@repo/eslint-config": "workspace: *",

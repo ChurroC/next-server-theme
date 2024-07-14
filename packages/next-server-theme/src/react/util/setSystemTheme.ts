@@ -1,12 +1,13 @@
 import type { Theme } from "../types";
 
-export function setBackgroundTheme(
+export function setSystemTheme(
+    isDarkMode: boolean,
     systemLightTheme: Theme,
     systemDarkTheme: Theme,
     element: string = "html",
     attributes: string | string[] = "class"
 ) {
-    if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
+    if (isDarkMode) {
         [attributes].flat().forEach(attribute => {
             document
                 .querySelector(element)
