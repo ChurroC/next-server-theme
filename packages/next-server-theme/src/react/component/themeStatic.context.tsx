@@ -1,8 +1,8 @@
 "use client";
 
 import { createContext, useContext, useEffect, useState } from "react";
-import { useOnChange } from "../util/useOnChange";
-import { setSystemTheme } from "../util/setSystemTheme";
+import { setBackgroundTheme } from "../util/setBackgroundTheme";
+import type { ThemeProviderProps } from "../types";
 import type { Theme } from "../types";
 
 declare const cookieStore: {
@@ -17,31 +17,27 @@ const SetThemeContext = createContext<
 
 export function ThemeProviderWithoutServerTheme({
     children,
-    serverTheme = "system",
     systemLightTheme = "light",
     systemDarkTheme = "dark",
     element = "html",
     attributes = "class"
-}: {
-    children: React.ReactNode;
-    serverTheme: Theme;
-    systemLightTheme: Theme;
-    systemDarkTheme: Theme;
-    element: string;
-    attributes: string | string[];
-}) {
-    const [theme, setTheme] = useState<Theme>(serverTheme);
+}: ThemeProviderProps) {
+    // Can't use CookieStore since it's async
+    const [theme, setTheme] = useState<Theme>(
+        () =>
+            document.cookie
+                .match("(^|;)\\s*" + "theme" + "\\s*=\\s*([^;]+)")
+                ?.pop() || "system"
+    );
 
     // When theme changes set class name
-    useOnChange(() => {
+    useEffect(() => {
         if (theme === "system") {
             const onSystemThemeChange = ({
                 matches
             }: MediaQueryListEventInit) => {
-                setSystemTheme(
-                    matches ?? false,
-                    systemLightTheme,
-                    systemDarkTheme,
+                setBackgroundTheme(
+                    matches ? systemDarkTheme : systemLightTheme,
                     element,
                     attributes
                 );
@@ -67,7 +63,7 @@ export function ThemeProviderWithoutServerTheme({
 
     // When theme changes set cookie
     // cookieStore is async
-    useOnChange(() => {
+    useEffect(() => {
         if (typeof cookieStore !== "undefined") {
             cookieStore.set("theme", theme);
         } else {
@@ -94,13 +90,11 @@ export function ThemeProviderWithoutServerTheme({
     return (
         <SetThemeContext.Provider value={setTheme}>
             <ThemeContext.Provider value={theme}>
-                {serverTheme === "system" && (
-                    <script
-                        dangerouslySetInnerHTML={{
-                            __html: `(${setSystemTheme.toString()})(window.matchMedia("(prefers-color-scheme: dark)").matches, "${systemLightTheme}", "${systemDarkTheme}", "${element}", "${attributes}")`
-                        }}
-                    />
-                )}
+                <script
+                    dangerouslySetInnerHTML={{
+                        __html: `(${setBackgroundTheme.toString()})(window.matchMedia("(prefers-color-scheme: dark)").matches, "${systemLightTheme}", "${systemDarkTheme}", "${element}", "${attributes}")`
+                    }}
+                />
                 {children}
             </ThemeContext.Provider>
         </SetThemeContext.Provider>

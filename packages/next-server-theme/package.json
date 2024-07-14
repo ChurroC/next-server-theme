@@ -15,6 +15,14 @@
       "import": "./dist/esm/server.js",
       "require": "./dist/cjs/server.js",
       "types": "./dist/types/server.d.ts"
+    },
+    "./dev": {
+      "import": "./src/react/client.ts",
+      "require": "./src/react/client.ts"
+    },
+    "./dev/server": {
+      "import": "./src/react/server.ts",
+      "require": "./src/react/server.ts"
     }
   },
   "bin": {

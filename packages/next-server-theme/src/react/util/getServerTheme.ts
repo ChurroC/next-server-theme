@@ -3,6 +3,7 @@ import type { Theme } from "../types";
 
 // This is basically a static variable
 // But we warned while hot reloading this will stay the same
+// Basically makes sure all the components are in sync
 let defaultThemeStatic: string;
 
 export function getServerTheme(defaultTheme?: Theme): Theme {

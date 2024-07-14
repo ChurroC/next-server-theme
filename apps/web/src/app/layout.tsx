@@ -1,4 +1,4 @@
-import { ThemeProvider, getServerTheme } from "next-server-theme/server";
+import { ThemeProvider, getServerTheme } from "next-server-theme/dev/server";
 
 import "./globals.css";
 
