@@ -2,5 +2,5 @@ export {
     useGetTheme,
     useSetTheme,
     useTheme
-} from "./component/themeServer.context";
+} from "./component/themeProvider.context";
 export type { Theme } from "./types";

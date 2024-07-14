@@ -6,6 +6,7 @@ import { useTheme } from "next-themes";
 export default function HomePage() {
     const [isMounted, setIsMounted] = useState(false);
     const { theme, setTheme } = useTheme();
+    console.log(theme);
 
     useEffect(() => {
         setIsMounted(true);

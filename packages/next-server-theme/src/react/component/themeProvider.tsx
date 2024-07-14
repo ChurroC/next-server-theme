@@ -1,6 +1,5 @@
-import { ServerThemeProvider } from "./themeServer.context";
+import { ThemeProvider as ThemeProviderComponent } from "./themeProvider.context";
 import { getServerTheme } from "../util/getServerTheme";
-import { StaticThemeProvider } from "./themeStatic.context";
 import type { Theme } from "../types";
 
 export function ThemeProvider({
@@ -10,7 +9,7 @@ export function ThemeProvider({
     systemDarkTheme = "dark",
     element = "html",
     attributes = "class",
-    staticRender = true
+    staticRender = false
 }: {
     children: React.ReactNode;
     defaultTheme?: Theme;
@@ -20,30 +19,19 @@ export function ThemeProvider({
     attributes?: string | string[];
     staticRender?: boolean;
 }) {
-    if (!staticRender) {
-        return (
-            // To have cookie from getServerTheme we need this to be a server component
-            <ServerThemeProvider
-                defaultTheme={getServerTheme(defaultTheme)}
-                systemLightTheme={systemLightTheme}
-                systemDarkTheme={systemDarkTheme}
-                element={element}
-                attributes={attributes}
-            >
-                {children}
-            </ServerThemeProvider>
-        );
-    } else {
-        return (
-            <StaticThemeProvider
-                defaultTheme={defaultTheme}
-                systemLightTheme={systemLightTheme}
-                systemDarkTheme={systemDarkTheme}
-                element={element}
-                attributes={attributes}
-            >
-                {children}
-            </StaticThemeProvider>
-        );
-    }
+    return (
+        // To have cookie from getServerTheme we need this to be a server component
+        <ThemeProviderComponent
+            defaultTheme={
+                staticRender ? defaultTheme : getServerTheme(defaultTheme)
+            }
+            systemLightTheme={systemLightTheme}
+            systemDarkTheme={systemDarkTheme}
+            element={element}
+            attributes={attributes}
+            staticRender={staticRender}
+        >
+            {children}
+        </ThemeProviderComponent>
+    );
 }

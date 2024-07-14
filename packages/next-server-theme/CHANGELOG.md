@@ -1,5 +1,11 @@
 # next-server-theme
 
+## 1.1.0
+
+### Minor Changes
+
+-   Added static param to opt out of dynamic rendering and output static files
+
 ## 1.0.5
 
 ### Patch Changes

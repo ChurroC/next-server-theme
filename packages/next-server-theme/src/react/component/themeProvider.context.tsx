@@ -1,10 +1,10 @@
+// Try layout effect later
 "use client";
 
 import { createContext, useContext, useEffect, useState } from "react";
-import { useOnChange } from "../util/useOnChange";
 import { setBackgroundTheme } from "../util/setBackgroundTheme";
-import type { ThemeProviderProps } from "../types";
 import type { Theme } from "../types";
+import { useOnChange } from "../util/useOnChange";
 
 declare const cookieStore: {
     get: (name: string) => Promise<{ value: string }>;
@@ -16,36 +16,48 @@ const SetThemeContext = createContext<
     React.Dispatch<React.SetStateAction<Theme>>
 >(() => {});
 
-export function ServerThemeProvider({
+export function ThemeProvider({
     children,
     defaultTheme = "system",
     systemLightTheme = "light",
     systemDarkTheme = "dark",
     element = "html",
-    attributes = "class"
-}: ThemeProviderProps) {
-    /*
-
+    attributes = "class",
+    staticRender = false
+}: {
+    children: React.ReactNode;
+    defaultTheme?: Theme;
+    systemLightTheme?: Theme;
+    systemDarkTheme?: Theme;
+    element?: string;
+    attributes?: string | string[];
+    staticRender?: boolean;
+}) {
+    console.log(staticRender);
+    // Can't use CookieStore since it's async
     const [theme, setTheme] = useState<Theme>(() => {
-    if (static) {
-    document.cookie
-                .match("(^|;)\\s*" + "theme" + "\\s*=\\s*([^;]+)")
-                ?.pop() || defaultTheme
-    } else {
-     defaultTheme
-     }
+        if (staticRender) {
+            if (typeof document !== "undefined") {
+                return (
+                    document.cookie
+                        .match("(^|;)\\s*" + "theme" + "\\s*=\\s*([^;]+)")
+                        ?.pop() || defaultTheme
+                );
+            } else {
+                return defaultTheme;
+            }
+        } else {
+            return defaultTheme;
+        }
     });
-    */
-    const [theme, setTheme] = useState<Theme>(defaultTheme);
+    console.log(theme);
 
     // When theme changes set class name
-    // Use effect to initalize the event listener
     useEffect(() => {
         if (theme === "system") {
             const onSystemThemeChange = ({
                 matches
             }: MediaQueryListEventInit) => {
-                console.log(matches);
                 setBackgroundTheme(
                     matches ? systemDarkTheme : systemLightTheme,
                     element,
@@ -73,7 +85,6 @@ export function ServerThemeProvider({
 
     // When theme changes set cookie
     // cookieStore is async
-    // Onchange since we don't need to broadcast to other tabs or set cookie if it hasn't changed
     useOnChange(() => {
         if (typeof cookieStore !== "undefined") {
             cookieStore.set("theme", theme);
@@ -101,12 +112,20 @@ export function ServerThemeProvider({
     return (
         <SetThemeContext.Provider value={setTheme}>
             <ThemeContext.Provider value={theme}>
-                {defaultTheme === "system" && (
+                {staticRender ? (
                     <script
                         dangerouslySetInnerHTML={{
-                            __html: `(${setBackgroundTheme.toString()})(window.matchMedia("(prefers-color-scheme: dark)").matches ? "${systemDarkTheme}" : "${systemLightTheme}", "${element}", "${attributes}")`
+                            __html: `(${setBackgroundTheme.toString()})((document.cookie.match("(^|;)\\\\s*" + "theme" + "\\\\s*=\\\\s*([^;]+)")?.pop() || "${defaultTheme}") === "system" ? window.matchMedia("(prefers-color-scheme: dark)").matches ? "${systemDarkTheme}" : "${systemLightTheme}" : document.cookie.match("(^|;)\\\\s*" + "theme" + "\\\\s*=\\\\s*([^;]+)")?.pop() || "${defaultTheme}" , "${element}", "${attributes}")`
                         }}
                     />
+                ) : (
+                    defaultTheme === "system" && (
+                        <script
+                            dangerouslySetInnerHTML={{
+                                __html: `(${setBackgroundTheme.toString()})(window.matchMedia("(prefers-color-scheme: dark)").matches ? "${systemDarkTheme}" : "${systemLightTheme}", "${element}", "${attributes}")`
+                            }}
+                        />
+                    )
                 )}
                 {children}
             </ThemeContext.Provider>
