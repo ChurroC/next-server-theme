@@ -12,6 +12,7 @@ declare const cookieStore: {
 } & EventTarget;
 
 const ThemeContext = createContext<Theme>("");
+const ResolvedThemeContext = createContext<Exclude<Theme, "system">>("");
 const SetThemeContext = createContext<
     React.Dispatch<React.SetStateAction<Theme>>
 >(() => {});
@@ -50,7 +51,19 @@ export function ThemeProvider({
             return defaultTheme;
         }
     });
-    console.log(theme);
+
+    if (typeof document !== "undefined") {
+        if (theme === "system") {
+            const cookieTheme = document.cookie
+                .match("(^|;)\\s*" + "theme" + "\\s*=\\s*([^;]+)")
+                ?.pop();
+            if (cookieTheme) {
+                setTheme(cookieTheme);
+            }
+        }
+    }
+
+    const resolvedTheme = typeof document !== "undefined" ? theme : "system";
 
     // When theme changes set class name
     useEffect(() => {
@@ -112,32 +125,54 @@ export function ThemeProvider({
     return (
         <SetThemeContext.Provider value={setTheme}>
             <ThemeContext.Provider value={theme}>
-                {staticRender ? (
-                    <script
-                        dangerouslySetInnerHTML={{
-                            __html: `(${setBackgroundTheme.toString()})((document.cookie.match("(^|;)\\\\s*" + "theme" + "\\\\s*=\\\\s*([^;]+)")?.pop() || "${defaultTheme}") === "system" ? window.matchMedia("(prefers-color-scheme: dark)").matches ? "${systemDarkTheme}" : "${systemLightTheme}" : document.cookie.match("(^|;)\\\\s*" + "theme" + "\\\\s*=\\\\s*([^;]+)")?.pop() || "${defaultTheme}" , "${element}", "${attributes}")`
-                        }}
-                    />
-                ) : (
-                    defaultTheme === "system" && (
+                <ResolvedThemeContext.Provider value={theme}>
+                    {staticRender ? (
                         <script
                             dangerouslySetInnerHTML={{
-                                __html: `(${setBackgroundTheme.toString()})(window.matchMedia("(prefers-color-scheme: dark)").matches ? "${systemDarkTheme}" : "${systemLightTheme}", "${element}", "${attributes}")`
+                                __html: `(${setBackgroundTheme.toString()})((document.cookie.match("(^|;)\\\\s*" + "theme" + "\\\\s*=\\\\s*([^;]+)")?.pop() || "${defaultTheme}") === "system" ? window.matchMedia("(prefers-color-scheme: dark)").matches ? "${systemDarkTheme}" : "${systemLightTheme}" : document.cookie.match("(^|;)\\\\s*" + "theme" + "\\\\s*=\\\\s*([^;]+)")?.pop() || "${defaultTheme}" , "${element}", "${attributes}")`
                             }}
                         />
-                    )
-                )}
-                {children}
+                    ) : (
+                        defaultTheme === "system" && (
+                            <script
+                                dangerouslySetInnerHTML={{
+                                    __html: `(${setBackgroundTheme.toString()})(window.matchMedia("(prefers-color-scheme: dark)").matches ? "${systemDarkTheme}" : "${systemLightTheme}", "${element}", "${attributes}")`
+                                }}
+                            />
+                        )
+                    )}
+                    {children}
+                </ResolvedThemeContext.Provider>
             </ThemeContext.Provider>
         </SetThemeContext.Provider>
     );
 }
 
-export function useTheme(): readonly [
-    Theme,
-    React.Dispatch<React.SetStateAction<Theme>>
-] {
-    return [useContext(ThemeContext), useContext(SetThemeContext)] as const;
+export function useTheme(
+    resolved: true
+): readonly [
+    Exclude<Theme, "system">,
+    React.Dispatch<React.SetStateAction<Exclude<Theme, "system">>>
+];
+export function useTheme(
+    resolved: false
+): readonly [Theme, React.Dispatch<React.SetStateAction<Theme>>];
+export function useTheme(
+    resolved: boolean = false
+):
+    | readonly [
+          Exclude<Theme, "system">,
+          React.Dispatch<React.SetStateAction<Exclude<Theme, "system">>>
+      ]
+    | readonly [Theme, React.Dispatch<React.SetStateAction<Theme>>] {
+    if (resolved) {
+        return [
+            useContext(ResolvedThemeContext),
+            useContext(SetThemeContext)
+        ] as const;
+    } else {
+        return [useContext(ThemeContext), useContext(SetThemeContext)] as const;
+    }
 }
 
 export function useGetTheme(): Theme {
