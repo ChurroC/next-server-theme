@@ -6,13 +6,15 @@ import { setBackgroundTheme } from "../util/setBackgroundTheme";
 import type { Theme } from "../types";
 import { useOnChange } from "../util/useOnChange";
 
+type ResolvedTheme = Exclude<Theme, "system"> | undefined;
+
 declare const cookieStore: {
     get: (name: string) => Promise<{ value: string }>;
     set: (name: string, value: string) => void;
 } & EventTarget;
 
 const ThemeContext = createContext<Theme>("");
-const ResolvedThemeContext = createContext<Exclude<Theme, "system">>("");
+const ResolvedThemeContext = createContext<ResolvedTheme>("");
 const SetThemeContext = createContext<
     React.Dispatch<React.SetStateAction<Theme>>
 >(() => {});
@@ -52,18 +54,8 @@ export function ThemeProvider({
         }
     });
 
-    if (typeof document !== "undefined") {
-        if (theme === "system") {
-            const cookieTheme = document.cookie
-                .match("(^|;)\\s*" + "theme" + "\\s*=\\s*([^;]+)")
-                ?.pop();
-            if (cookieTheme) {
-                setTheme(cookieTheme);
-            }
-        }
-    }
-
-    const resolvedTheme = typeof document !== "undefined" ? theme : "system";
+    const resolvedTheme: ResolvedTheme =
+        typeof document !== "undefined" ? theme : undefined;
 
     // When theme changes set class name
     useEffect(() => {
@@ -125,7 +117,7 @@ export function ThemeProvider({
     return (
         <SetThemeContext.Provider value={setTheme}>
             <ThemeContext.Provider value={theme}>
-                <ResolvedThemeContext.Provider value={theme}>
+                <ResolvedThemeContext.Provider value={resolvedTheme}>
                     {staticRender ? (
                         <script
                             dangerouslySetInnerHTML={{
@@ -149,21 +141,20 @@ export function ThemeProvider({
 }
 
 export function useTheme(
-    resolved: true
-): readonly [
-    Exclude<Theme, "system">,
-    React.Dispatch<React.SetStateAction<Exclude<Theme, "system">>>
-];
+    resolved?: true
+): readonly [ResolvedTheme, React.Dispatch<React.SetStateAction<Theme>>];
 export function useTheme(
-    resolved: false
+    resolved?: false
 ): readonly [Theme, React.Dispatch<React.SetStateAction<Theme>>];
+export function useTheme(
+    resolved?: boolean
+):
+    | readonly [ResolvedTheme, React.Dispatch<React.SetStateAction<Theme>>]
+    | readonly [Theme, React.Dispatch<React.SetStateAction<Theme>>];
 export function useTheme(
     resolved: boolean = false
 ):
-    | readonly [
-          Exclude<Theme, "system">,
-          React.Dispatch<React.SetStateAction<Exclude<Theme, "system">>>
-      ]
+    | readonly [ResolvedTheme, React.Dispatch<React.SetStateAction<Theme>>]
     | readonly [Theme, React.Dispatch<React.SetStateAction<Theme>>] {
     if (resolved) {
         return [
@@ -175,9 +166,46 @@ export function useTheme(
     }
 }
 
+useTheme(false);
+
 export function useGetTheme(): Theme {
     return useContext(ThemeContext);
 }
 export function useSetTheme(): React.Dispatch<React.SetStateAction<Theme>> {
     return useContext(SetThemeContext);
+}
+
+function dependsOnParameter(
+    x?: true
+): readonly [ResolvedTheme, React.Dispatch<React.SetStateAction<Theme>>];
+function dependsOnParameter(
+    x?: false
+): readonly [Theme, React.Dispatch<React.SetStateAction<Theme>>];
+function dependsOnParameter(
+    x?: boolean
+):
+    | readonly [ResolvedTheme, React.Dispatch<React.SetStateAction<Theme>>]
+    | readonly [Theme, React.Dispatch<React.SetStateAction<Theme>>];
+function dependsOnParameter(
+    x: boolean = false
+):
+    | readonly [ResolvedTheme, React.Dispatch<React.SetStateAction<Theme>>]
+    | readonly [Theme, React.Dispatch<React.SetStateAction<Theme>>] {
+    if (x) {
+        return 3;
+    } else {
+        return "string";
+    }
+}
+
+function calling(x: boolean) {
+    dependsOnParameter(x); // returns number| string
+    dependsOnParameter(true); // returns number
+    dependsOnParameter(false); // returns string
+    const t = dependsOnParameter(); // returns string
+
+    useTheme(x); // returns number| string
+    useTheme(true); // returns number
+    useTheme(false); // returns string
+    const t = useTheme(); // returns string
 }
