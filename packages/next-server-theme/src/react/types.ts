@@ -8,5 +8,5 @@ export interface ThemeProviderProps {
     systemDarkTheme?: Theme;
     element?: string;
     attributes?: string | string[];
-    static?: boolean;
+    staticRender?: boolean;
 }
