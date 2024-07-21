@@ -1,12 +1,10 @@
 // Try layout effect later
 "use client";
 
-import { createContext, useContext, useEffect, useState } from "react";
+import { createContext, useContext, useEffect, useState, useRef } from "react";
 import { setBackgroundTheme } from "../util/setBackgroundTheme";
-import type { Theme } from "../types";
 import { useOnChange } from "../util/useOnChange";
-
-type ResolvedTheme = Exclude<Theme, "system"> | undefined;
+import type { Theme, ResolvedTheme } from "../types";
 
 declare const cookieStore: {
     get: (name: string) => Promise<{ value: string }>;
@@ -36,7 +34,6 @@ export function ThemeProvider({
     attributes?: string | string[];
     staticRender?: boolean;
 }) {
-    console.log(staticRender);
     // Can't use CookieStore since it's async
     const [theme, setTheme] = useState<Theme>(() => {
         if (staticRender) {
@@ -54,11 +51,32 @@ export function ThemeProvider({
         }
     });
 
-    const resolvedTheme: ResolvedTheme =
-        typeof document !== "undefined" ? theme : undefined;
+    console.log(theme);
+    console.log(typeof document !== "undefined", theme === "system");
+    const resolvedTheme = useRef<ResolvedTheme>(
+        typeof document === "undefined" && theme === "system"
+            ? systemLightTheme
+            : theme
+    );
+    // if (theme !== "system") {
+    //     resolvedTheme = theme;
+    // } else {
+    //     if (typeof document !== "undefined") {
+    //         const systemDark = window.matchMedia(
+    //             "(prefers-color-scheme: dark)"
+    //         );
+    //         resolvedTheme = systemDark.matches
+    //             ? systemDarkTheme
+    //             : systemLightTheme;
+    //     } else {
+    //         resolvedTheme = systemLightTheme;
+    //     }
+    // }
 
     // When theme changes set class name
     useEffect(() => {
+        resolvedTheme.current = theme;
+
         if (theme === "system") {
             const onSystemThemeChange = ({
                 matches
@@ -72,6 +90,10 @@ export function ThemeProvider({
             const systemDark = window.matchMedia(
                 "(prefers-color-scheme: dark)"
             );
+
+            resolvedTheme.current = systemDark.matches
+                ? systemDarkTheme
+                : systemLightTheme;
 
             // This checks for when the system theme changes and only run on the change
             systemDark.addEventListener("change", onSystemThemeChange);
@@ -117,7 +139,7 @@ export function ThemeProvider({
     return (
         <SetThemeContext.Provider value={setTheme}>
             <ThemeContext.Provider value={theme}>
-                <ResolvedThemeContext.Provider value={resolvedTheme}>
+                <ResolvedThemeContext.Provider value={resolvedTheme.current}>
                     {staticRender ? (
                         <script
                             dangerouslySetInnerHTML={{
@@ -140,20 +162,21 @@ export function ThemeProvider({
     );
 }
 
-export function useTheme(
-    resolved?: true
-): readonly [ResolvedTheme, React.Dispatch<React.SetStateAction<Theme>>];
-export function useTheme(
-    resolved?: false
-): readonly [Theme, React.Dispatch<React.SetStateAction<Theme>>];
-export function useTheme(
-    resolved?: boolean
-):
-    | readonly [ResolvedTheme, React.Dispatch<React.SetStateAction<Theme>>]
-    | readonly [Theme, React.Dispatch<React.SetStateAction<Theme>>];
-export function useTheme(
-    resolved: boolean = false
-):
+export function useTheme({
+    resolved
+}?: {
+    resolved?: false;
+}): readonly [Theme, React.Dispatch<React.SetStateAction<Theme>>];
+export function useTheme({
+    resolved
+}?: {
+    resolved?: true;
+}): readonly [ResolvedTheme, React.Dispatch<React.SetStateAction<Theme>>];
+export function useTheme({
+    resolved = false
+}: {
+    resolved?: boolean;
+} = {}):
     | readonly [ResolvedTheme, React.Dispatch<React.SetStateAction<Theme>>]
     | readonly [Theme, React.Dispatch<React.SetStateAction<Theme>>] {
     if (resolved) {
@@ -166,46 +189,14 @@ export function useTheme(
     }
 }
 
-useTheme(false);
-
 export function useGetTheme(): Theme {
     return useContext(ThemeContext);
 }
+
+export function useGetResolvedTheme(): ResolvedTheme {
+    return useContext(ResolvedThemeContext);
+}
+
 export function useSetTheme(): React.Dispatch<React.SetStateAction<Theme>> {
     return useContext(SetThemeContext);
-}
-
-function dependsOnParameter(
-    x?: true
-): readonly [ResolvedTheme, React.Dispatch<React.SetStateAction<Theme>>];
-function dependsOnParameter(
-    x?: false
-): readonly [Theme, React.Dispatch<React.SetStateAction<Theme>>];
-function dependsOnParameter(
-    x?: boolean
-):
-    | readonly [ResolvedTheme, React.Dispatch<React.SetStateAction<Theme>>]
-    | readonly [Theme, React.Dispatch<React.SetStateAction<Theme>>];
-function dependsOnParameter(
-    x: boolean = false
-):
-    | readonly [ResolvedTheme, React.Dispatch<React.SetStateAction<Theme>>]
-    | readonly [Theme, React.Dispatch<React.SetStateAction<Theme>>] {
-    if (x) {
-        return 3;
-    } else {
-        return "string";
-    }
-}
-
-function calling(x: boolean) {
-    dependsOnParameter(x); // returns number| string
-    dependsOnParameter(true); // returns number
-    dependsOnParameter(false); // returns string
-    const t = dependsOnParameter(); // returns string
-
-    useTheme(x); // returns number| string
-    useTheme(true); // returns number
-    useTheme(false); // returns string
-    const t = useTheme(); // returns string
 }

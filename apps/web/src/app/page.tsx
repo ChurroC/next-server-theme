@@ -3,8 +3,8 @@
 import { useTheme } from "next-server-theme/dev/client.ts";
 
 export default function HomePage() {
-    const [theme, setTheme] = useTheme();
-    console.log(theme, "client");
+    const [theme, setTheme] = useTheme({ resolved: true });
+    console.log(theme);
 
     return (
         <div className="flex h-screen flex-col items-center justify-center gap-3 dark:text-white">
