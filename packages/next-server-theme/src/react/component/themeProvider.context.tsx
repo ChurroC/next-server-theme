@@ -1,7 +1,7 @@
 // Try layout effect later
 "use client";
 
-import { createContext, useContext, useEffect, useState } from "react";
+import { createContext, useContext, useEffect, useState, useRef } from "react";
 import { setBackgroundTheme } from "../util/setBackgroundTheme";
 import { useOnChange } from "../util/useOnChange";
 import type { Theme, ResolvedTheme, ThemeProviderProps } from "../types";
@@ -42,20 +42,12 @@ export function ThemeProvider({
             return defaultTheme;
         }
     });
-
-    let resolvedTheme: ResolvedTheme = theme;
-    if (theme === "system") {
-        if (typeof document !== "undefined") {
-            const systemDark = window.matchMedia(
-                "(prefers-color-scheme: dark)"
-            );
-            resolvedTheme = systemDark.matches
-                ? systemDarkTheme
-                : systemLightTheme;
-        } else {
-            resolvedTheme = systemLightTheme;
-        }
-    }
+    // Late night thought but do I need to have people solve for hydration or could I solve it???
+    // Basically instead of rendering systemLightTheme on the server then the actual theme on the client which only causes errors on dark mode
+    // I could just render systemLightTheme initally on client too. Since either way the first render will be inaccurate. But this way it will be inaccurate on both server and client causing no reyhydration.
+    const [resolvedTheme, setResolvedTheme] = useState<ResolvedTheme>(
+        theme === "system" ? systemLightTheme : theme
+    );
 
     // When theme changes set class name
     useEffect(() => {
@@ -68,6 +60,7 @@ export function ThemeProvider({
                     element,
                     attributes
                 );
+                setResolvedTheme(matches ? systemDarkTheme : systemLightTheme);
             };
             const systemDark = window.matchMedia(
                 "(prefers-color-scheme: dark)"
@@ -117,7 +110,9 @@ export function ThemeProvider({
     return (
         <SetThemeContext.Provider value={setTheme}>
             <ThemeContext.Provider value={theme}>
-                <ResolvedThemeContext.Provider value={resolvedTheme}>
+                <ResolvedThemeContext.Provider
+                    value={theme === "system" ? resolvedTheme : theme}
+                >
                     {staticRender ? (
                         <script
                             dangerouslySetInnerHTML={{

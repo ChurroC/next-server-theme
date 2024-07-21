@@ -1,5 +1,11 @@
 # next-server-theme
 
+## 1.2.0
+
+### Minor Changes
+
+-   Added a resolved feature to know what system resolved to
+
 ## 1.1.2
 
 ### Patch Changes
