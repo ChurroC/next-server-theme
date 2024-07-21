@@ -1,4 +1,4 @@
-import { ThemeProvider, getServerTheme } from "next-server-theme/server";
+import { ThemeProvider } from "next-server-theme/server";
 
 import "./globals.css";
 
@@ -16,11 +16,13 @@ export default function RootLayout({
     children: React.ReactNode;
 }) {
     return (
-        <html lang="en" suppressHydrationWarning className={getServerTheme()}>
+        <html lang="en" suppressHydrationWarning>
             <body
                 className={`${GeistSans.className} pink:bg-pink-100 bg-white dark:bg-black`}
             >
-                <ThemeProvider>{children}</ThemeProvider>
+                <ThemeProvider defaultTheme="pink" staticRender>
+                    {children}
+                </ThemeProvider>
             </body>
         </html>
     );

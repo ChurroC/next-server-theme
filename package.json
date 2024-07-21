@@ -31,7 +31,7 @@
   },
   "workspaces": [
     "packages/*",
-    "apps/web",
+    "apps/*",
     "apps/examples/*",
     "apps/comparison/*"
   ],

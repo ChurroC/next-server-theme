@@ -20,7 +20,7 @@ export default function RootLayout({
             <body
                 className={`${GeistSans.className} pink:bg-pink-100 bg-white dark:bg-black`}
             >
-                <ThemeProvider>{children}</ThemeProvider>
+                {children}
             </body>
         </html>
     );

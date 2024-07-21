@@ -5,6 +5,7 @@ export function setBackgroundTheme(
     element: string = "html",
     attributes: string | string[] = "class"
 ) {
+    console.log("setBackgroundTheme", theme, element, attributes);
     [attributes].flat().forEach(attribute => {
         document.querySelector(element)?.setAttribute(attribute, theme);
     });

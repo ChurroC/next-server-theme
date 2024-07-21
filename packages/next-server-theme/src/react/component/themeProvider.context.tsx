@@ -26,6 +26,7 @@ export function ThemeProvider({
     attributes = "class",
     staticRender = false
 }: ThemeProviderProps) {
+    console.log(defaultTheme);
     // Can't use CookieStore since it's async
     const [theme, setTheme] = useState<Theme>(defaultTheme);
     // Late night thought but do I need to have people solve for hydration or could I solve it???
