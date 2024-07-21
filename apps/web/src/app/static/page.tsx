@@ -4,14 +4,16 @@ import { useTheme } from "next-server-theme/dev/client.ts";
 import { useEffect, useState } from "react";
 
 export default function HomePage() {
-    const [isMounted, setIsMounted] = useState(false);
     const [theme, setTheme] = useTheme();
+    console.log("theme", theme);
 
-    useEffect(() => {
-        setIsMounted(true);
-    }, []);
+    // const [isMounted, setIsMounted] = useState(false);
 
-    if (!isMounted) return null;
+    // useEffect(() => {
+    //     setIsMounted(true);
+    // }, []);
+
+    // if (!isMounted) return null;
 
     return (
         <div className="flex h-screen flex-col items-center justify-center gap-3 dark:text-white">

@@ -1,5 +1,11 @@
 # next-server-theme
 
+## 1.2.1
+
+### Patch Changes
+
+-   No hydration errors but will have default value on inital client load
+
 ## 1.2.0
 
 ### Minor Changes

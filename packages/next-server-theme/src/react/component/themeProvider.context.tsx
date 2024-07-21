@@ -1,7 +1,7 @@
 // Try layout effect later
 "use client";
 
-import { createContext, useContext, useEffect, useState, useRef } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 import { setBackgroundTheme } from "../util/setBackgroundTheme";
 import { useOnChange } from "../util/useOnChange";
 import type { Theme, ResolvedTheme, ThemeProviderProps } from "../types";
@@ -27,21 +27,7 @@ export function ThemeProvider({
     staticRender = false
 }: ThemeProviderProps) {
     // Can't use CookieStore since it's async
-    const [theme, setTheme] = useState<Theme>(() => {
-        if (staticRender) {
-            if (typeof document !== "undefined") {
-                return (
-                    document.cookie
-                        .match("(^|;)\\s*" + "theme" + "\\s*=\\s*([^;]+)")
-                        ?.pop() || defaultTheme
-                );
-            } else {
-                return defaultTheme;
-            }
-        } else {
-            return defaultTheme;
-        }
-    });
+    const [theme, setTheme] = useState<Theme>(defaultTheme);
     // Late night thought but do I need to have people solve for hydration or could I solve it???
     // Basically instead of rendering systemLightTheme on the server then the actual theme on the client which only causes errors on dark mode
     // I could just render systemLightTheme initally on client too. Since either way the first render will be inaccurate. But this way it will be inaccurate on both server and client causing no reyhydration.
@@ -94,9 +80,26 @@ export function ThemeProvider({
         localStorage.setItem("theme", theme);
     }, [theme]);
 
-    // This is when another tabs theme changes
-    // Was going to use broadcast api but this is easier since it runs on other tabs and doesnt run if localstorage is set to the value
     useEffect(() => {
+        // I'll set the inital theme the same on server and client to not have hydration issues
+        // But then it will swap to the document cookie value on client below or it will stay the same with no rerender
+        if (staticRender) {
+            console.log(
+                "inital",
+                theme,
+                document.cookie
+                    .match("(^|;)\\s*" + "theme" + "\\s*=\\s*([^;]+)")
+                    ?.pop()
+            );
+            setTheme(
+                document.cookie
+                    .match("(^|;)\\s*" + "theme" + "\\s*=\\s*([^;]+)")
+                    ?.pop() || defaultTheme
+            );
+        }
+
+        // This is when another tabs theme changes
+        // Was going to use broadcast api but this is easier since it runs on other tabs and doesnt run if localstorage is set to the value
         function onStorageChange({ key, newValue }: StorageEvent) {
             if (key === "theme") {
                 setTheme(newValue as Theme);
@@ -134,29 +137,6 @@ export function ThemeProvider({
         </SetThemeContext.Provider>
     );
 }
-
-// export function useTheme({
-//     resolved
-// }?: {
-//     resolved?: false;
-// }): readonly [Theme, React.Dispatch<React.SetStateAction<Theme>>];
-// export function useTheme({
-//     resolved
-// }?: {
-//     resolved?: true;
-// }): readonly [ResolvedTheme, React.Dispatch<React.SetStateAction<Theme>>];
-// export function useTheme({ resolved = false }: { resolved: boolean } = {}):
-//     | readonly [ResolvedTheme, React.Dispatch<React.SetStateAction<Theme>>]
-//     | readonly [Theme, React.Dispatch<React.SetStateAction<Theme>>] {
-//     if (resolved) {
-//         return [
-//             useContext(ResolvedThemeContext),
-//             useContext(SetThemeContext)
-//         ] as const;
-//     } else {
-//         return [useContext(ThemeContext), useContext(SetThemeContext)] as const;
-//     }
-// }
 
 export function useTheme<B extends boolean = false>({
     resolved
