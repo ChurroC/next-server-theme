@@ -2,7 +2,7 @@
 "use client";
 
 import { createContext, useContext, useEffect, useState } from "react";
-import { setBackgroundTheme } from "../util/setBackgroundTheme";
+import { changeText, setBackgroundTheme } from "../util/setBackgroundTheme";
 import { useOnChange } from "../util/useOnChange";
 import type { Theme, ResolvedTheme, ThemeProviderProps } from "../types";
 
@@ -118,16 +118,23 @@ export function ThemeProvider({
                     value={theme === "system" ? resolvedTheme : theme}
                 >
                     {staticRender ? (
-                        <script
-                            dangerouslySetInnerHTML={{
-                                __html: `(${setBackgroundTheme.toString()})((document.cookie.match("(^|;)\\\\s*" + "theme" + "\\\\s*=\\\\s*([^;]+)")?.pop() || "${defaultTheme}") === "system" ? window.matchMedia("(prefers-color-scheme: dark)").matches ? "${systemDarkTheme}" : "${systemLightTheme}" : document.cookie.match("(^|;)\\\\s*" + "theme" + "\\\\s*=\\\\s*([^;]+)")?.pop() || "${defaultTheme}" , "${element}", "${attributes}")`
-                            }}
-                        />
+                        <>
+                            <script
+                                dangerouslySetInnerHTML={{
+                                    __html: `(${setBackgroundTheme.toString()})((document.cookie.match("(^|;)\\\\s*" + "theme" + "\\\\s*=\\\\s*([^;]+)")?.pop() || "${defaultTheme}") === "system" ? window.matchMedia("(prefers-color-scheme: dark)").matches ? "${systemDarkTheme}" : "${systemLightTheme}" : document.cookie.match("(^|;)\\\\s*" + "theme" + "\\\\s*=\\\\s*([^;]+)")?.pop() || "${defaultTheme}" , "${element}", "${attributes}")`
+                                }}
+                            />
+                            <script
+                                dangerouslySetInnerHTML={{
+                                    __html: `(${changeText.toString()})("${theme}")`
+                                }}
+                            />
+                        </>
                     ) : (
                         defaultTheme === "system" && (
                             <script
                                 dangerouslySetInnerHTML={{
-                                    __html: `(${setBackgroundTheme.toString()})(window.matchMedia("(prefers-color-scheme: dark)").matches ? "${systemDarkTheme}" : "${systemLightTheme}", "${element}", "${attributes}")`
+                                    __html: `(${setBackgroundTheme.toString()})(window.matchMedia("(prefers-color-scheme: dark)").matches ? "${systemDarkTheme}" : "${systemLightTheme}", "${element}", "${attributes}", "true")`
                                 }}
                             />
                         )
