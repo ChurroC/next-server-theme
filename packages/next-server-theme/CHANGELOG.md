@@ -1,5 +1,23 @@
 # next-server-theme
 
+## 1.2.5
+
+### Patch Changes
+
+-   Your boy just went crazy and reduced a rerender and solved the inital default theming causing whole background to change problem
+
+## 1.2.4
+
+### Patch Changes
+
+-   Simplified code
+
+## 1.2.3
+
+### Patch Changes
+
+-   Ends up having system class on inital load even with resolve on. This what usually happens since the prerender script has the class be resolved.
+
 ## 1.2.2
 
 ### Patch Changes
