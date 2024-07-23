@@ -2,7 +2,7 @@
 "use client";
 
 import { createContext, useContext, useEffect, useState } from "react";
-import { changeText, setBackgroundTheme } from "../util/setBackgroundTheme";
+import { setBackgroundTheme } from "../util/setBackgroundTheme";
 import { useOnChange } from "../util/useOnChange";
 import type { Theme, ResolvedTheme, ThemeProviderProps } from "../types";
 
@@ -26,7 +26,6 @@ export function ThemeProvider({
     attributes = "class",
     staticRender = false
 }: ThemeProviderProps) {
-    console.log(defaultTheme);
     // Can't use CookieStore since it's async
     const [theme, setTheme] = useState<Theme>(defaultTheme);
     // Late night thought but do I need to have people solve for hydration or could I solve it???
@@ -118,18 +117,11 @@ export function ThemeProvider({
                     value={theme === "system" ? resolvedTheme : theme}
                 >
                     {staticRender ? (
-                        <>
-                            <script
-                                dangerouslySetInnerHTML={{
-                                    __html: `(${setBackgroundTheme.toString()})((document.cookie.match("(^|;)\\\\s*" + "theme" + "\\\\s*=\\\\s*([^;]+)")?.pop() || "${defaultTheme}") === "system" ? window.matchMedia("(prefers-color-scheme: dark)").matches ? "${systemDarkTheme}" : "${systemLightTheme}" : document.cookie.match("(^|;)\\\\s*" + "theme" + "\\\\s*=\\\\s*([^;]+)")?.pop() || "${defaultTheme}" , "${element}", "${attributes}")`
-                                }}
-                            />
-                            <script
-                                dangerouslySetInnerHTML={{
-                                    __html: `(${changeText.toString()})("${theme}")`
-                                }}
-                            />
-                        </>
+                        <script
+                            dangerouslySetInnerHTML={{
+                                __html: `(${setBackgroundTheme.toString()})((document.cookie.match("(^|;)\\\\s*" + "theme" + "\\\\s*=\\\\s*([^;]+)")?.pop() || "${defaultTheme}") === "system" ? window.matchMedia("(prefers-color-scheme: dark)").matches ? "${systemDarkTheme}" : "${systemLightTheme}" : document.cookie.match("(^|;)\\\\s*" + "theme" + "\\\\s*=\\\\s*([^;]+)")?.pop() || "${defaultTheme}" , "${element}", "${attributes}")`
+                            }}
+                        />
                     ) : (
                         defaultTheme === "system" && (
                             <script

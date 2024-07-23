@@ -1,5 +1,11 @@
 # next-server-theme
 
+## 1.2.2
+
+### Patch Changes
+
+-   Tried to path inital wrong render during flash
+
 ## 1.2.1
 
 ### Patch Changes

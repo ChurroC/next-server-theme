@@ -1,6 +1,6 @@
 {
   "name": "next-server-theme",
-  "version": "1.2.1",
+  "version": "1.2.2",
   "type": "module",
   "author": "churroc",
   "description": "This is a theme library that allows you to know the user's theme preference on the server and allow you to server pages with no hydration errors.",
