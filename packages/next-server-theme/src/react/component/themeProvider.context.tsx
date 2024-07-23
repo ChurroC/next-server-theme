@@ -24,7 +24,8 @@ export function ThemeProvider({
     systemDarkTheme = "dark",
     element = "html",
     attributes = "class",
-    staticRender = false
+    staticRender = false,
+    nonce
 }: ThemeProviderProps) {
     const [theme, setTheme] = useState<Theme>(defaultTheme);
     // Late night thought but do I need to have people solve for hydration or could I solve it???
@@ -117,6 +118,7 @@ export function ThemeProvider({
                             dangerouslySetInnerHTML={{
                                 __html: `(${setBackgroundTheme.toString()})((document.cookie.match("(^|;)\\\\s*" + "theme" + "\\\\s*=\\\\s*([^;]+)")?.pop() || "${defaultTheme}") === "system" ? window.matchMedia("(prefers-color-scheme: dark)").matches ? "${systemDarkTheme}" : "${systemLightTheme}" : document.cookie.match("(^|;)\\\\s*" + "theme" + "\\\\s*=\\\\s*([^;]+)")?.pop() || "${defaultTheme}" , "${element}", "${attributes}")`
                             }}
+                            nonce={typeof window === "undefined" ? nonce : ""}
                         />
                     ) : (
                         defaultTheme === "system" && (
@@ -124,6 +126,9 @@ export function ThemeProvider({
                                 dangerouslySetInnerHTML={{
                                     __html: `(${setBackgroundTheme.toString()})(window.matchMedia("(prefers-color-scheme: dark)").matches ? "${systemDarkTheme}" : "${systemLightTheme}", "${element}", "${attributes}", "true")`
                                 }}
+                                nonce={
+                                    typeof window === "undefined" ? nonce : ""
+                                }
                             />
                         )
                     )}

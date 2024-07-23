@@ -9,7 +9,8 @@ export function ThemeProvider({
     systemDarkTheme = "dark",
     element = "html",
     attributes = "class",
-    staticRender = false
+    staticRender = false,
+    nonce
 }: ThemeProviderProps) {
     return (
         // To have cookie from getServerTheme we need this to be a server component
@@ -22,6 +23,7 @@ export function ThemeProvider({
             element={element}
             attributes={attributes}
             staticRender={staticRender}
+            nonce={nonce}
         >
             {children}
         </ThemeProviderComponent>
