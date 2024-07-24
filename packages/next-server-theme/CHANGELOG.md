@@ -1,5 +1,11 @@
 # next-server-theme
 
+## 1.3.0
+
+### Minor Changes
+
+-   Added a nonce
+
 ## 1.2.5
 
 ### Patch Changes

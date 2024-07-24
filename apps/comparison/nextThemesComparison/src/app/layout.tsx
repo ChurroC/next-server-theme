@@ -4,8 +4,6 @@ import "./globals.css";
 
 import { GeistSans } from "geist/font/sans";
 import { WebVitals } from "./web-vitals";
-import { headers } from "next/headers";
-import Script from "next/script";
 
 export const metadata = {
     title: "Create T3 App",
@@ -18,8 +16,6 @@ export default function RootLayout({
 }: {
     children: React.ReactNode;
 }) {
-    const nonce = headers().get("x-nonce");
-    console.log("nonce", nonce);
     return (
         <html lang="en" suppressHydrationWarning>
             <body
@@ -29,15 +25,9 @@ export default function RootLayout({
                 <ThemeProvider
                     attribute="class"
                     themes={["light", "dark", "pink"]}
-                    nonce="ssssss"
                 >
                     {children}
                 </ThemeProvider>
-                <Script
-                    src="https://www.googletagmanager.com/gtag/js"
-                    strategy="afterInteractive"
-                    nonce={nonce}
-                />
             </body>
         </html>
     );

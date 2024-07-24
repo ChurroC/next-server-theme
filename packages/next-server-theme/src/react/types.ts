@@ -9,5 +9,5 @@ export interface ThemeProviderProps {
     element?: string;
     attributes?: string | string[];
     staticRender?: boolean;
-    nonce?: string;
+    nonce?: string | null;
 }
