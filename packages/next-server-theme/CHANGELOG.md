@@ -1,5 +1,11 @@
 # next-server-theme
 
+## 1.4.0
+
+### Minor Changes
+
+-   Added custom key name props
+
 ## 1.3.6
 
 ### Patch Changes
@@ -125,3 +131,9 @@
 ### Patch Changes
 
 -   Thought I pushed wrong build but cli was being overwritten by the test cli
+
+## 1.0.0
+
+### Minor Changes
+
+-   Published package

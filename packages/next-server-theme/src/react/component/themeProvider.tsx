@@ -6,6 +6,8 @@ import type { ThemeProviderProps } from "../types";
 export function ThemeProvider({
     children,
     defaultTheme = "system",
+    themeKey = "theme",
+    resolvedThemeKey = "resolvedTheme",
     systemLightTheme = "light",
     systemDarkTheme = "dark",
     element = "html",
@@ -17,11 +19,17 @@ export function ThemeProvider({
         // To have cookie from getServerTheme we need this to be a server component
         <ThemeProviderComponent
             defaultTheme={
-                staticRender ? defaultTheme : getServerTheme(defaultTheme)
+                staticRender
+                    ? defaultTheme
+                    : getServerTheme(defaultTheme, themeKey)
             }
             defaultResolvedTheme={
-                staticRender ? undefined : cookies().get("resolvedTheme")?.value
+                staticRender
+                    ? undefined
+                    : cookies().get(resolvedThemeKey)?.value
             }
+            themeKey={themeKey}
+            resolvedThemeKey={resolvedThemeKey}
             systemLightTheme={systemLightTheme}
             systemDarkTheme={systemDarkTheme}
             element={element}

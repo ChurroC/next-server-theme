@@ -21,14 +21,26 @@ export function ThemeProvider({
     children,
     defaultTheme = "system",
     defaultResolvedTheme,
+    themeKey,
+    resolvedThemeKey,
     systemLightTheme = "light",
     systemDarkTheme = "dark",
     element = "html",
     attributes = "class",
     staticRender = false,
     nonce
-}: ThemeProviderProps & {
+}: {
+    children: React.ReactNode;
+    defaultTheme: Theme;
     defaultResolvedTheme?: ResolvedTheme;
+    themeKey: string;
+    resolvedThemeKey: string;
+    systemLightTheme: Theme;
+    systemDarkTheme: Theme;
+    element: string;
+    attributes: string | string[];
+    staticRender: boolean;
+    nonce?: string | null;
 }) {
     const [theme, setTheme] = useState<Theme>(defaultTheme);
     // Late night thought but do I need to have people solve for hydration or could I solve it???
@@ -71,23 +83,23 @@ export function ThemeProvider({
     // cookieStore is async
     useOnChange(() => {
         if (typeof cookieStore !== "undefined") {
-            cookieStore.set("theme", theme);
+            cookieStore.set(themeKey, theme);
         } else {
             document.cookie = `theme=${theme};`;
         }
 
         // This is easier than broadcast channel to modify the theme
-        localStorage.setItem("theme", theme);
+        localStorage.setItem(themeKey, theme);
     }, [theme]);
 
     useOnChange(() => {
         if (typeof cookieStore !== "undefined") {
-            cookieStore.set("resolvedTheme", resolvedTheme);
+            cookieStore.set(resolvedThemeKey, resolvedTheme);
         } else {
             document.cookie = `resolvedTheme=${resolvedTheme};`;
         }
 
-        localStorage.setItem("resolvedTheme", resolvedTheme);
+        localStorage.setItem(resolvedThemeKey, resolvedTheme);
     }, [resolvedTheme]);
 
     useEffect(() => {
@@ -96,7 +108,7 @@ export function ThemeProvider({
         if (staticRender) {
             setTheme(
                 document.cookie
-                    .match("(^|;)\\s*" + "theme" + "\\s*=\\s*([^;]+)")
+                    .match("(^|;)\\s*" + themeKey + "\\s*=\\s*([^;]+)")
                     ?.pop() || defaultTheme
             );
         }
@@ -111,9 +123,9 @@ export function ThemeProvider({
         // This is when another tabs theme changes
         // Was going to use broadcast api but this is easier since it runs on other tabs and doesnt run if localstorage is set to the value
         function onStorageChange({ key, newValue }: StorageEvent) {
-            if (key === "theme") {
+            if (key === themeKey) {
                 setTheme(newValue as Theme);
-            } else if (key === "resolvedTheme") {
+            } else if (key === resolvedThemeKey) {
                 setResolvedTheme(newValue as ResolvedTheme);
             }
         }
@@ -131,7 +143,7 @@ export function ThemeProvider({
                     {staticRender ? (
                         <script
                             dangerouslySetInnerHTML={{
-                                __html: `(${setBackgroundTheme.toString()})((document.cookie.match("(^|;)\\\\s*" + "theme" + "\\\\s*=\\\\s*([^;]+)")?.pop() || "${defaultTheme}") === "system" ? window.matchMedia("(prefers-color-scheme: dark)").matches ? "${systemDarkTheme}" : "${systemLightTheme}" : document.cookie.match("(^|;)\\\\s*" + "theme" + "\\\\s*=\\\\s*([^;]+)")?.pop() || "${defaultTheme}" , "${element}", "${attributes}")`
+                                __html: `(${setBackgroundTheme.toString()})((document.cookie.match("(^|;)\\\\s*" + "${themeKey}" + "\\\\s*=\\\\s*([^;]+)")?.pop() || "${defaultTheme}") === "system" ? window.matchMedia("(prefers-color-scheme: dark)").matches ? "${systemDarkTheme}" : "${systemLightTheme}" : document.cookie.match("(^|;)\\\\s*" + "theme" + "\\\\s*=\\\\s*([^;]+)")?.pop() || "${defaultTheme}" , "${element}", "${attributes}")`
                             }}
                             nonce={
                                 nonce

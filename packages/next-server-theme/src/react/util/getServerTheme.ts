@@ -6,11 +6,14 @@ import type { Theme } from "../types";
 // Basically makes sure all the components are in sync
 let defaultThemeStatic: string;
 
-export function getServerTheme(defaultTheme?: Theme): Theme {
+export function getServerTheme(
+    defaultTheme?: Theme,
+    themeKey = "theme"
+): Theme {
     if (defaultTheme) {
         defaultThemeStatic = defaultTheme;
     }
-    const cookie = cookies().get("theme")?.value;
+    const cookie = cookies().get(themeKey)?.value;
 
     // even if the theme is system before being displayed the right theme will be set
     return cookie ?? defaultThemeStatic ?? "system";
