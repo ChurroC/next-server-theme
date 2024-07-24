@@ -4,7 +4,7 @@
 
 ### Minor Changes
 
--   Added a nonce
+-   Added nonce paramaters to script tags
 
 ## 1.2.5
 

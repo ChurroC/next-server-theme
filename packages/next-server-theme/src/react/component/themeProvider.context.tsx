@@ -118,7 +118,9 @@ export function ThemeProvider({
                             dangerouslySetInnerHTML={{
                                 __html: `(${setBackgroundTheme.toString()})((document.cookie.match("(^|;)\\\\s*" + "theme" + "\\\\s*=\\\\s*([^;]+)")?.pop() || "${defaultTheme}") === "system" ? window.matchMedia("(prefers-color-scheme: dark)").matches ? "${systemDarkTheme}" : "${systemLightTheme}" : document.cookie.match("(^|;)\\\\s*" + "theme" + "\\\\s*=\\\\s*([^;]+)")?.pop() || "${defaultTheme}" , "${element}", "${attributes}")`
                             }}
-                            nonce={typeof window === "undefined" ? nonce : ""}
+                            nonce={
+                                typeof window === "undefined" ? nonce ?? "" : ""
+                            }
                         />
                     ) : (
                         defaultTheme === "system" && (
@@ -127,7 +129,9 @@ export function ThemeProvider({
                                     __html: `(${setBackgroundTheme.toString()})(window.matchMedia("(prefers-color-scheme: dark)").matches ? "${systemDarkTheme}" : "${systemLightTheme}", "${element}", "${attributes}", "true")`
                                 }}
                                 nonce={
-                                    typeof window === "undefined" ? nonce : ""
+                                    typeof window === "undefined"
+                                        ? nonce ?? ""
+                                        : ""
                                 }
                             />
                         )

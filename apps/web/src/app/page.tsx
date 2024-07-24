@@ -6,8 +6,10 @@ export default function HomePage() {
             <div>Links</div>
             <Link href={"/server"}>Dev - Server</Link>
             <Link href={"/static"}>Dev - Static</Link>
+            <Link href={"/nonce"}>Dev - Nonce</Link>
             <Link href={"/build/server"}>Build - Server</Link>
             <Link href={"/build/static"}>Build - Static</Link>
+            <Link href={"/build/nonce"}>Build - Nonce</Link>
         </div>
     );
 }
