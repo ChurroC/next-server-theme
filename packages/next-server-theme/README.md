@@ -23,7 +23,7 @@ This library allow has a substantial speed difference especially in first conten
 ## Add To Project
 
 ```jsx
-//app/layout.jsx
+// app/layout.jsx
 export default function Layout({ children }) {
     return (
         <html>
@@ -36,7 +36,7 @@ export default function Layout({ children }) {
 Adding dark mode support takes 2 lines of code:
 
 ```jsx
-//app/layout.jsx
+// app/layout.jsx
 import { ThemeProvider, getServerTheme } from "next-server-themes/server";
 
 export default function Layout({ children }) {
@@ -116,7 +116,7 @@ In our examples we have 3 ways to do this method
 [Tailwind](/apps/examples/tailwind):
 
 ```jsx
-//app/layout.jsx
+// app/layout.jsx
 import { ThemeProvider, getServerTheme } from "next-server-themes";
 
 export default function Layout({ children }) {
@@ -169,7 +169,7 @@ export default {
 [Attribute](/apps/examples/attribute/) (We change classes to data-theme for getServerTheme):
 
 ```jsx
-//app/layout.jsx
+// app/layout.jsx
 import { ThemeProvider, getServerTheme } from "next-server-themes/server";
 
 export default function Layout({ children }) {
@@ -209,7 +209,7 @@ You can even choose custom attributes,
 You can also choose a custom element to apply themes to instead of the HTML element:
 
 ```jsx
-//app/layout.jsx
+// app/layout.jsx
 import { ThemeProvider, getServerTheme } from "next-server-themes";
 
 export default function Layout({ children }) {
@@ -235,7 +235,7 @@ It might seem backwards to what this package does but this option allows you to 
 This could put less stress on your server and makes it easier for users who don't need the page rendered on the server.
 
 ```jsx
-//app/layout.jsx
+// app/layout.jsx
 import { ThemeProvider, getServerTheme } from "next-server-themes/server";
 
 export default function Layout({ children }) {
@@ -258,8 +258,9 @@ import { useTheme } from "next-server-theme/client";
 import { useEffect, useState } from "react";
 
 export default function Page() {
-    const [isMounted, setIsMounted] = useState(false);
     const [theme, setTheme] = useTheme();
+
+    const [isMounted, setIsMounted] = useState(false);
 
     useEffect(() => {
         setIsMounted(true);
@@ -278,6 +279,163 @@ export default function Page() {
     );
 }
 ```
+
+I also did make it possible for you to not hydrate the theme but it will lead you to have the default theme intially before swapping to the proper theme on the client. So you could build your own solution like above if you don't like mine.
+
+### Resolved Theme
+
+If you want the resolved theme you could modify the useTheme function or useGetResolvedTheme. Instead of having the "system" theme it instead shows the proper resolved theme according to the users prefered colored scheme of dark or light.
+
+```jsx
+"use client";
+
+import { useTheme } from "next-server-theme";
+
+export default function Page() {
+    const [theme, setTheme] = useTheme({ resolved: true });
+
+    return (
+        <div className="flex h-screen flex-col items-center justify-center gap-3">
+            <div>Theme: {theme}</div>
+            <button onClick={() => setTheme("dark")}>Dark</button>
+            <button onClick={() => setTheme("light")}>Light</button>
+            <button onClick={() => setTheme("pink")}>Pink</button>
+            <button onClick={() => setTheme("system")}>System</button>
+        </div>
+    );
+}
+```
+
+Or you could use useGetResolvedTheme instead
+
+```jsx
+"use client";
+
+import { useGetResolvedTheme, useSetTheme } from "next-server-theme";
+
+export default function Page() {
+    const theme = useGetResolvedTheme();
+    const setTheme = useSetTheme();
+
+    return (
+        <div className="flex h-screen flex-col items-center justify-center gap-3">
+            <div>Theme: {theme}</div>
+            <button onClick={() => setTheme("dark")}>Dark</button>
+            <button onClick={() => setTheme("light")}>Light</button>
+            <button onClick={() => setTheme("pink")}>Pink</button>
+            <button onClick={() => setTheme("system")}>System</button>
+        </div>
+    );
+}
+```
+
+You would need to hydrate this result because the users preference can only be found on the client like so:
+
+```jsx
+"use client";
+
+import { useTheme } from "next-server-theme/client";
+import { useEffect, useState } from "react";
+
+export default function Page() {
+    const [theme, setTheme] = useTheme({ resolved: true });
+
+    const [isMounted, setIsMounted] = useState(false);
+
+    useEffect(() => {
+        setIsMounted(true);
+    }, []);
+
+    if (!isMounted) return null;
+
+    return (
+        <div className="flex h-screen flex-col items-center justify-center gap-3">
+            <div>Theme: {theme}</div>
+            <button onClick={() => setTheme("dark")}>Dark</button>
+            <button onClick={() => setTheme("light")}>Light</button>
+            <button onClick={() => setTheme("pink")}>Pink</button>
+            <button onClick={() => setTheme("system")}>System</button>
+        </div>
+    );
+}
+```
+
+But like in the static rendering I already have my custom solution where system defaults to light mode. Then if the user prefers dark mode then it switches to the dark theme. This is already a good solution because there will only be an extra render when the theme is system and the client prefers dark mode.
+
+### Nonce
+
+If you wish to use nonces which “whitelist” certain inline script and style elements, while avoiding use of the CSP unsafe-inline directive. It basically tells the inline contents of the browser the inline contents of a particular script or style element weren’t injected into the document by some (malicious) third party, but were instead put in the document intentionally by whoever controls the server the document is served from.
+
+In order to first use this you have to modify nextjs middleware to send some custom headers like so:
+[NextJs Example Offical Docs](https://nextjs.org/docs/app/building-your-application/configuring/content-security-policy)
+
+```jsx
+// middleware.ts (Make sure it is as the app dir or inside src)
+import { NextResponse } from "next/server";
+
+export function middleware(request) {
+    const nonce = Buffer.from(crypto.randomUUID()).toString("base64");
+    const cspHeader = `
+    default-src 'self';
+    script-src 'self' 'nonce-${nonce}' 'strict-dynamic';
+    style-src 'self' 'nonce-${nonce}';
+    img-src 'self' blob: data:;
+    font-src 'self';
+    object-src 'none';
+    base-uri 'self';
+    form-action 'self';
+    frame-ancestors 'none';
+    upgrade-insecure-requests;
+`;
+    // Replace newline characters and spaces
+    const contentSecurityPolicyHeaderValue = cspHeader
+        .replace(/\s{2,}/g, " ")
+        .trim();
+
+    const requestHeaders = new Headers(request.headers);
+    requestHeaders.set("x-nonce", nonce);
+    requestHeaders.set(
+        "Content-Security-Policy",
+        contentSecurityPolicyHeaderValue
+    );
+
+    const response = NextResponse.next({
+        request: {
+            headers: requestHeaders
+        }
+    });
+    response.headers.set(
+        "Content-Security-Policy",
+        contentSecurityPolicyHeaderValue
+    );
+
+    return response;
+}
+```
+
+Then to use the nonce you would do:
+
+```jsx
+// app/layout.jsx
+import { ThemeProvider, getServerTheme } from "next-server-themes";
+import { headers } from "next/headers";
+
+export default function Layout({ children }) {
+    const nonce = headers().get("x-nonce");
+
+    return (
+        <html>
+            <body suppressHydrationWarning className={getServerTheme()}>
+                <ThemeProvider nonce={nonce}>{children}</ThemeProvider>
+            </body>
+        </html>
+    );
+}
+```
+
+In the example above I used the server cookies but you could render using the static rendering too.
+
+But this option allows you to use nonces to secure your code. If you don't use static rendering then during dynamic rendering a script is only sent when the theming is on "system."
 
 ## Typesafety
 

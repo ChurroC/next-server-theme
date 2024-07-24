@@ -1,5 +1,5 @@
 export type Theme = string;
-export type ResolvedTheme = Exclude<Theme, "system"> | undefined;
+export type ResolvedTheme = Exclude<Theme, "system">;
 
 export interface ThemeProviderProps {
     children: React.ReactNode;

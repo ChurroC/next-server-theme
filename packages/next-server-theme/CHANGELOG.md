@@ -1,5 +1,41 @@
 # next-server-theme
 
+## 1.3.6
+
+### Patch Changes
+
+-   Reduced a render by using cookies for last value of user theming preference
+
+## 1.3.5
+
+### Patch Changes
+
+-   Added nonce theming docs
+
+## 1.3.4
+
+### Patch Changes
+
+-   Added resolved theming docs
+
+## 1.3.3
+
+### Patch Changes
+
+-   Fixed up nonce being undefined on client if defined on server
+
+## 1.3.2
+
+### Patch Changes
+
+-   Fixed up showing dark theme if theme is set system and is in resolved mode
+
+## 1.3.1
+
+### Patch Changes
+
+-   Fixed up nonces if they are null or not passed as prop
+
 ## 1.3.0
 
 ### Minor Changes
@@ -10,7 +46,7 @@
 
 ### Patch Changes
 
--   Your boy just went crazy and reduced a rerender and solved the inital default theming causing whole background to change problem
+-   Your boy just went crazy and reduced a rerender and solved the inital default theming causing whole background to change problem with less renders
 
 ## 1.2.4
 

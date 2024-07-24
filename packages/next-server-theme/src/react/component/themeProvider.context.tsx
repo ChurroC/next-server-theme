@@ -20,19 +20,22 @@ const SetThemeContext = createContext<
 export function ThemeProvider({
     children,
     defaultTheme = "system",
+    resolvedCookieTheme,
     systemLightTheme = "light",
     systemDarkTheme = "dark",
     element = "html",
     attributes = "class",
     staticRender = false,
     nonce
-}: ThemeProviderProps) {
+}: ThemeProviderProps & {
+    resolvedCookieTheme?: string;
+}) {
     const [theme, setTheme] = useState<Theme>(defaultTheme);
     // Late night thought but do I need to have people solve for hydration or could I solve it???
     // Basically instead of rendering systemLightTheme on the server then the actual theme on the client which only causes errors on dark mode
     // I could just render systemLightTheme initally on client too. Since either way the first render will be inaccurate. But this way it will be inaccurate on both server and client causing no reyhydration.
     const [resolvedTheme, setResolvedTheme] = useState<ResolvedTheme>(
-        theme === "system" ? systemLightTheme : theme
+        resolvedCookieTheme ?? (theme === "system" ? systemLightTheme : theme)
     );
 
     useOnChange(() => {
@@ -77,21 +80,31 @@ export function ThemeProvider({
         localStorage.setItem("theme", theme);
     }, [theme]);
 
+    useOnChange(() => {
+        if (typeof cookieStore !== "undefined") {
+            cookieStore.set("resolvedTheme", resolvedTheme);
+        } else {
+            document.cookie = `resolvedTheme=${resolvedTheme};`;
+        }
+
+        localStorage.setItem("resolvedTheme", resolvedTheme);
+    }, [resolvedTheme]);
+
     useEffect(() => {
         // I'll set the inital theme the same on server and client to not have hydration issues
         // But then it will swap to the document cookie value on client below or it will stay the same with no rerender
         if (staticRender) {
-            console.log(
-                "inital",
-                theme,
-                document.cookie
-                    .match("(^|;)\\s*" + "theme" + "\\s*=\\s*([^;]+)")
-                    ?.pop()
-            );
             setTheme(
                 document.cookie
                     .match("(^|;)\\s*" + "theme" + "\\s*=\\s*([^;]+)")
                     ?.pop() || defaultTheme
+            );
+        }
+        if (theme === "system") {
+            setResolvedTheme(
+                window.matchMedia("(prefers-color-scheme: dark)").matches
+                    ? systemDarkTheme
+                    : systemLightTheme
             );
         }
 
@@ -100,6 +113,8 @@ export function ThemeProvider({
         function onStorageChange({ key, newValue }: StorageEvent) {
             if (key === "theme") {
                 setTheme(newValue as Theme);
+            } else if (key === "resolvedTheme") {
+                setResolvedTheme(newValue as ResolvedTheme);
             }
         }
         window.addEventListener("storage", onStorageChange);
@@ -119,7 +134,11 @@ export function ThemeProvider({
                                 __html: `(${setBackgroundTheme.toString()})((document.cookie.match("(^|;)\\\\s*" + "theme" + "\\\\s*=\\\\s*([^;]+)")?.pop() || "${defaultTheme}") === "system" ? window.matchMedia("(prefers-color-scheme: dark)").matches ? "${systemDarkTheme}" : "${systemLightTheme}" : document.cookie.match("(^|;)\\\\s*" + "theme" + "\\\\s*=\\\\s*([^;]+)")?.pop() || "${defaultTheme}" , "${element}", "${attributes}")`
                             }}
                             nonce={
-                                typeof window === "undefined" ? nonce ?? "" : ""
+                                nonce
+                                    ? typeof window === "undefined"
+                                        ? nonce
+                                        : ""
+                                    : undefined
                             }
                         />
                     ) : (
@@ -129,9 +148,11 @@ export function ThemeProvider({
                                     __html: `(${setBackgroundTheme.toString()})(window.matchMedia("(prefers-color-scheme: dark)").matches ? "${systemDarkTheme}" : "${systemLightTheme}", "${element}", "${attributes}", "true")`
                                 }}
                                 nonce={
-                                    typeof window === "undefined"
-                                        ? nonce ?? ""
-                                        : ""
+                                    nonce
+                                        ? typeof window === "undefined"
+                                            ? nonce
+                                            : ""
+                                        : undefined
                                 }
                             />
                         )
