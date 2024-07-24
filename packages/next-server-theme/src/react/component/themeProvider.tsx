@@ -19,7 +19,7 @@ export function ThemeProvider({
             defaultTheme={
                 staticRender ? defaultTheme : getServerTheme(defaultTheme)
             }
-            resolvedCookieTheme={
+            defaultResolvedTheme={
                 staticRender ? undefined : cookies().get("resolvedTheme")?.value
             }
             systemLightTheme={systemLightTheme}

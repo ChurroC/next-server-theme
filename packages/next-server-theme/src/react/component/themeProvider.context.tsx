@@ -20,7 +20,7 @@ const SetThemeContext = createContext<
 export function ThemeProvider({
     children,
     defaultTheme = "system",
-    resolvedCookieTheme,
+    defaultResolvedTheme,
     systemLightTheme = "light",
     systemDarkTheme = "dark",
     element = "html",
@@ -28,14 +28,14 @@ export function ThemeProvider({
     staticRender = false,
     nonce
 }: ThemeProviderProps & {
-    resolvedCookieTheme?: string;
+    defaultResolvedTheme?: ResolvedTheme;
 }) {
     const [theme, setTheme] = useState<Theme>(defaultTheme);
     // Late night thought but do I need to have people solve for hydration or could I solve it???
     // Basically instead of rendering systemLightTheme on the server then the actual theme on the client which only causes errors on dark mode
     // I could just render systemLightTheme initally on client too. Since either way the first render will be inaccurate. But this way it will be inaccurate on both server and client causing no reyhydration.
     const [resolvedTheme, setResolvedTheme] = useState<ResolvedTheme>(
-        resolvedCookieTheme ?? (theme === "system" ? systemLightTheme : theme)
+        defaultResolvedTheme ?? (theme === "system" ? systemLightTheme : theme)
     );
 
     useOnChange(() => {

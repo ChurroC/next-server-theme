@@ -64,7 +64,7 @@
 
 ### Patch Changes
 
--   Tried to path inital wrong render during flash
+-   Tried to patch inital wrong render during flash
 
 ## 1.2.1
 

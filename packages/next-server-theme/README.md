@@ -58,6 +58,31 @@ The `className={getServerTheme()}` will grab the users theme preference from the
 
 Then the ThemeProvider is a context that allows children to use the current state value.
 
+## API
+
+### ThemeProvider Options
+
+All your theme configuration is passed to ThemeProvider.
+
+-   `defaultTheme = "system"`: Default theme if it a user's first type to the site
+-   `systemLightTheme = "light"`: If you use the system theme then light mode will be set as this variable
+-   `systemDarkTheme = "dark"`: If you use the system theme then dark mode will be set as this variable
+-   `element = "html"`: CSS selector to choose which element to update attribute with theme. Remember to move getServerTheme to this location [example](#element)
+-   `attributes = "class"`: CSS attribute to which theme is set to. It does replace all the data so make sure you don't use attribute for anything else. Remember to move getServerTheme to this location. [example](#styling)
+-   `staticRender = false`: If staticRender is true it lets you opt out of dyanmic rendering.
+-   `nonce`: This allows you to use nonces to better secure your webpage [example](#nonce)
+
+### CLI
+
+Since it is very tough to provide a good experience with types with context we ended up going with the method prisma does. We end up having a cli that directly modifies the themes.
+
+-   `next-server-theme`: CLI info
+-   `next-server-theme types`: Displays current theme type
+-   `next-server-theme set`: You can modify the theme type with a ts type. Ex: next-server-theme set dark light system. This causes theme to be typesafe and equal to a union of dark | light | system
+-   `next-server-theme reset`: Switches theme type to the default which is all strings
+
+The default is string and once you modify it when you try to get or set themes they will be typed.
+
 ## Use
 
 To get the current theme you would do:
@@ -436,25 +461,3 @@ export default function Layout({ children }) {
 In the example above I used the server cookies but you could render using the static rendering too.
 
 But this option allows you to use nonces to secure your code. If you don't use static rendering then during dynamic rendering a script is only sent when the theming is on "system."
-
-## Typesafety
-
-Since it is very tough to provide a good experience with types with context we ended up going with the method prisma does. We end up having a cli that directly modifies the themes.
-
--   `next-server-theme`: CLI info
--   `next-server-theme types`: Displays current theme type
--   `next-server-theme set`: You can modify the theme type with a ts type. Ex: next-server-theme set dark light system. This causes theme to be typesafe and equal to a union of dark | light | system
--   `next-server-theme reset`: Switches theme type to the default which is all strings
-
-The default is string and once you modify it when you try to get or set themes they will be typed.
-
-## ThemeProvider Options
-
-All your theme configuration is passed to ThemeProvider.
-
--   `defaultTheme = "system"`: Default theme if it a user's first type to the site
--   `systemLightTheme = "light"`: If you use the system theme then light mode will be set as this variable
--   `systemDarkTheme = "dark"`: If you use the system theme then dark mode will be set as this variable
--   `element = "html"`: CSS selector to choose which element to update attribute with theme. Remember to move getServerTheme to this location
--   `attributes = "class"`: CSS attribute to which theme is set to. It does replace all the data so make sure you don't use attribute for anything else. Remeber to move getServerTheme to this location.
--   `staticRender = false`: If staticRender is true it lets you opt out of dyanmic rendering.
