@@ -1,5 +1,5 @@
 import { ThemeProvider as ThemeProviderComponent } from "./themeProvider.context";
-import { getServerThemeFromProvider } from "../util/getServerTheme";
+import { getServerThemeForProvider } from "../util/getServerThemeForProvider";
 import { cookies } from "next/headers";
 import type { ThemeProviderProps } from "../types";
 
@@ -22,7 +22,7 @@ export function ThemeProvider({
             defaultTheme={
                 staticRender
                     ? defaultTheme
-                    : getServerThemeFromProvider(defaultTheme, themeKey)
+                    : getServerThemeForProvider(defaultTheme, themeKey)
             }
             defaultResolvedTheme={
                 staticRender

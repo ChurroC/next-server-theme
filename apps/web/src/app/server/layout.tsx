@@ -1,9 +1,5 @@
-import { ThemeProvider } from "next-server-theme/dev/server.ts";
+import { ThemeProvider } from "next-server-theme/dev/server";
 
 export default function Layout({ children }: { children: React.ReactNode }) {
-    return (
-        <ThemeProvider themes={["dark", "light"]} defaultTheme="bhj">
-            {children}
-        </ThemeProvider>
-    );
+    return <ThemeProvider>{children}</ThemeProvider>;
 }

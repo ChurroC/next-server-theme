@@ -2,19 +2,17 @@ import type { Theme } from "../types";
 
 export function setBackgroundTheme(
     theme: Theme,
-    element: string = "html",
+    elementId: string = "html",
     attributes: string | string[] = "class",
     themes?: Theme[]
 ) {
-    console.log(themes);
+    const element = document.querySelector(elementId);
     [attributes].flat().forEach(attribute => {
         if (attribute === "class" && themes) {
-            console.log("class with themes");
-            document.querySelector(element)?.classList.remove(...themes);
-            document.querySelector(element)?.classList.add(theme);
+            element?.classList.remove(...themes);
+            element?.classList.add(theme);
         } else {
-            console.log("nah");
-            document.querySelector(element)?.setAttribute(attribute, theme);
+            element?.setAttribute(attribute, theme);
         }
     });
 }

@@ -44,7 +44,6 @@ export function ThemeProvider({
     staticRender: boolean;
     nonce?: string | null;
 }) {
-    console.log(themes);
     const [theme, setTheme] = useState<Theme>(defaultTheme);
     // Late night thought but do I need to have people solve for hydration or could I solve it???
     // Basically instead of rendering systemLightTheme on the server then the actual theme on the client which only causes errors on dark mode
