@@ -4,7 +4,7 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import { setBackgroundTheme } from "../util/setBackgroundTheme";
 import { useOnChange } from "../util/useOnChange";
-import type { Theme, ResolvedTheme, ThemeProviderProps } from "../types";
+import type { Theme, ResolvedTheme } from "../types";
 
 declare const cookieStore: {
     get: (name: string) => Promise<{ value: string }>;
@@ -21,6 +21,7 @@ export function ThemeProvider({
     children,
     defaultTheme = "system",
     defaultResolvedTheme,
+    themes,
     themeKey,
     resolvedThemeKey,
     systemLightTheme = "light",
@@ -33,6 +34,7 @@ export function ThemeProvider({
     children: React.ReactNode;
     defaultTheme: Theme;
     defaultResolvedTheme?: ResolvedTheme;
+    themes?: Theme[];
     themeKey: string;
     resolvedThemeKey: string;
     systemLightTheme: Theme;
@@ -42,6 +44,7 @@ export function ThemeProvider({
     staticRender: boolean;
     nonce?: string | null;
 }) {
+    console.log(themes);
     const [theme, setTheme] = useState<Theme>(defaultTheme);
     // Late night thought but do I need to have people solve for hydration or could I solve it???
     // Basically instead of rendering systemLightTheme on the server then the actual theme on the client which only causes errors on dark mode
@@ -58,7 +61,8 @@ export function ThemeProvider({
                 setBackgroundTheme(
                     matches ? systemDarkTheme : systemLightTheme,
                     element,
-                    attributes
+                    attributes,
+                    themes
                 );
                 setResolvedTheme(matches ? systemDarkTheme : systemLightTheme);
             };
@@ -75,7 +79,7 @@ export function ThemeProvider({
             return () =>
                 systemDark.removeEventListener("change", onSystemThemeChange);
         } else {
-            setBackgroundTheme(theme, element, attributes);
+            setBackgroundTheme(theme, element, attributes, themes);
         }
     }, [theme]);
 
@@ -143,7 +147,7 @@ export function ThemeProvider({
                     {staticRender ? (
                         <script
                             dangerouslySetInnerHTML={{
-                                __html: `(${setBackgroundTheme.toString()})((document.cookie.match("(^|;)\\\\s*" + "${themeKey}" + "\\\\s*=\\\\s*([^;]+)")?.pop() || "${defaultTheme}") === "system" ? window.matchMedia("(prefers-color-scheme: dark)").matches ? "${systemDarkTheme}" : "${systemLightTheme}" : document.cookie.match("(^|;)\\\\s*" + "theme" + "\\\\s*=\\\\s*([^;]+)")?.pop() || "${defaultTheme}" , "${element}", "${attributes}")`
+                                __html: `(${setBackgroundTheme.toString()})((document.cookie.match("(^|;)\\\\s*" + "${themeKey}" + "\\\\s*=\\\\s*([^;]+)")?.pop() || "${defaultTheme}") === "system" ? window.matchMedia("(prefers-color-scheme: dark)").matches ? "${systemDarkTheme}" : "${systemLightTheme}" : document.cookie.match("(^|;)\\\\s*" + "theme" + "\\\\s*=\\\\s*([^;]+)")?.pop() || "${defaultTheme}" , "${element}", "${attributes}", ${JSON.stringify(themes)})`
                             }}
                             nonce={
                                 nonce
@@ -157,7 +161,7 @@ export function ThemeProvider({
                         defaultTheme === "system" && (
                             <script
                                 dangerouslySetInnerHTML={{
-                                    __html: `(${setBackgroundTheme.toString()})(window.matchMedia("(prefers-color-scheme: dark)").matches ? "${systemDarkTheme}" : "${systemLightTheme}", "${element}", "${attributes}", "true")`
+                                    __html: `(${setBackgroundTheme.toString()})(window.matchMedia("(prefers-color-scheme: dark)").matches ? "${systemDarkTheme}" : "${systemLightTheme}", "${element}", "${attributes}", ${JSON.stringify(themes)})`
                                 }}
                                 nonce={
                                     nonce

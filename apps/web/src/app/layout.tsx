@@ -1,4 +1,4 @@
-import { ThemeProvider, getServerTheme } from "next-server-theme/dev/server.ts";
+import { getServerTheme } from "next-server-theme/dev/server.ts";
 
 import "./globals.css";
 
@@ -16,7 +16,11 @@ export default function RootLayout({
     children: React.ReactNode;
 }) {
     return (
-        <html lang="en" suppressHydrationWarning className={getServerTheme()}>
+        <html
+            lang="en"
+            suppressHydrationWarning
+            className={`${getServerTheme()} wow`}
+        >
             <body
                 className={`${GeistSans.className} pink:bg-pink-100 bg-white dark:bg-black`}
             >

@@ -1,11 +1,12 @@
 import { ThemeProvider as ThemeProviderComponent } from "./themeProvider.context";
-import { getServerTheme } from "../util/getServerTheme";
+import { getServerThemeFromProvider } from "../util/getServerTheme";
 import { cookies } from "next/headers";
 import type { ThemeProviderProps } from "../types";
 
 export function ThemeProvider({
     children,
     defaultTheme = "system",
+    themes,
     themeKey = "theme",
     resolvedThemeKey = "resolvedTheme",
     systemLightTheme = "light",
@@ -21,13 +22,14 @@ export function ThemeProvider({
             defaultTheme={
                 staticRender
                     ? defaultTheme
-                    : getServerTheme(defaultTheme, themeKey)
+                    : getServerThemeFromProvider(defaultTheme, themeKey)
             }
             defaultResolvedTheme={
                 staticRender
                     ? undefined
                     : cookies().get(resolvedThemeKey)?.value
             }
+            themes={themes}
             themeKey={themeKey}
             resolvedThemeKey={resolvedThemeKey}
             systemLightTheme={systemLightTheme}

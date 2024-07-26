@@ -3,7 +3,7 @@
 import { useTheme } from "next-server-theme/dev/client.ts";
 
 export default function HomePage() {
-    const [theme, setTheme] = useTheme({ resolved: true });
+    const [theme, setTheme] = useTheme();
     console.log(theme, "theme");
 
     return (

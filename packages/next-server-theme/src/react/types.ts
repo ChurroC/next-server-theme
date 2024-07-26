@@ -4,6 +4,7 @@ export type ResolvedTheme = Exclude<Theme, "system">;
 export interface ThemeProviderProps {
     children: React.ReactNode;
     defaultTheme?: Theme;
+    themes?: Theme[];
     themeKey?: string;
     resolvedThemeKey?: string;
     systemLightTheme?: Theme;

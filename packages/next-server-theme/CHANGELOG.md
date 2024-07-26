@@ -1,5 +1,25 @@
 # next-server-theme
 
+## 1.5.0
+
+### Minor Changes
+
+-   Modified getServerTheme doesn't return "system" but instead ""
+-   Now that we don't have a "system" class I now use the new themes prop to specify which classes to remove
+
+## 1.4.2
+
+### Patch Changes
+
+-   Modified getServerTheme doesn't return "system" but instead undefined
+-   Modified the getServerTheme to have no props to reduce confusion
+
+## 1.4.1
+
+### Patch Changes
+
+-   Never published. When doing npm view next-server-theme time it says 1.4.1 was supposedly published 3 months before creation???
+
 ## 1.4.0
 
 ### Minor Changes
