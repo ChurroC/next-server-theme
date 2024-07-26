@@ -16,7 +16,10 @@ export default function RootLayout({
     children: React.ReactNode;
 }) {
     return (
-        <html lang="en" suppressHydrationWarning className={getServerTheme()}>
+        <html
+            lang="en"
+            suppressHydrationWarning /*className={getServerTheme()}*/
+        >
             <body
                 className={`${GeistSans.className} pink:bg-pink-100 bg-white dark:bg-black`}
             >

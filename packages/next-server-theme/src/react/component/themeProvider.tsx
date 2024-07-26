@@ -1,5 +1,5 @@
 import { ThemeProvider as ThemeProviderComponent } from "./themeProvider.context";
-import { getServerThemeForProvider } from "../util/getServerThemeForProvider";
+import { getServerThemeForProvider } from "../util/getServerTheme";
 import { cookies } from "next/headers";
 import type { ThemeProviderProps } from "../types";
 
