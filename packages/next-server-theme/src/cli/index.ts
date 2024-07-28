@@ -3,6 +3,8 @@ import { program } from "commander";
 import { version, name } from "../../package.json";
 import { Chalk } from "chalk";
 import fs from "fs/promises";
+import path from "path";
+import { parse } from "@typescript-eslint/parser";
 
 // When running this script, types will be in the root of the project
 const fileNameClient = `./node_modules/${name}/types/client.d.ts`;
@@ -54,38 +56,108 @@ program
 program
     .command("set")
     .description("Modify theme type")
-    .argument("<strings...>", "modified theme types")
-    .action(async (newThemeType: string[]) => {
-        try {
-            const dataClient = await fs.readFile(fileNameClient, {
-                encoding: "utf8"
-            });
-            const themeType = dataClient
-                .split("type Theme = ")[1]
-                ?.split(";")[0];
+    .argument("[strings...]", "modified theme types")
+    .option(
+        "-p <path>",
+        "path to file with ThemeProvider if no argument is provided",
+        "src/app/layout.tsx | src/layout.tsx"
+    )
+    .action(
+        async (
+            newThemeType: string[],
+            options: {
+                path?: string[];
+                p?: string[];
+            }
+        ) => {
+            console.log(options);
+            const pathParams = options.p ?? options.path ?? [];
+            if (newThemeType.length === 0) {
+                let filePath: string;
+                try {
+                    if (pathParams.length > 0) {
+                        await fs.stat(path.join(process.cwd(), ...pathParams));
+                        filePath = path.join(process.cwd(), ...pathParams);
+                    } else {
+                        throw new Error();
+                    }
+                } catch {
+                    try {
+                        await fs.stat(
+                            path.join(process.cwd(), "src", "app", "layout.tsx")
+                        );
+                        filePath = path.join(
+                            process.cwd(),
+                            "src",
+                            "app",
+                            "layout.tsx"
+                        );
+                    } catch {
+                        try {
+                            await fs.stat(
+                                path.join(process.cwd(), "src", "layout.tsx")
+                            );
+                            filePath = path.join(
+                                process.cwd(),
+                                "src",
+                                "layout.tsx"
+                            );
+                        } catch {
+                            console.log(
+                                "Theme type not found. Make sure cli is run in the root of the project next to node_modules folder."
+                            );
+                            return;
+                        }
+                    }
+                }
 
-            const formattedTypeClient = dataClient.replace(
-                `type Theme = ${themeType};`,
-                `type Theme = ${newThemeType.map(type => `"${type.trim()}"`).join(" | ")};`
-            );
-            await fs.writeFile(fileNameClient, formattedTypeClient, "utf8");
+                console.log(filePath);
+                console.log(parse(filePath));
 
-            const dataServer = await fs.readFile(fileNameServer, {
-                encoding: "utf8"
-            });
-            const formattedTypeServer = dataServer.replace(
-                `type Theme = ${themeType};`,
-                `type Theme = ${newThemeType.map(type => `"${type.trim()}"`).join(" | ")};`
-            );
-            await fs.writeFile(fileNameServer, formattedTypeServer, "utf8");
+                return;
+            } else {
+                try {
+                    const dataClient = await fs.readFile(fileNameClient, {
+                        encoding: "utf8"
+                    });
+                    const themeType = dataClient
+                        .split("type Theme = ")[1]
+                        ?.split(";")[0];
 
-            console.log(`Theme type changed to ${newThemeType.join(" | ")}`);
-        } catch {
-            console.log(
-                "Theme type not found. Make sure cli is run in the root of the project next to node_modules folder."
-            );
+                    const formattedTypeClient = dataClient.replace(
+                        `type Theme = ${themeType};`,
+                        `type Theme = ${newThemeType.map(type => `"${type.trim()}"`).join(" | ")};`
+                    );
+                    await fs.writeFile(
+                        fileNameClient,
+                        formattedTypeClient,
+                        "utf8"
+                    );
+
+                    const dataServer = await fs.readFile(fileNameServer, {
+                        encoding: "utf8"
+                    });
+                    const formattedTypeServer = dataServer.replace(
+                        `type Theme = ${themeType};`,
+                        `type Theme = ${newThemeType.map(type => `"${type.trim()}"`).join(" | ")};`
+                    );
+                    await fs.writeFile(
+                        fileNameServer,
+                        formattedTypeServer,
+                        "utf8"
+                    );
+
+                    console.log(
+                        `Theme type changed to ${newThemeType.join(" | ")}`
+                    );
+                } catch {
+                    console.log(
+                        "Theme type not found. Make sure cli is run in the root of the project next to node_modules folder."
+                    );
+                }
+            }
         }
-    });
+    );
 
 program
     .command("reset")
