@@ -1,5 +1,18 @@
 # next-server-theme
 
+## 1.5.2
+
+### Patch Changes
+
+-   Types up all the ts into docs
+-   Added links to all info in docs
+
+## 1.5.1
+
+### Patch Changes
+
+-   Added all the new key props into docs
+
 ## 1.5.0
 
 ### Minor Changes

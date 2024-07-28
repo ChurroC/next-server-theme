@@ -18,7 +18,7 @@ Just wanted to talk about big reason this would be useful and why I built. I wro
 
 I had a button that would change the theme that had an icon of the current theme. But every time I loaded up the page it would have the system icon displayed first then switch to the proper theme due to hydration. I don't mean to call next-themes out since they were a source of inspiration and the tool that I first used but even on their example site [Next Themes Site](https://next-themes-example.vercel.app) you can see this issue apparent. If you switch themes from system and reload the page it causes a flash in the textbox. If it's apparent for me on my wifi with just a textbox imagine it on a larger image or any data. This is why having the theme on the server can allow us to just apply these changes before the user sees it to have a seemless experience.
 
-This library allow has a substantial speed difference especially in first contentful paint and other web vitals. You can see how I tested it all in [Comparison README.md](/apps/comparison/README.md). It will not stop all flickers for anything dependant on the theme but also increase page loads by a substantial amount that is easily retestable on you device.
+This library allow has a substantial speed difference especially in first contentful paint and other web vitals. You can see how I tested it all in [Comparison README.md](/apps/comparison/README.md). It will not only stop all flickers for anything dependant on the theme but also increase page loads by a substantial amount that is easily retestable on you device.
 
 ## Add To Project
 
@@ -57,31 +57,6 @@ The suppressHydrationWarning is there for when the theme is set to system which 
 The `className={getServerTheme()}` will grab the users theme preference from the last time on the site and add it to the class of the html body. Both which element you bind it to and whether it changes the class or a different attribute can be changed.
 
 Then the ThemeProvider is a context that allows children to use the current state value.
-
-## API
-
-### ThemeProvider Options
-
-All your theme configuration is passed to ThemeProvider.
-
--   `defaultTheme = "system"`: Default theme if it a user's first type to the site
--   `systemLightTheme = "light"`: If you use the system theme then light mode will be set as this variable
--   `systemDarkTheme = "dark"`: If you use the system theme then dark mode will be set as this variable
--   `element = "html"`: CSS selector to choose which element to update attribute with theme. Remember to move getServerTheme to this location [example](#element)
--   `attributes = "class"`: CSS attribute to which theme is set to. It does replace all the data so make sure you don't use attribute for anything else. Remember to move getServerTheme to this location. [example](#styling)
--   `staticRender = false`: If staticRender is true it lets you opt out of dyanmic rendering.
--   `nonce`: This allows you to use nonces to better secure your webpage [example](#nonce)
-
-### CLI
-
-Since it is very tough to provide a good experience with types with context we ended up going with the method prisma does. We end up having a cli that directly modifies the themes.
-
--   `next-server-theme`: CLI info
--   `next-server-theme types`: Displays current theme type
--   `next-server-theme set`: You can modify the theme type with a ts type. Ex: next-server-theme set dark light system. This causes theme to be typesafe and equal to a union of dark | light | system
--   `next-server-theme reset`: Switches theme type to the default which is all strings
-
-The default is string and once you modify it when you try to get or set themes they will be typed.
 
 ## Use
 
@@ -133,6 +108,63 @@ export default function Page() {
 In both of these example you don't need to worry about rehydration since the theme is on the server and this will run fine during SSR.
 
 **When you setTheme the background color won't change but the attribute class on the HTML tag will. Then you can react to it using styles in the next section for further customizability**
+
+## API
+
+### getServerTheme
+
+-   `getServerTheme(): ResolvedTheme | ""`: This function takes no arguments and return the theme based of the user's cookie on the server. This is only available on server components but can be passed as a prop from a server component to a client component. Make sure if this isn't set equal to the className in the html tag that you modify either the `element` or `attributes` on the ThemeProvider to provide a consistent experience. [example](#element)
+
+### ThemeProvider Options
+
+All your theme configuration is passed to ThemeProvider.
+
+-   `defaultTheme: Theme = "system"`: Default theme if it a user's first type to the site
+-   `systemLightTheme: Theme[] = "light"`: System theme with user preference of light mode will be set as this theme
+-   `systemDarkTheme: string = "dark"`: System theme with user preference of dark mode will be set as this theme
+-   `themeKey: string = "theme"`: Cookie and localstorage key to store theme
+-   `resolvedThemeKey: string = "resolvedTheme"`: Cookie and localstorage key to store resolved theme
+-   `element: string = "html"`: CSS selector to choose which element to update attribute with theme. Remember to move getServerTheme to this location [example](#element)
+-   `attributes: string | string[] = "class"`: CSS attribute to which theme is set to. It does replace all the data so make sure you don't use attribute for anything else. Remember to move getServerTheme to this location. [example](#styling)
+-   `staticRender: boolean = false`: If staticRender is true it lets you opt out of dyanmic rendering.
+-   `nonce: string | null`: This allows you to use nonces to better secure your webpage [example](#nonce)
+
+### useTheme Options
+
+This is how you would access the theme on your website.
+
+## Props
+
+-   `resolved: boolean = false`: Depending on whether this is true you will either receive the resolved theme or the normal theme which includes system. [example](#resolved-theme)
+
+## Return
+
+-   `theme: Theme | ResolvedTheme`: Depending on whether this is true you will either receive the resolved theme or the normal theme which includes system. [example](#use)
+-   `setTheme: React.Dispatch<React.SetStateAction<Theme>>`: You recieve the setTheme function which allows you to modify the theming. [example](#use)
+
+## Specific Functions
+
+-   `useGetTheme(): Theme`: Only returns the theme. [example](#use)
+-   `useGetResolvedTheme(): ResolvedTheme`: Only returns the resolved theme. [example](#resolved-theme)
+-   `useSetTheme(): React.Dispatch<React.SetStateAction<Theme>>`: Only return setTheme function. [example](#use)
+
+### Types
+
+These are the main types used in the project.
+
+-   `Theme = string`: This is the type for the majority of the project. It is just a string but you can modify the type using the [cli](cli) which allows you to type the Theme.
+-   `ResolvedTheme = Exclude<Theme, "system">`: Resolved theme is the same as the Theme but doesn't return "system." It returns the resolved theme which is dependant on the user's theming preference.
+
+### CLI
+
+Since it is very tough to provide a good experience with types with context we ended up going with the method prisma does. We end up having a cli that directly modifies the themes.
+
+-   `next-server-theme`: CLI info
+-   `next-server-theme types`: Displays current theme type
+-   `next-server-theme set: strings[]`: You can modify the theme type with a ts type. Ex: next-server-theme set dark light system. This causes theme to be typesafe and equal to a union of dark | light | system
+-   `next-server-theme reset`: Switches theme type to the default which is all strings
+
+The default is string and once you modify it when, get or set themes they will be typed.
 
 ### Styling
 
@@ -239,8 +271,8 @@ import { ThemeProvider, getServerTheme } from "next-server-themes";
 
 export default function Layout({ children }) {
     return (
-        <html>
-            <body suppressHydrationWarning className={getServerTheme()}>
+        <html suppressHydrationWarning>
+            <body className={getServerTheme()}>
                 <ThemeProvider element="body">{children}</ThemeProvider>
             </body>
         </html>
