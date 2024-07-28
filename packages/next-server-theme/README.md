@@ -119,15 +119,16 @@ In both of these example you don't need to worry about rehydration since the the
 
 All your theme configuration is passed to ThemeProvider.
 
--   `defaultTheme: Theme = "system"`: Default theme if it a user's first type to the site
--   `systemLightTheme: Theme[] = "light"`: System theme with user preference of light mode will be set as this theme
--   `systemDarkTheme: string = "dark"`: System theme with user preference of dark mode will be set as this theme
--   `themeKey: string = "theme"`: Cookie and localstorage key to store theme
--   `resolvedThemeKey: string = "resolvedTheme"`: Cookie and localstorage key to store resolved theme
--   `element: string = "html"`: CSS selector to choose which element to update attribute with theme. Remember to move getServerTheme to this location [example](#element)
--   `attributes: string | string[] = "class"`: CSS attribute to which theme is set to. It does replace all the data so make sure you don't use attribute for anything else. Remember to move getServerTheme to this location. [example](#styling)
--   `staticRender: boolean = false`: If staticRender is true it lets you opt out of dyanmic rendering.
--   `nonce: string | null`: This allows you to use nonces to better secure your webpage [example](#nonce)
+-   `defaultTheme?: Theme = "system"`: Default theme if it a user's first type to the site
+-   `themes?: Theme[]`: You can set an array of all the theme values to this prop. This will allow the class to specifically removed instead of rewriting the entire class. [example](#themes)
+-   `systemLightTheme?: Theme[] = "light"`: System theme with user preference of light mode will be set as this theme
+-   `systemDarkTheme?: string = "dark"`: System theme with user preference of dark mode will be set as this theme
+-   `themeKey?: string = "theme"`: Cookie and localstorage key to store theme
+-   `resolvedThemeKey?: string = "resolvedTheme"`: Cookie and localstorage key to store resolved theme
+-   `element?: string = "html"`: CSS selector to choose which element to update attribute with theme. Remember to move getServerTheme to this location [example](#element)
+-   `attributes?: string | string[] = "class"`: CSS attribute to which theme is set to. It does replace all the data so make sure you don't use attribute for anything else. Remember to move getServerTheme to this location. [example](#styling)
+-   `staticRender?: boolean = false`: If staticRender is true it lets you opt out of dyanmic rendering. [example](#static-rendering)
+-   `nonce?: string | null`: This allows you to use nonces to better secure your webpage [example](#nonce)
 
 ### useTheme Options
 
@@ -135,7 +136,7 @@ This is how you would access the theme on your website.
 
 ## Props
 
--   `resolved: boolean = false`: Depending on whether this is true you will either receive the resolved theme or the normal theme which includes system. [example](#resolved-theme)
+-   `resolved?: boolean = false`: Depending on whether this is true you will either receive the resolved theme or the normal theme which includes system. [example](#resolved-theme)
 
 ## Return
 
@@ -261,6 +262,29 @@ TBD this section is basically up to you since all this package does is change wh
 Then you can choose your own way whether it be like the examples or even styled components.
 You can even choose custom attributes,
 
+### Themes
+
+You can specify which themes you want to use for the project like so:
+
+```jsx
+// app/layout.jsx
+import { ThemeProvider, getServerTheme } from "next-server-themes";
+
+export default function Layout({ children }) {
+    return (
+        <html suppressHydrationWarning className={getServerTheme()}>
+            <body>
+                <ThemeProvider themes={["system", "dark", "light"]}>
+                    {children}
+                </ThemeProvider>
+            </body>
+        </html>
+    );
+}
+```
+
+The default functionality is to replace the entire class with the new theme. But no with the theming prop it now specifically remove the themes and adds the new theme in. This means it won't interfere with other classes.
+
 ### Element
 
 You can also choose a custom element to apply themes to instead of the HTML element:
@@ -306,7 +330,7 @@ export default function Layout({ children }) {
 }
 ```
 
-Only issue is that is must be hydrated like so:
+I also did make it possible for you to not hydrate the theme but it will lead you to have the default theme intially before swapping to the proper theme on the client. So you could build your own solution like below if you don't like mine.
 
 ```jsx
 "use client";
@@ -336,8 +360,6 @@ export default function Page() {
     );
 }
 ```
-
-I also did make it possible for you to not hydrate the theme but it will lead you to have the default theme intially before swapping to the proper theme on the client. So you could build your own solution like above if you don't like mine.
 
 ### Resolved Theme
 

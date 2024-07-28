@@ -44,10 +44,10 @@ export function ThemeProvider({
     staticRender: boolean;
     nonce?: string | null;
 }) {
+    // Default theme on the server is cookie value else with static it's just the default theme
     const [theme, setTheme] = useState<Theme>(defaultTheme);
-    // Late night thought but do I need to have people solve for hydration or could I solve it???
-    // Basically instead of rendering systemLightTheme on the server then the actual theme on the client which only causes errors on dark mode
-    // I could just render systemLightTheme initally on client too. Since either way the first render will be inaccurate. But this way it will be inaccurate on both server and client causing no reyhydration.
+
+    // This requires a second rerender if it is set to system and the preference is dark mode
     const [resolvedTheme, setResolvedTheme] = useState<ResolvedTheme>(
         defaultResolvedTheme ?? (theme === "system" ? systemLightTheme : theme)
     );
