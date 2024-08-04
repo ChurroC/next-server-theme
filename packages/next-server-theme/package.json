@@ -1,0 +1,86 @@
+{
+  "name": "next-server-theme",
+  "version": "1.5.2",
+  "description": "This is a theme library that allows you to know the user's theme preference on the server and allow you to server pages with no hydration errors.",
+  "keywords": [
+    "next",
+    "nextjs",
+    "theme",
+    "dark-mode",
+    "light-mode",
+    "background-color",
+    "color-scheme",
+    "prefers-color-scheme",
+    "user-preference",
+    "server",
+    "hydration",
+    "ssr",
+    "server-side-rendering",
+    "next-server-theme",
+    "next-theme",
+    "nextjs-theme",
+    "nextjs-server-theme"
+  ],
+  "homepage": "https://github.com/ChurroC/next-server-theme#readme",
+  "bugs": {
+    "url": "https://github.com/ChurroC/next-server-theme/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ChurroC/next-server-theme.git"
+  },
+  "license": "MIT",
+  "author": "churroc",
+  "type": "module",
+  "exports": {
+    ".": {
+      "import": "./dist/esm/client.js",
+      "require": "./dist/cjs/client.js",
+      "types": "./dist/types/client.d.ts"
+    },
+    "./server": {
+      "import": "./dist/esm/server.js",
+      "require": "./dist/cjs/server.js",
+      "types": "./dist/types/server.d.ts"
+    },
+    "./dev/*": {
+      "import": "./src/react/*",
+      "require": "./src/react/*"
+    }
+  },
+  "bin": {
+    "next-server-theme": "./dist/cli/index.js"
+  },
+  "scripts": {
+    "prebuild": "rm -rf dist",
+    "build": "rollup -c",
+    "postbuild": "rm -rf ./dist/esm/types ./dist/cjs/types ./dist/cli/types ./dist/tsconfig.tsbuildinfo",
+    "dev": "$npm_execpath run build -- --watch",
+    "lint": "eslint",
+    "publishPKG": "sh publish.sh"
+  },
+  "devDependencies": {
+    "@repo/config-eslint": "*",
+    "@repo/config-typescript": "*",
+    "@rollup/plugin-commonjs": "^26.0.1",
+    "@rollup/plugin-json": "^6.1.0",
+    "@rollup/plugin-node-resolve": "15.2.3",
+    "@rollup/plugin-terser": "^0.4.4",
+    "@rollup/plugin-typescript": "^11.1.6",
+    "@types/react": "^18.3.1",
+    "@typescript-eslint/parser": "^7.17.0",
+    "chalk": "^5.3.0",
+    "commander": "^12.1.0",
+    "next": "^14.2.3",
+    "react": "^18.2.0",
+    "rollup": "^4.13.0",
+    "rollup-plugin-dts": "^6.1.0",
+    "rollup-plugin-peer-deps-external": "^2.2.4",
+    "rollup-plugin-preserve-directives": "^0.4.0",
+    "typescript": "^5.5.4"
+  },
+  "peerDependencies": {
+    "next": "^13 || ^14",
+    "react": "^16.8 || ^17 || ^18"
+  }
+}

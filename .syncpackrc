@@ -1,0 +1,6 @@
+{
+    "dependencyTypes": [
+        "!peer",
+        "!local"
+    ]
+}

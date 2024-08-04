@@ -1,23 +1,33 @@
 {
-  "name": "next-server-theme2",
+  "name": "next-server-theme",
   "private": true,
-  "scripts": {
-    "build": "turbo build",
-    "dev": "turbo dev",
-    "lint": "turbo lint",
-    "format": "prettier --write \"**/*.{ts,tsx,md}\""
-  },
-  "devDependencies": {
-    "prettier": "^3.2.5",
-    "turbo": "latest",
-    "typescript": "^5.4.5"
-  },
-  "engines": {
-    "node": ">=18"
-  },
-  "packageManager": "bun@1.1.7",
+  "type": "module",
   "workspaces": [
     "apps/*",
     "packages/*"
-  ]
+  ],
+  "scripts": {
+    "build": "turbo build",
+    "dev": "turbo dev",
+    "findMismatches": "syncpack list-mismatches",
+    "fixMismatches": "syncpack fix-mismatches",
+    "format": "prettier --write .",
+    "postinstall": "$npm_execpath run findMismatches",
+    "lint": "turbo lint"
+  },
+  "devDependencies": {
+    "@changesets/cli": "^2.27.7",
+    "@repo/config-eslint": "*",
+    "@repo/config-typescript": "*",
+    "prettier": "^3.2.5",
+    "prettier-plugin-packagejson": "^2.5.1",
+    "prettier-plugin-tailwindcss": "^0.6.5",
+    "syncpack": "^12.3.2",
+    "turbo": "latest",
+    "typescript": "^5.5.4"
+  },
+  "packageManager": "bun@1.1.7",
+  "engines": {
+    "node": ">=18"
+  }
 }

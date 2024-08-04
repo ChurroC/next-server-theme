@@ -1,0 +1,22 @@
+{
+  "$schema": "https://json.schemastore.org/tsconfig",
+  "display": "Next.js",
+  "extends": "./base.json",
+  "compilerOptions": {
+    "allowImportingTsExtensions": true,
+    "jsx": "preserve",
+
+    /* Path Aliases */
+    "baseUrl": "${configDir}",
+    "paths": {
+      "@/*": ["${configDir}/src/*"]
+    }
+  },
+  "include": [
+    "${configDir}/.next/types/**/*.ts",
+    "${configDir}/next-env.d.ts",
+    "${configDir}/**/*.tsx",
+    "${configDir}/**/*.ts"
+  ],
+  "exclude": ["${configDir}/node_modules"]
+}
