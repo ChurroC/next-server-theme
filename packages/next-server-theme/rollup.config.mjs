@@ -69,22 +69,22 @@ export default [
         input: "dist/esm/types/server.d.ts",
         output: [{ file: "dist/types/server.d.ts", format: "es" }],
         plugins: [dts()]
-    },
-    {
-        input: "src/cli/index.ts",
-        output: [{ file: "dist/cli/index.js", format: "es" }],
-        plugins: [
-            typescript({
-                tsconfig: "./tsconfig.json",
-                outDir: "dist/cli/types",
-                declarationDir: "dist/cli/types",
-                rootDir: "src/cli",
-                outputToFilesystem: true
-            }),
-            commonjs(),
-            resolve(),
-            json(),
-            terser()
-        ]
     }
+    // {
+    //     input: "src/cli/index.ts",
+    //     output: [{ file: "dist/cli/index.js", format: "es" }],
+    //     plugins: [
+    //         typescript({
+    //             tsconfig: "./tsconfig.json",
+    //             outDir: "dist/cli/types",
+    //             declarationDir: "dist/cli/types",
+    //             rootDir: "src/cli",
+    //             outputToFilesystem: true
+    //         }),
+    //         commonjs(),
+    //         resolve(),
+    //         json(),
+    //         terser()
+    //     ]
+    // }
 ];

@@ -34,18 +34,26 @@
   "type": "module",
   "exports": {
     ".": {
-      "import": "./dist/esm/client.js",
-      "require": "./dist/cjs/client.js",
-      "types": "./dist/types/client.d.ts"
+      "development": {
+        "import": "./src/react/client.ts",
+        "require": "./src/react/client.ts"
+      },
+      "default": {
+        "types": "./dist/types/client.d.ts",
+        "import": "./dist/esm/client.js",
+        "require": "./dist/cjs/client.js"
+      }
     },
     "./server": {
-      "import": "./dist/esm/server.js",
-      "require": "./dist/cjs/server.js",
-      "types": "./dist/types/server.d.ts"
-    },
-    "./dev/*": {
-      "import": "./src/react/*",
-      "require": "./src/react/*"
+      "development": {
+        "import": "./src/react/server.ts",
+        "require": "./src/react/server.ts"
+      },
+      "default": {
+        "types": "./dist/types/server.d.ts",
+        "import": "./dist/esm/server.js",
+        "require": "./dist/cjs/server.js"
+      }
     }
   },
   "bin": {
@@ -55,9 +63,10 @@
     "prebuild": "rm -rf dist",
     "build": "rollup -c",
     "postbuild": "rm -rf ./dist/esm/types ./dist/cjs/types ./dist/cli/types ./dist/tsconfig.tsbuildinfo",
-    "dev": "$npm_execpath run build -- --watch",
+    "postinstall": "$npm_execpath run ./dist/cli/index.js",
     "lint": "eslint",
-    "publishPKG": "sh publish.sh"
+    "prepublish": "sh publish.sh",
+    "postpublish": "rm -rf ./tempDist"
   },
   "devDependencies": {
     "@repo/config-eslint": "*",

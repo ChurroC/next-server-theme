@@ -6,7 +6,7 @@
   "scripts": {
     "build": "next build",
     "dev": "next dev --turbo",
-    "lint": "eslint",
+    "lint": "eslint .",
     "showTests": "playwright show-report playwright/report --port 0",
     "start": "next start",
     "test": "playwright test"

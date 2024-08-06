@@ -13,7 +13,8 @@
     "fixMismatches": "syncpack fix-mismatches",
     "format": "prettier --write .",
     "postinstall": "$npm_execpath run findMismatches",
-    "lint": "turbo lint"
+    "lint": "turbo lint",
+    "start": "turbo start"
   },
   "devDependencies": {
     "@changesets/cli": "^2.27.7",
