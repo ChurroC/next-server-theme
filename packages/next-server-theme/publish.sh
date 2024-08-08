@@ -9,6 +9,7 @@ cp ./LICENSE ./tempDist/LICENSE
 cp ./CHANGELOG.md ./tempDist/CHANGELOG.md
 cp -r ./dist/* ./tempDist
 
-sed -i -e 's/".\/dist/"./g' ./tempDist/package.json
+sed -i 's/".\/dist/"./g' ./tempDist/package.json
+sed -i 's/(?="development").*?(?="default")//sg' ./tempDist/package.json
 
 cd tempDist
