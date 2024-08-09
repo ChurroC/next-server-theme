@@ -7,7 +7,7 @@
     "lint": "eslint"
   },
   "devDependencies": {
-    "@playwright/test": "^1.44.0",
+    "@playwright/test": "^1.45.0",
     "@repo/config-eslint": "*",
     "@repo/config-typescript": "*",
     "find-free-ports": "^3.1.1"
