@@ -10,6 +10,6 @@ cp ./CHANGELOG.md ./tempDist/CHANGELOG.md
 cp -r ./dist/* ./tempDist
 
 sed -i 's/".\/dist/"./g' ./tempDist/package.json
-sed -i 's/(?="development").*?(?="default")//sg' ./tempDist/package.json
+sed -i -E '/development/,/}/d' ./tempDist/package.json
 
 cd tempDist
