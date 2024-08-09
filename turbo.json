@@ -15,8 +15,22 @@
     },
     "build": {
       "dependsOn": ["^build"],
-      "inputs": ["$TURBO_DEFAULT$", ".env*"],
+      "inputs": [
+        "$TURBO_DEFAULT$",
+        ".env*",
+        "!README.md",
+        "!LICENSE",
+        "!playwright.config.ts",
+        "!src/tests/**"
+      ],
       "outputs": [".next/**", "!.next/cache/**", "dist/**"]
+    },
+    "test": {
+      "dependsOn": []
+    },
+    "showTests": {
+      "dependsOn": ["test"],
+      "persistent": true
     }
   }
 }

@@ -1,0 +1,1 @@
+Note to remeber that in the turbo.json file I configure build to have a fake input file. Causing the hash to be the same everytime. Meaning no cache break. Which means build doesn't check cache of this project.

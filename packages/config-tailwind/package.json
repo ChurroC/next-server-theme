@@ -2,7 +2,11 @@
   "name": "@repo/tailwind-config",
   "version": "0.0.0",
   "private": true,
+  "scripts": {
+    "lint": "eslint"
+  },
   "devDependencies": {
+    "@repo/config-eslint": "*",
     "@repo/config-typescript": "*",
     "tailwindcss": "^3.4.1"
   }

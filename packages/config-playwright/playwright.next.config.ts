@@ -22,3 +22,15 @@ export default defineConfig({
     baseURL: `http://localhost:${process.env.port}`
   }
 });
+console.log("3");
+console.log("3");
+console.log("3");
+console.log("3");
+console.log("3");
+console.log("3");
+console.log("3");
+console.log("3");
+console.log("3");
+console.log("3");
+console.log("3");
+console.log("3");

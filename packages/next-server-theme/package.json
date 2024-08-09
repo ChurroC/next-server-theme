@@ -65,8 +65,7 @@
     "postbuild": "rm -rf ./dist/esm/types ./dist/cjs/types ./dist/cli/types ./dist/tsconfig.tsbuildinfo",
     "postinstall": "$npm_execpath run ./dist/cli/index.js",
     "lint": "eslint",
-    "prepublish": "sh publish.sh",
-    "postpublish": "rm -rf ./tempDist"
+    "prepublishOnly": "sh publish.sh"
   },
   "devDependencies": {
     "@repo/config-eslint": "*",
