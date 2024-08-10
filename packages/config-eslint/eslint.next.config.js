@@ -1,5 +1,5 @@
 import globals from "globals";
-import baseConfig from "./eslint.base.config.js";
+import baseConfig from "./eslint.base.config";
 import next from "@next/eslint-plugin-next";
 import flatCompat from "./compat.js";
 

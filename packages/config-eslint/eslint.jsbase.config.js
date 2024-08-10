@@ -17,9 +17,6 @@ export default [
   ...flatCompat.plugins("eslint-plugin-only-warn"),
   {
     languageOptions: {
-      parserOptions: {
-        project: resolve(process.cwd(), "tsconfig.json")
-      },
       globals: {
         ...globals.node,
         React: true,

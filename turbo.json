@@ -26,7 +26,9 @@
       "outputs": [".next/**", "!.next/cache/**", "dist/**"]
     },
     "test": {
-      "dependsOn": ["build", "@repo/config-playwright#properInputs"]
+      "dependsOn": ["build", "@repo/config-playwright#properInputs"],
+      "env": ["CI", "port"],
+      "outputs": ["playwright/**"]
     },
     "showTests": {
       "dependsOn": ["test"],

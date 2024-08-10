@@ -3,6 +3,9 @@
   "version": "0.0.0",
   "private": true,
   "type": "module",
+  "scripts": {
+    "lint": "eslint"
+  },
   "devDependencies": {
     "@eslint/compat": "^1.0.1",
     "@eslint/eslintrc": "^3.0.2",

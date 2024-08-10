@@ -4,6 +4,7 @@ import { useTheme } from "next-server-theme";
 
 export default function HomePage() {
     const [theme, setTheme] = useTheme();
+    console.log(theme, "theme");
 
     return (
         <div className="flex h-screen flex-col items-center justify-center gap-3 dark:text-white">

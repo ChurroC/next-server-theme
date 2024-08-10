@@ -63,7 +63,7 @@
     "prebuild": "rm -rf dist",
     "build": "rollup -c",
     "postbuild": "rm -rf ./dist/esm/types ./dist/cjs/types ./dist/cli/types ./dist/tsconfig.tsbuildinfo",
-    "postinstall": "$npm_execpath run ./dist/cli/index.js",
+    "postinstall": "$npm_execpath run ./dist/cli/index.js || echo",
     "lint": "eslint",
     "prepublishOnly": "sh publish.sh"
   },

@@ -11,3 +11,4 @@ const compat = new FlatCompat({
 });
 
 export default compat;
+console.log("a");
