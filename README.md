@@ -1,1 +1,1 @@
-/packages/next-server-theme/README.md
+/home/charan/dev/js/next-server-theme4/packages/next-server-theme/README.md

@@ -1,1 +1,1 @@
-/packages/next-server-theme/CHANGELOG.md
+/home/charan/dev/js/next-server-theme4/packages/next-server-theme/CHANGELOG.md

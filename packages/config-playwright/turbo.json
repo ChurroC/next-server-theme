@@ -2,8 +2,10 @@
   "extends": ["//"],
   "tasks": {
     "build": {
-      "dependsOn": [],
       "inputs": ["fake.jk"]
+    },
+    "properInputs": {
+      "inputs": ["$TURBO_DEFAULT$"]
     }
   }
 }
