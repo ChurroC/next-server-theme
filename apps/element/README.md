@@ -1,0 +1,1 @@
+This is an example of how to use the static-render option in next-server-theme. This allows you to be similar to next-themes but the hydrations has already been solved but you could always make your own solutions.

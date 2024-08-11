@@ -1,6 +1,6 @@
 {
   "name": "next-server-theme",
-  "version": "1.5.2",
+  "version": "1.5.4",
   "description": "This is a theme library that allows you to know the user's theme preference on the server and allow you to server pages with no hydration errors.",
   "keywords": [
     "next",
@@ -65,7 +65,7 @@
     "postbuild": "rm -rf ./dist/esm/types ./dist/cjs/types ./dist/cli/types ./dist/tsconfig.tsbuildinfo",
     "postinstall": "$npm_execpath run ./dist/cli/index.js || echo",
     "lint": "eslint",
-    "prepublishOnly": "sh publish.sh"
+    "publishPKG": "sh publish.sh"
   },
   "devDependencies": {
     "@repo/config-eslint": "*",

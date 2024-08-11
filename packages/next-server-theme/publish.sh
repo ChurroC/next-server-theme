@@ -13,3 +13,7 @@ sed -i 's/".\/dist/"./g' ./tempDist/package.json
 sed -i -E '/development/,/}/d' ./tempDist/package.json
 
 cd tempDist
+npm publish
+
+cd ..
+rm -rf ./tempDist

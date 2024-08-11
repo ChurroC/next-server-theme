@@ -1,3 +1,5 @@
+import { ThemeProvider } from "next-server-theme/server";
+
 import "./globals.css";
 
 import { GeistSans } from "geist/font/sans";
@@ -14,11 +16,14 @@ export default function RootLayout({
     children: React.ReactNode;
 }) {
     return (
-        <html lang="en">
-            <body
-                className={`${GeistSans.className} pink:bg-pink-100 bg-white dark:bg-black`}
-            >
-                {children}
+        <html lang="en" suppressHydrationWarning>
+            <body className={GeistSans.className}>
+                <ThemeProvider
+                    element="#themeElement"
+                    themes={["dark", "light", "pink"]}
+                >
+                    {children}
+                </ThemeProvider>
             </body>
         </html>
     );

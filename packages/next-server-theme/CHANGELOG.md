@@ -1,11 +1,23 @@
 # next-server-theme
 
-## 1.5.2
+## 1.5.4
+
+### Patch Changes
+
+-   Inital load has proper class in HTML tag even in custom element which later uses mutation observor to switch it over.
+
+## 1.5.3
 
 ### Patch Changes
 
 -   Types up all the ts into docs
 -   Added links to all info in docs
+
+## 1.5.2
+
+### Patch Changes
+
+-   Kinda skipped over :()
 
 ## 1.5.1
 

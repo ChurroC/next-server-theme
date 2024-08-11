@@ -1,11 +1,9 @@
 "use client";
 
 import { useTheme } from "next-server-theme";
-import { useEffect, useState } from "react";
 
 export default function HomePage() {
     const [theme, setTheme] = useTheme();
-    console.log("theme", theme);
 
     // const [isMounted, setIsMounted] = useState(false);
 
