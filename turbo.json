@@ -11,7 +11,8 @@
       "persistent": true
     },
     "lint": {
-      "dependsOn": []
+      "dependsOn": ["@repo/config-eslint#properInputs"],
+      "inputs": ["eslint.config.js"]
     },
     "build": {
       "dependsOn": ["^build"],
@@ -20,6 +21,7 @@
         ".env*",
         "!README.md",
         "!LICENSE",
+        "!eslint.config.js",
         "!playwright.config.ts",
         "!src/tests/**"
       ],

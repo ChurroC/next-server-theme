@@ -18,9 +18,9 @@
     "checkJs": true,
 
     /* Bundled projects */
-    "lib": ["es2022", "DOM", "DOM.Iterable"],
+    "lib": ["dom", "dom.iterable", "es2022"],
     "noEmit": true,
-    "moduleResolution": "nodenext",
+    "moduleResolution": "Bundler",
     "module": "ESNext",
     "incremental": true,
 

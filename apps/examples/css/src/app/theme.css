@@ -1,0 +1,12 @@
+.light {
+    color: black;
+    background-color: white;
+}
+.dark {
+    color: white;
+    background-color: black;
+}
+.pink {
+    color: black;
+    background-color: rgb(252 231 243);
+}
