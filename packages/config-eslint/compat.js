@@ -11,3 +11,7 @@ const compat = new FlatCompat({
 });
 
 export default compat;
+console.log("d");
+
+console.log("d");
+("eslint.config.js");
