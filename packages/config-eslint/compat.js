@@ -10,9 +10,4 @@ const compat = new FlatCompat({
   baseDirectory: __dirname // optional; default: process.cwd()
 });
 
-console.log("compat");
-console.log("compat");
-console.log("compat");
-console.log("compat");
-console.log("compat");
 export default compat;

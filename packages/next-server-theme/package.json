@@ -64,11 +64,9 @@
     "build": "rollup -c",
     "postbuild": "rm -rf ./dist/esm/types ./dist/cjs/types ./dist/cli/types ./dist/tsconfig.tsbuildinfo",
     "postinstall": "$npm_execpath run ./dist/cli/index.js || echo",
-    "lint": "eslint",
     "publishPKG": "sh publish.sh"
   },
   "devDependencies": {
-    "@repo/config-eslint": "*",
     "@repo/config-typescript": "*",
     "@rollup/plugin-commonjs": "^26.0.1",
     "@rollup/plugin-json": "^6.1.0",
@@ -76,7 +74,6 @@
     "@rollup/plugin-terser": "^0.4.4",
     "@rollup/plugin-typescript": "^11.1.6",
     "@types/react": "^18.3.1",
-    "@typescript-eslint/parser": "^7.17.0",
     "chalk": "^5.3.0",
     "commander": "^12.1.0",
     "next": "^14.2.3",
