@@ -64,6 +64,7 @@
     "build": "rollup -c",
     "postbuild": "rm -rf ./dist/esm/types ./dist/cjs/types ./dist/cli/types ./dist/tsconfig.tsbuildinfo",
     "postinstall": "$npm_execpath run ./dist/cli/index.js || echo",
+    "lint": "eslint",
     "publishPKG": "sh publish.sh"
   },
   "devDependencies": {
