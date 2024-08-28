@@ -1,18 +1,18 @@
 "use client";
-import { useEffect, useState } from "react";
+import { useEffect, useRef } from "react";
 
 export function useOnChange(
     callback: React.EffectCallback,
     dependancies: React.DependencyList
 ) {
-    const [hasMounted, setHasMounted] = useState(false);
+    const hasMounted = useRef(false)
 
     // Page loads and sets hasMounted to true then next time dependacies change it will run the callback
     useEffect(() => {
-        if (hasMounted) {
+        if (hasMounted.current) {
             return callback();
         } else {
-            setHasMounted(true);
+            hasMounted.current = true
         }
     }, dependancies);
 }
