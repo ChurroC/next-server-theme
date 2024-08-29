@@ -11,8 +11,7 @@
       "persistent": true
     },
     "lint": {
-      "dependsOn": ["@repo/config-eslint#properInputs"],
-      "inputs": ["eslint.config.js"]
+      "dependsOn": ["@repo/config-eslint#properInputs"]
     },
     "build": {
       "dependsOn": ["^build"],

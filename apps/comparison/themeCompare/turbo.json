@@ -1,0 +1,15 @@
+{
+  "extends": ["//"],
+  "tasks": {
+    "start": {
+      "dependsOn": ["build", "getAnalytics"],
+      "persistent": true
+    },
+    "getAnalytics": {
+      "dependsOn": [
+        "next-server-theme-comparison#getAnalytics",
+        "next-themes-comparison#getAnalytics"
+      ]
+    }
+  }
+}

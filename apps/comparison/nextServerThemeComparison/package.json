@@ -1,0 +1,41 @@
+{
+  "name": "next-server-theme-comparison",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "next build",
+    "dev": "next dev",
+    "getAnalytics": "rm -f -r analyticsData && for i in {1..10}; do $npm_execpath run test; done && $npm_execpath run ./src/util/averageData.ts",
+    "lint": "eslint",
+    "showTests": "playwright show-report playwright/report --port 0",
+    "start": "next start",
+    "test": "playwright test"
+  },
+  "dependencies": {
+    "async-mutex": "^0.5.0",
+    "geist": "^1.2.2",
+    "next": "^14.2.3",
+    "next-server-theme": "*",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "zod": "^3.22.4"
+  },
+  "devDependencies": {
+    "@next/eslint-plugin-next": "^14.2.3",
+    "@repo/config-eslint": "*",
+    "@repo/config-playwright": "*",
+    "@repo/config-typescript": "*",
+    "@types/node": "22.0.0",
+    "@types/react": "^18.3.1",
+    "@types/react-dom": "^18.2.19",
+    "eslint": "^9",
+    "playwright": "^1.44.0",
+    "postcss": "^8.4.34",
+    "tailwindcss": "^3.4.1",
+    "typescript": "^5.5.4"
+  },
+  "ct3aMetadata": {
+    "initVersion": "7.30.0"
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "extends": ["//"],
+  "tasks": {
+    "getAnalytics": {
+      "dependsOn": ["build", "@repo/config-playwright#properInputs"],
+      "env": ["CI", "port"],
+      "outputs": ["playwright/**"]
+    }
+  }
+}
