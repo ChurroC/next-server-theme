@@ -1,7 +1,7 @@
 "use client";
 import { useEffect, useRef } from "react";
 
-function useOnChange(
+export function useOnChange(
     callback: React.EffectCallback,
     dependancies: React.DependencyList
 ) {
