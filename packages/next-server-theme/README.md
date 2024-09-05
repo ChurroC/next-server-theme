@@ -1,4 +1,4 @@
-# next-server-themes
+# next-server-theme
 
 Simple way to add themeing to your nextjs app directory project. It's as simple as adding 2 lines which allows you to use the best theming package made specifically for next. Similar to other packages like next-themes but we you won't have to worry about the rehydration issues as you can see the users choice on the server. No need to check if we mount before reading the theme. This also allows us to prerender all the pages on the server and have a smaller client bundle which is faster.
 
@@ -37,7 +37,7 @@ Adding dark mode support takes 2 lines of code:
 
 ```jsx
 // app/layout.jsx
-import { ThemeProvider, getServerTheme } from "next-server-themes/server";
+import { ThemeProvider, getServerTheme } from "next-server-theme/server";
 
 export default function Layout({ children }) {
     return (
@@ -175,7 +175,7 @@ In our examples we have 3 ways to do this method
 
 ```jsx
 // app/layout.jsx
-import { ThemeProvider, getServerTheme } from "next-server-themes";
+import { ThemeProvider, getServerTheme } from "next-server-theme";
 
 export default function Layout({ children }) {
     return (
@@ -228,7 +228,7 @@ export default {
 
 ```jsx
 // app/layout.jsx
-import { ThemeProvider, getServerTheme } from "next-server-themes/server";
+import { ThemeProvider, getServerTheme } from "next-server-theme/server";
 
 export default function Layout({ children }) {
     return (
@@ -268,7 +268,7 @@ You can specify which themes you want to use for the project like so:
 
 ```jsx
 // app/layout.jsx
-import { ThemeProvider, getServerTheme } from "next-server-themes";
+import { ThemeProvider, getServerTheme } from "next-server-theme";
 
 export default function Layout({ children }) {
     return (
@@ -291,7 +291,7 @@ You can also choose a custom element to apply themes to instead of the HTML elem
 
 ```jsx
 // app/layout.jsx
-import { ThemeProvider, getServerTheme } from "next-server-themes";
+import { ThemeProvider, getServerTheme } from "next-server-theme";
 
 export default function Layout({ children }) {
     return (
@@ -317,7 +317,7 @@ This could put less stress on your server and makes it easier for users who don'
 
 ```jsx
 // app/layout.jsx
-import { ThemeProvider, getServerTheme } from "next-server-themes/server";
+import { ThemeProvider, getServerTheme } from "next-server-theme/server";
 
 export default function Layout({ children }) {
     return (
@@ -496,7 +496,7 @@ Then to use the nonce you would do:
 
 ```jsx
 // app/layout.jsx
-import { ThemeProvider, getServerTheme } from "next-server-themes";
+import { ThemeProvider, getServerTheme } from "next-server-theme";
 import { headers } from "next/headers";
 
 export default function Layout({ children }) {
